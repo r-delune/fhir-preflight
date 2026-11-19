@@ -175,3 +175,14 @@ Message counts are not distinct-defect counts: the same omission appears under s
 **Evidence status:** UI implementation and local automated/HTTP checks ready for review. Final interactive/mobile browser verification and a saved screenshot artifact are still outstanding due to tooling; hosted GitHub CI has not been claimed green.
 
 **Status:** ☐ awaiting Brian's review. Step 3 not started; AGENTS.md requires checkpoint approval before progression. Browser evidence gap remains open, rather than marking this step fully verified.
+
+### #3-prep — Modal secret naming — 2026-11-19
+
+Brian showed the Custom secret form with name `fhir-test` and asked what next.
+Recorded the contract in model/README.md: secret `fhir-test`, key
+`PREFLIGHT_API_KEY`, private randomly generated value supplied by Brian.
+No secret value is generated, read or stored by Codex, and no external write or
+deployment is performed. This is authorization for setup guidance, not paid
+provisioning or proof that Step 2's outstanding visual evidence is complete.
+The future deployment and client must use this contract. Documentation only;
+no runtime changes or tests needed. Cost incurred: €0 paid services.
