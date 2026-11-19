@@ -275,3 +275,24 @@ resolved SDK dependencies are registered in SOUP with licence review explicitly
 open. SDK wheel source inspection confirmed required_keys, routing_region,
 startup_timeout and max_inputs support. Installing the wheels is still underway
 at this preparation commit; no actual SDK import check is claimed yet.
+
+**Final local preparation verification:** the serial locked SDK installation
+completed (21 optional packages). A redundant local-wheel reuse check raced with
+completion; the attempted stop found no process, and the same verified SDK
+version was briefly reinstalled from the local wheel. Immediately ran uv sync
+--locked --group hosting --offline successfully to restore the registry origin
+and exact lock state. No dependency version changed. Real Modal 1.6.4 imported
+model.serve without hydration/remote calls; CLI help confirmed run/deploy module
+and environment flags plus app stop and volume delete syntax.
+
+Local make dev rebuilt successfully. ADR-005, CR-003, Costs and Model Runbook all
+returned HTTP 200 at /governance?doc=... and showed commit c7c167c provenance.
+The first HTTP probe incorrectly used path-style document URLs and got 404;
+corrected the probe to the app's actual query routing. No app change was needed.
+Final documentation refresh follows this evidence commit so the UI displays its
+committed bytes. No Modal credentials, GPU or model endpoint was accessed.
+
+**Preparation outcome:** ready for Brian's cost review; cloud trial remains
+pending. Next: verify secret exists and saved workspace credit/limits, obtain
+explicit trial authorization, then cache/deploy/smoke/stop/redeploy and record
+actual billing. This is an intermediate cost gate, not a claim Step 3 is complete.

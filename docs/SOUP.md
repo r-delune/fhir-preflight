@@ -5,7 +5,7 @@ drafted_by: Codex
 
 # Third-party component register — Step 0
 
-Exact distribution hashes and sources are recorded in uv.lock. Licence labels below are provisional; verify upstream licence files before release. No validator, FHIR package, runtime AI model, cloud service or HTMX is used yet.
+Exact local distribution hashes and sources are recorded in uv.lock. Licence labels below are provisional; verify upstream licence files before release. This first table records Step 0; later sections record validator, UI and proposed hosting additions. The hosted model is not deployed.
 
 | Component | Exact version | Licence | Purpose / requirement | Known limitations |
 |---|---|---|---|---|
