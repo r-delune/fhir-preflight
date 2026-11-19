@@ -16,7 +16,7 @@ REQ-01 through REQ-05 are working drafts; Brian authorized Steps 1–2 implement
 | REQ-05 | Validator/profile/package provenance exists; no explanation yet | Model/explanation provenance deferred to Steps 4–5 |
 | REQ-11 | tests/test_validator.py; real offline fixture outcomes; compose.yaml isolated validator network | Verified for Step 1 baseline |
 | REQ-12 | tests/test_presentation.py; docs/examples/step-2/http-smoke.json | Stable semantic IDs verified locally |
-| REQ-13 | tests/test_presentation.py; tests/frontend.test.cjs | Mapping and event logic verified; final browser click/mobile QA pending tooling recovery |
+| REQ-13 | tests/test_presentation.py; tests/frontend.test.cjs | Mapping and event logic verified; desktop click QA reviewer-reported by Brian (Claude, 2026-11-19 ~14:35 Asia/Bangkok); mobile/saved screenshot pending, see ANOM-004 |
 | REQ-14 | tests/test_presentation.py; tests/frontend.test.cjs | Fixture switching, result clearing, progress and incomplete-state logic verified |
 | REQ-15 | tests/test_workflow_guidance.py; tests/frontend.test.cjs | Pipeline, severity/result explanations, governance links and verbatim nested message excerpts verified locally |
 | REQ-16 | tests/test_governance.py; scripts/prepare_build_metadata.py | Allowlist, traversal/symlink rejection, Markdown safety, status/authorship, git/build hashes, read-only routes and default-off API docs verified; container smoke evidence recorded in journal |
@@ -24,3 +24,5 @@ REQ-01 through REQ-05 are working drafts; Brian authorized Steps 1–2 implement
 Scaffold tests verify infrastructure only. The traceability generator is scheduled for Step 6. Hosted CI has no recorded runs when last checked; local results are recorded in the journal.
 
 REQ-17: tests/test_model_hosting.py verifies local configuration, secret/target boundaries, identity rejection and measurement with a fake client. Cloud fit/auth/latency/billing and teardown remain pending; local tests do not prove them.
+
+REQ-14 progress correction: status card changes to “Checking…” on submit and restores the loaded snapshot on browser back/forward navigation; tests/frontend.test.cjs. REQ-17 now additionally verifies separate CPU app registration cannot import/register GPU serving; remote retry remains pending.

@@ -60,3 +60,19 @@ quantisation as another variable. Cache weights with the CPU function only.
 Measure independently confirmed cold first-request latency and warm latency,
 and distinguish measured platform billing from resource-rate estimates. Public
 demo explanations are cache-only, including cache misses (no GPU wake-up).
+
+Budget revision before first job: Brian reported setup done and requested staying
+within $1 current credit, adding a card later. This supersedes the earlier $15
+request. Do not raise limits or incur card charges. Dashboard state is user
+confirmed, not independently observed by automation. Stop on insufficient budget.
+
+## ANOM-005 mitigation — separate CPU registration
+The first CPU invocation failed after building images because Modal validates
+all registered app functions, including unused L4 serving. CPU-only resource
+selection on one function did not isolate that registration requirement.
+Move caching to its own app in model/cache.py, sharing only configuration and
+the image factory in model/runtime.py; never import the serving module there.
+Reuse the existing pinned runtime image to avoid another dependency baseline
+and repeat heavyweight build. A leaner download-only image is a future cost
+optimisation, not required for registration isolation. Offline tests prove the
+CPU app declares no GPU or serving import; remote verification is still pending.

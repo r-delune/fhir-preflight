@@ -94,12 +94,12 @@ def test_deployment_caps_are_registered_without_remote_calls(monkeypatch):
     )
     monkeypatch.setitem(sys.modules, "modal", fake)
     monkeypatch.delitem(sys.modules, "model.serve", raising=False)
+    monkeypatch.delitem(sys.modules, "model.runtime", raising=False)
     importlib.import_module("model.serve")
     monkeypatch.delitem(sys.modules, "model.serve")
-    cache, gpu, probe = functions
+    gpu, probe = functions
     assert "gpu" not in probe
     assert probe["cpu"] == (1, 1)
-    assert "gpu" not in cache
     assert gpu["gpu"] == "L4"
     assert gpu["region"] == "eu"
     assert gpu["routing_region"] == "eu-west"
@@ -108,3 +108,37 @@ def test_deployment_caps_are_registered_without_remote_calls(monkeypatch):
     assert gpu["scaledown_window"] == 30
     assert gpu["memory"] == (16384, 16384)
     assert gpu["cpu"] == (2, 2)
+
+
+@pytest.mark.req("REQ-17")
+def test_cpu_cache_app_never_registers_gpu_or_loads_serving_module(monkeypatch):
+    import importlib
+    import sys
+    import types
+
+    registered = []
+
+    class App:
+        def __init__(self, name):
+            assert name == "fhir-preflight-model-cache"
+
+        def function(self, **kwargs):
+            registered.append(kwargs)
+            return lambda fn: fn
+
+    monkeypatch.setitem(sys.modules, "modal", types.SimpleNamespace(
+        App=App, Volume=types.SimpleNamespace(from_name=lambda *a, **kw: object()),
+    ))
+    monkeypatch.setitem(sys.modules, "model.runtime", types.SimpleNamespace(
+        runtime_image=lambda: object(),
+    ))
+    monkeypatch.delitem(sys.modules, "model.cache", raising=False)
+    # Fail if the CPU module even tries to import the serving module.
+    monkeypatch.setitem(sys.modules, "model.serve", None)
+    importlib.import_module("model.cache")
+    monkeypatch.delitem(sys.modules, "model.cache")
+    assert len(registered) == 1
+    assert "gpu" not in registered[0]
+    assert "secrets" not in registered[0]
+    assert registered[0]["cpu"] == (2, 2)
+    assert registered[0]["memory"] == (4096, 4096)

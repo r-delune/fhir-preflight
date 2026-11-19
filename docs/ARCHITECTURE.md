@@ -32,3 +32,8 @@ L4 running vLLM. `model/config.py` holds the reviewed pins and resource limits;
 `model/smoke.py` is an explicit manual client, never a test/CI network dependency.
 Step 4 will add the application integration; no validator result passes through
 this model service. See ADR-005 and the model-hosting runbook.
+
+ANOM-005 refinement: model/cache.py is a distinct CPU-only Modal app; serving
+remains in model/serve.py. They share model/config.py and the inert image factory
+in model/runtime.py. This prevents CPU app registration from validating an unused
+GPU function. No model/provider fallback or workbench integration was added.

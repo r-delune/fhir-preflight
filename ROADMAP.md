@@ -15,7 +15,7 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | 0 | Skeleton, rules, CI, intended purpose, first requirements | ✅ progression approved in chat; hosted CI pending | 2026-11-19 | 2026-11-19 | [Entry #0](BUILD_JOURNAL.md#step-0) | ☐ |
 | 1 | FHIR fixtures, our profile, validator running locally | ✅ progression approved in chat | 2026-11-19 | 2026-11-19 | [Entry #1](BUILD_JOURNAL.md#step-1) | ☐ |
 | 2 | Results UI, pipeline guidance and read-only governance docs (REQ-15/REQ-16) | ✅ progression approved in chat; visual QA gap recorded | 2026-11-19 | 2026-11-19 | [Entry #2](BUILD_JOURNAL.md#step-2) | ☐ |
-| 3 | Host the model on Modal (Codex prepares and explains) | 🔨 prepared locally; trial authorized; sign-in and saved $15 limit pending | 2026-11-19 | | [Step 3](BUILD_JOURNAL.md#step-3) | ☐ |
+| 3 | Host the model on Modal (Codex prepares and explains) | 🔨 prepared locally; initial cache failed; isolated CPU app tested; publishing CI | 2026-11-19 | | [Step 3](BUILD_JOURNAL.md#step-3) | ☐ |
 | 4 | AI explanations, citation checks, red-team | ⬜ | | | | ☐ |
 | 5 | Review, export, activity log | ⬜ | | | | ☐ |
 | 6 | Release v0.1 + reviewed AI Act / MDR drafts | ⬜ | | | | ☐ |
@@ -23,9 +23,9 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | 8 | Model swap exercise (CR-002), release v0.2 | ⬜ | | | | ☐ |
 
 ## Now
-- **Current step:** 3 — deployment code, pinned model/runtime and cost/runbook preparation; Step 2 visual QA gap remains recorded
-- **Waiting on Brian:** complete Modal sign-in and supply the saved $15 spend-limit/credit state because browser automation is unavailable. Trial spending is authorized; no repeat permission request. Keep the Modal secret private.
-- **Open anomalies:** 2 (see `docs/ANOMALIES.md`)
+- **Current step:** 3 — deployment code, pinned model/runtime and cost/runbook preparation; Step 2 desktop QA reviewer-reported; mobile/screenshot pending
+- **Waiting on Brian:** confirm the saved spend limit after adding the card; retain last $1 constraint until known. No new cloud jobs while that control is unverified.
+- **Open anomalies:** 3 (see `docs/ANOMALIES.md`)
 - **Spend this month:** €0 (see `docs/COSTS.md`)
 
 ## Parked ideas

@@ -406,3 +406,60 @@ start or session charge is invented. COSTS.md records zero baseline separately
 from pending measurements. Next action is the already authorized CPU cache job
 once the saved $15 spend limit is verified, followed by capped GPU measurement
 and teardown. No further spending approval is requested.
+
+**Budget amendment and first authorized job:** Brian completed the sign-in/billing
+action and replied “done. we will stay at 1 dolalr for now and il add card details
+later”. Treated this as a narrower $1-credit-only trial, not permission to save a
+$15 limit or incur card charges. Dashboard control state is reported by Brian,
+not independently observed by automation. Rechecked zero baseline billing and
+started the CPU-only cache function. Run ID ap-wdMl2woX43JTyuQvRdu3Qm. No GPU
+allocation was requested by the invoked function. Build/cache outcome pending.
+
+### ANOM-005 follow-up, reviewer QA evidence and progress-card correction
+
+**Authorization:** Brian reported the L4 payment-method failure, subsequently
+confirmed adding a card, requested anomaly/cost records and consideration of an
+independent CPU app, supplied Step 2 reviewer evidence, requested “Checking…” on
+the status card during validation, and explicitly authorized pushing main and
+step branches to GitHub and recording the first CI result. Asked only for the
+saved spending-limit value; card addition alone is not proof of a cap. No new
+cloud job is started until that value is confirmed. The prior $1 constraint
+remains in effect meanwhile; no repeat spending approval is requested.
+
+**Observed failure and costs:** log for ap-wdMl2woX43JTyuQvRdu3Qm confirms images
+built, then app registration rejected its L4 function before cache_weights ran.
+Image im-iosm6gspUOj9uHerxcKtDU reports a 181.83-second build. This is not a cold
+start. Modal billing after the attempt: $0.01037242 metered, $0 billed, $0.01
+credits and $0.00037242 egress allowance applied. Resource report CPU/Memory and
+Egress rows do not fully reconcile with the summary; no per-image or unexplained
+charge allocation is invented. Sanitized API evidence is committed under
+ docs/examples/step-3/failed-cache-billing.json; COSTS.md distinguishes reported
+charges, credits and unmeasured inference. ANOM-005 records the failure.
+
+**Mitigation:** split CPU caching into model/cache.py with a separate app and no
+serving-module import/GPU registration. model/runtime.py shares the same pinned
+image definition so no new dependency baseline or repeated heavy build is needed.
+Tests reject any serving import or GPU declaration in the CPU app. Real SDK loads
+both app definitions independently without hydration. Remote retry is pending,
+so the anomaly remains open rather than calling the mitigation cloud-verified.
+
+**Reviewer-observed evidence:** Brian reports Claude performed Chrome QA on
+2026-11-19 at about 14:35 Asia/Bangkok: validation submitted, pipeline reached
+Findings, selection highlighted lines 33–41, nested-message summary appeared,
+/docs returned 404. Recorded as reviewer-reported evidence, not independently
+repeated by Codex, with source and limitations in
+ docs/examples/step-3/reviewer-reported-step-2-qa.json. ANOM-004 is partially
+resolved: desktop checks reported, mobile layout and saved screenshot still open.
+No screenshot or mobile evidence is invented.
+
+**UI correction:** separate commit 36e1862 changes status title to “Checking…” on
+submit, replaces the stale details/counts with progress text and restores the
+loaded snapshot on back/forward navigation. Summary is a polite live region.
+REQ-14 Node regression covers status transition/restoration, alongside existing
+pipeline and double-submit checks. Tests use safe textContent.
+
+**Local checks:** 88 Python tests, 3 Node tests, Ruff and whitespace checks passed;
+existing TestClient warning remains. No new browser verification claim is made.
+Main and Step 1 pushes completed; Step 0 was already up to date. First GitHub run
+query returned none; workflow/run configuration is being checked before claiming
+CI passed. Remaining branch pushes and actual hosted result follow below.

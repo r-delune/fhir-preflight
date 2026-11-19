@@ -1,0 +1,58 @@
+{
+  "recorded_at_utc": "2026-11-19T12:02:30.684220+00:00",
+  "source": "Modal SDK 1.6.4 billing summary + hourly resource report",
+  "attempt_app_id": "ap-wdMl2woX43JTyuQvRdu3Qm",
+  "images_observed": [
+    "im-sdroFBlQSCWVhEYg8V5Cnh",
+    "im-iosm6gspUOj9uHerxcKtDU"
+  ],
+  "failure": "Please add a payment method to use L4 GPU functions.",
+  "cpu_weight_download_started": false,
+  "gpu_inference_started": false,
+  "baseline_metered_usd": "0",
+  "baseline_billed_usd": "0",
+  "billing_summary": {
+    "metered_cost": "0.01037242",
+    "billed_cost": "0E-8",
+    "adjustments": {
+      "plan_cost": "0E-8",
+      "network_egress_allowance": "-0.00037242",
+      "reservation_adjustment": "-0E-8",
+      "free_storage": "-0E-8",
+      "credits": "-0.01000000"
+    },
+    "metered_cost_breakdown": {
+      "volumes": "0E-8",
+      "llm_tokens": "0E-8",
+      "network_egress": "0.00037242",
+      "ephemeral_apps": "0.00668943"
+    }
+  },
+  "hourly_resource_report": [
+    {
+      "object_id": "ap-wdMl2woX43JTyuQvRdu3Qm",
+      "description": "fhir-preflight-model",
+      "environment": "main",
+      "interval_start": "2026-11-19T07:00:00",
+      "resource": "Memory",
+      "cost": "0.00027961"
+    },
+    {
+      "object_id": "ap-wdMl2woX43JTyuQvRdu3Qm",
+      "description": "fhir-preflight-model",
+      "environment": "main",
+      "interval_start": "2026-11-19T07:00:00",
+      "resource": "CPU",
+      "cost": "0.00640981"
+    },
+    {
+      "object_id": "ap-wdMl2woX43JTyuQvRdu3Qm",
+      "description": "fhir-preflight-model",
+      "environment": "main",
+      "interval_start": "2026-11-19T07:00:00",
+      "resource": "Network Egress",
+      "cost": "0.00037242"
+    }
+  ],
+  "limitation": "Reported attempt/workspace cost; API does not identify a separate price per image. Do not attribute unexplained summary/report differences to a particular image."
+}

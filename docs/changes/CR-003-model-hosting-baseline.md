@@ -31,3 +31,15 @@ Trial refinement: a CLI-only CPU probe reads the endpoint token from the existin
 Modal secret and calls the deployed HTTPS inference API. No secret copying to
 chat/local files is required. Record this CPU waiting time in session cost. Local
 tests verify the probe itself requests no GPU and remains outside app/CI paths.
+
+Budget amendment before first job: Brian confirmed billing setup and directed
+staying at $1 current credit, with card details later. This overrides the earlier
+$15 instruction. No limit increase/card charge is authorized; stop if credit is
+insufficient. First CPU cache invocation is within this narrower trial.
+
+ANOM-005: initial registration failed after paid image-build work because the
+cache and L4 functions shared an app. Measured metered/billed amounts are in
+COSTS.md and the nonsecret billing artifact. Split cache registration into a
+CPU-only app without changing model/image/runtime versions or adding dependencies.
+Tests explicitly block serving-module imports from that app. Reuse cached image
+layers. Card addition is user-reported; saved spending limit still pending.

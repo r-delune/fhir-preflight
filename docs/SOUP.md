@@ -119,3 +119,10 @@ Resolved locally for preparation; licence review remains open before release.
 | types-toml | 0.10.8.20260518 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
 | watchfiles | 1.3.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
 | yarl | 1.25.1 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+
+### First remote image-build observation (ANOM-005)
+The runtime image im-iosm6gspUOj9uHerxcKtDU built successfully (181.83 seconds),
+but app registration failed before weight download/inference. Build log observed
+vLLM 0.21.0, Transformers 5.8.1, torch 2.11.0 and huggingface-hub 1.33.0. These
+are build observations, not a successfully adopted model baseline or a full
+transitive lock. The separate CPU app shares this same image definition.
