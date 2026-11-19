@@ -7,6 +7,10 @@ function setPipelineStage(name) {
     else stage.removeAttribute("aria-current");
   });
 }
+const statusTitle = document.getElementById("run-status-title");
+const statusDetail = document.getElementById("run-status-detail");
+const initialStatusTitle = statusTitle?.textContent;
+const initialStatusDetail = statusDetail?.textContent;
 const cards = document.querySelectorAll(".issue-card");
 cards.forEach((card) => {
   card.addEventListener("click", () => {
@@ -29,6 +33,9 @@ cards.forEach((card) => {
 });
 document.getElementById("validation-form")?.addEventListener("submit", () => {
   setPipelineStage("validator");
+  if (statusTitle) statusTitle.textContent = "Checking…";
+  if (statusDetail) statusDetail.textContent =
+    "The official HL7 FHIR validator is checking this FHIR R4 example.";
   document.getElementById("validate-button").disabled = true;
   document.getElementById("validate-label").textContent = "Validating…";
   document.getElementById("busy-message").hidden = false;
@@ -43,6 +50,8 @@ document.getElementById("fixture")?.addEventListener("change", (event) => {
 window.addEventListener("pageshow", () => {
   const originalStage = document.getElementById("pipeline")?.dataset.currentStage;
   if (originalStage) setPipelineStage(originalStage);
+  if (statusTitle) statusTitle.textContent = initialStatusTitle;
+  if (statusDetail) statusDetail.textContent = initialStatusDetail;
   document.getElementById("validate-button").disabled = false;
   document.getElementById("validate-label").textContent = "Run validation";
   document.getElementById("busy-message").hidden = true;

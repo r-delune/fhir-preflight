@@ -39,10 +39,10 @@
       </form>
     </div>
     <p id="busy-message" class="busy-message" role="status" hidden>Checking with the local HL7 validator. This can take a minute; no AI is involved.</p>
-    <section class="run-summary" aria-label="Validation summary">
-      {% if error %}<div class="result-label incomplete"><span class="status-icon">!</span><div><strong>Validation incomplete</strong><small>{{ error }}</small></div></div>
-      {% elif result %}<div class="result-label {{ result.status }}"><span class="status-icon">{{ '✓' if result.status == 'pass' else '!' }}</span><div><strong>{{ 'Pass — configured checks' if result.status == 'pass' else 'Validation failed' }}</strong><small>{{ counts.get('error', 0) + counts.get('fatal', 0) }} errors · {{ counts.get('warning', 0) }} warnings · {{ counts.get('information', 0) }} information</small></div></div>
-      {% else %}<div class="result-label pending"><span class="status-icon">—</span><div><strong>Ready to check</strong><small>Load an example, then run validation.</small></div></div>{% endif %}
+    <section class="run-summary" aria-label="Validation summary" aria-live="polite" aria-atomic="true">
+      {% if error %}<div class="result-label incomplete"><span class="status-icon">!</span><div><strong id="run-status-title">Validation incomplete</strong><small id="run-status-detail">{{ error }}</small></div></div>
+      {% elif result %}<div class="result-label {{ result.status }}"><span class="status-icon">{{ '✓' if result.status == 'pass' else '!' }}</span><div><strong id="run-status-title">{{ 'Pass — configured checks' if result.status == 'pass' else 'Validation failed' }}</strong><small id="run-status-detail">{{ counts.get('error', 0) + counts.get('fatal', 0) }} errors · {{ counts.get('warning', 0) }} warnings · {{ counts.get('information', 0) }} information</small></div></div>
+      {% else %}<div class="result-label pending"><span class="status-icon">—</span><div><strong id="run-status-title">Ready to check</strong><small id="run-status-detail">Load an example, then run validation.</small></div></div>{% endif %}
       <div class="checks"><span class="checks-title">{% if result %}CHECKS ENABLED{% else %}CHECKS PLANNED{% endif %}</span><span>{{ '✓' if result else '○' }} Structure</span><span>{{ '✓' if result else '○' }} Profile</span><span>{{ '✓' if result else '○' }} Invariants</span><span class="disabled-check">⊘ Remote terminology off</span></div>
     </section>
     {% if result %}<section class="run-explanation" aria-label="What this run means">
