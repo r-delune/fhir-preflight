@@ -5,7 +5,7 @@ drafted_by: Codex
 
 # Step 3 — hosted model runbook
 
-Trial authorized; latest budget is $1 current credit with no card charges. The model is Qwen3-8B (Apache-2.0)
+Trial authorized; Brian confirmed a saved $15 workspace spend limit after card addition. The model is Qwen3-8B (Apache-2.0)
 running through vLLM on Modal's rented GPU. Your laptop runs the workbench and
 sends a request; the GPU generates the text. No local Ollama. The current
 workbench still uses mock output; connecting it is Step 4.
@@ -30,8 +30,8 @@ Do not paste its value in chat or commit it. No Hugging Face token is required
 for this public model. Confirm the secret exists without displaying its value.
 
 ## 2. Authorized spending control — verify before jobs
-Review COSTS.md and ADR-005. Brian revised the budget to $1 current credit and confirmed setup in chat.
-Do not set $15 or add a card. Record the latest account state and baseline billing.
+Review COSTS.md and ADR-005. Brian subsequently confirmed “$15 limit saved” after card addition.
+This supersedes the earlier $1 restriction. Record current baseline billing.
 Keep any existing stricter usage limit. Authorization does not prove a limit was saved. They may
 build images, create persistent storage and consume credits/cash. A bearer key
 does not stop unauthenticated requests waking compute. Do not share the URL.

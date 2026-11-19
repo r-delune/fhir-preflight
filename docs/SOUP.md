@@ -126,3 +126,9 @@ but app registration failed before weight download/inference. Build log observed
 vLLM 0.21.0, Transformers 5.8.1, torch 2.11.0 and huggingface-hub 1.33.0. These
 are build observations, not a successfully adopted model baseline or a full
 transitive lock. The separate CPU app shares this same image definition.
+
+CPU-cache cloud verification: one successful call, five weight shards (15.2565
+GiB), runtime manifest matches the above versions and pinned model revision. The
+shared image worked on CPU without GPU registration (ANOM-005 resolved). This
+does not verify GPU fit or inference. ANOM-006: L4 registration remains blocked
+by Modal's payment-method check after user-reported card/limit setup.

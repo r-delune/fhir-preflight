@@ -489,3 +489,45 @@ Saved exact run IDs, refs, SHAs, event types and result URLs in
  docs/examples/step-3/ci-branch-results.json. No cloud/GPU calls ran in CI.
 Final evidence-only commit is pushed next; local image refresh then exposes the
 updated costs/anomalies/journal and Checking… status with committed provenance.
+
+### Step 3 resumed — saved limit confirmed
+Brian answered “$15 limit saved” to the pending billing-control question. This
+supersedes the temporary $1 restriction and completes the missing settings
+information. Recorded as user-confirmed, not independently observed by CUA.
+Captured baseline billing, then invoked the separate CPU-only app through
+model.cache::cache_weights. The cached image was reused and the job reached
+Hugging Face snapshot download; no GPU was requested by this app. Measurement,
+cache manifest, model probe and final billing remain to be recorded. No further
+cost permission is required within the confirmed scope.
+
+**Observed cloud outcomes:** separate CPU app ap-7BdmoCPCGt38E3yEGEjgO4 ran
+cache_weights once successfully and stopped, with no server requests. HF progress
+reported ~75 seconds for 14 files; app lifecycle 101 seconds. Verified five
+weight shards totaling 16,381,516,776 bytes (15.2565 GiB), pinned revision and
+runtime manifest (vLLM 0.21.0, Transformers 5.8.1, torch 2.11.0, HF Hub 1.33.0).
+Expected NVIDIA-driver warning on CPU is not a failed GPU allocation. ANOM-005's
+isolation mitigation is now cloud-verified, not merely a local test.
+
+**Costs:** per-app current-hour resource snapshot: CPU $0.00267454, memory
+$0.00090471, egress $0.00045390, total $0.00403315 metered. Snapshot covers the
+still-open 12:00–13:00 UTC hour; final invoice may adjust. Workspace summary
+$0.01082632 metered/$0 billed does not reconcile fully with the resource
+breakdown; retained both and did not substitute summary delta for session cost.
+Evidence: docs/examples/step-3/cpu-cache-success-gpu-blocked.json.
+
+**Unexpected blocker:** GPU deploy app ap-HyWWj3PeL8njqU58kvap84 still rejected
+with “Please add a payment method to use L4 GPU functions.” Stats show zero
+calls/containers; both apps stopped, zero tasks. No cold-start/warm/inference
+cost result can be claimed. Added ANOM-006 rather than claim the reported card
+state was independently verified. CLI workspace confirmed by the earlier login
+and lifecycle is r-delune. A diagnostic `modal workspace list` was unsupported;
+used actual workspace/settings help, which exposes no billing/card setting. CUA
+now lists no Chrome browser at all, so cannot inspect the existing billing login.
+Asked for card active/pending/workspace status, not renewed spending permission.
+No repeated blind deployment, GPU/model fallback, limit increase or public-demo
+generation attempted. Cached weights retained; no running cloud compute observed.
+
+**Step status:** Step 3 remains incomplete pending platform payment-method
+recognition. Required cold/warm/auth/stop/redeploy evidence is outstanding. The
+post-Step-3 product-plan draft stays queued under Brian's sequencing instruction;
+no profile/UI/upload implementation or adopted regulatory conclusion is inferred.

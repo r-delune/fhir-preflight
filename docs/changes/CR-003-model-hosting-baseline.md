@@ -43,3 +43,15 @@ COSTS.md and the nonsecret billing artifact. Split cache registration into a
 CPU-only app without changing model/image/runtime versions or adding dependencies.
 Tests explicitly block serving-module imports from that app. Reuse cached image
 layers. Card addition is user-reported; saved spending limit still pending.
+
+Latest control confirmation: Brian replied “$15 limit saved” after card addition,
+superseding the temporary $1 restriction. Resumed isolated CPU download under
+that cap. This is user-confirmed settings evidence, not a CUA screenshot.
+
+Remote mitigation evidence: CPU cache app ap-7BdmoCPCGt38E3yEGEjgO4 succeeded
+and stopped; revision/runtime manifest and five weight shards verified. CPU
+resource report totals $0.00403315 preliminary metered cost. GPU registration
+ap-HyWWj3PeL8njqU58kvap84 still failed for payment-method recognition despite
+the user-confirmed $15 limit. Zero GPU calls/containers. ANOM-005 CPU isolation
+resolved; ANOM-006 remains open. Adoption/release, cold/warm measurement and
+stop/redeploy verification are not claimed complete.

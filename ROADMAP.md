@@ -23,10 +23,10 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | 8 | Model swap exercise (CR-002), release v0.2 | ⬜ | | | | ☐ |
 
 ## Now
-- **Current step:** 3 — initial cloud registration failure recorded, CPU isolation tested, first hosted CI passed; Step 2 desktop QA reviewer-reported; mobile/screenshot pending
-- **Waiting on Brian:** confirm the saved spend limit after adding the card; retain last $1 constraint until known. No new cloud jobs while that control is unverified.
+- **Current step:** 3 — CPU cache verified in cloud; GPU deployment rejected by platform; hosted CI passed; Step 2 desktop QA reviewer-reported; mobile/screenshot pending
+- **Waiting on Brian:** check whether the card is active/pending in workspace r-delune: Modal still rejects L4 despite the confirmed $15 limit. No repeat cost approval required.
 - **Open anomalies:** 3 (see `docs/ANOMALIES.md`)
-- **Spend this month:** €0 (see `docs/COSTS.md`)
+- **Spend this month:** $0 billed in latest platform snapshot; metered costs recorded in `docs/COSTS.md`
 
 ## Parked ideas
 Things that came up but are out of scope for now. Add here instead of building them.
