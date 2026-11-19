@@ -7,7 +7,7 @@ setup:
 validator-download:
 	python3.12 scripts/download_validator.py
 dev: validator-download
-	docker compose up --build -d
+	docker compose up --build -d --wait
 dev-python:
 	uv run --locked uvicorn app.main:app --reload --host 127.0.0.1
 stop:

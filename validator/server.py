@@ -4,7 +4,9 @@ import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from threading import BoundedSemaphore
 
+from validator.inventory import inventory
 from validator.runner import CONFIG, ValidatorUnavailable, validate
+from validator.runner import ROOT as PROJECT_ROOT
 
 SLOT = BoundedSemaphore(1)
 MAX_BYTES = 1_000_000
@@ -52,4 +54,6 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
+    if inventory() != json.loads((PROJECT_ROOT / "validator/packages.lock.json").read_text()):
+        raise RuntimeError("FHIR package inventory mismatch; refusing to serve.")
     ThreadingHTTPServer(("0.0.0.0", 8081), Handler).serve_forever()

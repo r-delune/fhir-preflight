@@ -80,6 +80,8 @@ def validate(payload: dict, *, bootstrap: bool = False) -> dict:
             "outcome": outcome,
             "provenance": {
                 **CONFIG,
+                "packages": json.loads((ROOT / "validator/packages.lock.json").read_text())
+                if (ROOT / "validator/packages.lock.json").exists() else [],
                 "input_sha256": hashlib.sha256(encoded).hexdigest(),
                 "profile_sha256": hashlib.sha256(PROFILE.read_bytes()).hexdigest(),
                 "validator_exit_code": process.returncode,
@@ -99,6 +101,8 @@ if __name__ == "__main__":
         json.loads((ROOT / "fhir/fixtures/valid-infant-weight.json").read_text()),
         bootstrap="--bootstrap" in sys.argv,
     )
-    print(json.dumps(result, indent=2))
+    print("Bootstrap validation:", result["status"])
+    for issue in result["outcome"]["issue"]:
+        print(issue["severity"], issue.get("details", {}).get("text", issue.get("diagnostics", "")))
     if result["status"] != "pass":
         raise SystemExit(1)

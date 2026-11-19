@@ -9,9 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CASES = {
     "valid-infant-weight": {"status": "pass", "terms": []},
-    "broken-structure": {"status": "fail", "terms": ["status", "decimal"]},
+    "broken-structure": {"status": "fail", "terms": ["status"]},
     "broken-profile-and-reference": {
-        "status": "fail", "terms": ["29463-7", "demo-subject-1", "g"]
+        "status": "fail", "terms": ["29463-7", "demo-subject-1"]
     },
 }
 
@@ -36,6 +36,20 @@ def main() -> int:
         errors = [issue for issue in issues if issue["severity"] in {"error", "fatal"}]
         text = json.dumps(errors)
         missing = [term for term in expected["terms"] if term not in text]
+        if name == "broken-structure" and not any(
+            "value" in json.dumps(issue.get("expression", []))
+            and any(term in json.dumps(issue).lower() for term in ["number", "decimal", "numeric"])
+            for issue in errors
+        ):
+            missing.append("numeric datatype error at a value field")
+        if name == "broken-profile-and-reference" and not any(
+            "value" in json.dumps(issue.get("expression", []))
+            and "code" in json.dumps(issue.get("expression", []))
+            and "kg" in json.dumps(issue)
+            and "fixed to 'g'" in issue.get("details", {}).get("text", "")
+            for issue in errors
+        ):
+            missing.append("quantity unit code error for kg")
         success = result["status"] == expected["status"] and not missing
         failed |= not success
         counts = dict(collections.Counter(issue["severity"] for issue in issues))

@@ -42,3 +42,17 @@ Development tools: uv 0.8.22 (MIT/Apache-2.0, verify); Python 3.12.0 local (PSF 
 - Docker Engine **28.4.0**, Compose **v2.39.4-desktop.1** observed locally; existing development tools. Docker Desktop has separate terms; no subscription purchased by this project. Required for isolated local service orchestration.
 
 Container image digests pin contents; their full OS component licence inventory/security review is deferred to release preparation. New components must pass the fixture regression before a version change is adopted.
+
+### Installed FHIR package baseline
+
+Bootstrap resolved the packages below. `validator/packages.lock.json` records exact versions and per-package content hashes (excluding generated .index files). Image builds and service startup reject a different inventory; no package drift is accepted silently. A future changed upstream default may cause a build failure requiring deliberate cache/version review rather than an automatic upgrade. The packaged FHIR artifacts use their included licence notices; the project does not redistribute a full package archive in git.
+
+| Package | Version | Content SHA-256 |
+|---|---|---|
+| hl7.fhir.r4.core | 4.0.1 | `f83bee4ac13dea6da256eb28fc34ee0b67f21411866a9a2c31a7261508358795` |
+| hl7.fhir.uv.extensions | 5.4.0 | `0fc78158806baab3cc5268293b9a4120fb2089d0974b9b0200a060a9cc7eaeac` |
+| hl7.fhir.uv.extensions.r4 | 5.2.0 | `8fea4a7f0d9f7ac33eba1a1f4fc6b0d9c68e22584146c8d0755908059d86161d` |
+| hl7.fhir.xver-extensions | 0.1.0 | `25f89086a6d71a4304edad552c5752f579707ebbeb0c42169e35d456ebd1bdea` |
+| hl7.terminology | 7.5.0 | `0f88b34ecc182e9b2b4629445006ac936fe8937a7ed32cd6d7fdbb0d217965b6` |
+| hl7.terminology.r4 | 6.2.0 | `ee7ce5718d6de22145366891150bd5e1abe3778d5176e95427ed1e3c16c735c5` |
+| hl7.terminology.r5 | 7.5.0 | `fd27739491e6145e716563e7149dcc29e71279df2eb856ba5fd147f9d2c87976` |

@@ -8,9 +8,9 @@ From the WORKDEMO directory:
 make dev
 ```
 
-This verifies/downloads the pinned HL7 JAR, builds app and validator images, fetches FHIR packages at build time, and starts the two containers in the background. Docker Desktop must be running. First setup needs internet and may be slow. Subsequent request-time validation is offline. No hosted AI service or model is deployed at this step.
+This verifies/downloads the pinned HL7 JAR, builds app and validator images, fetches FHIR packages at build time, and starts the two containers in the background, waiting for health checks before returning. Docker Desktop must be running. First setup needs internet and may be slow. Subsequent request-time validation is offline. No hosted AI service or model is deployed at this step.
 
-The hello page is http://127.0.0.1:8000. Results are available through the command below; the results UI comes in Step 2. The validator's development endpoint is bound to the laptop at http://127.0.0.1:8081.
+The hello page is http://127.0.0.1:8002. Results are available through the command below; the results UI comes in Step 2. The app forwards CLI requests to the isolated validator over its private network; the validator has no host port. Port 8000 is left free for an existing local process.
 
 ## Check examples
 

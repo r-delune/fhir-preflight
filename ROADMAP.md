@@ -8,7 +8,7 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | Step | What | Status | Started | Checkpoint | Journal | Approved |
 |---|---|---|---|---|---|---|
 | 0 | Skeleton, rules, CI, intended purpose, first requirements | ✅ progression approved in chat; hosted CI pending | 2026-11-19 | 2026-11-19 | [Entry #0](BUILD_JOURNAL.md#step-0) | ☐ |
-| 1 | FHIR fixtures, our profile, validator running locally | 🔨 in progress | 2026-11-19 | | [Entry #1](BUILD_JOURNAL.md#step-1) | ☐ |
+| 1 | FHIR fixtures, our profile, validator running locally | ⏸ waiting for review | 2026-11-19 | 2026-11-19 | [Entry #1](BUILD_JOURNAL.md#step-1) | ☐ |
 | 2 | Results UI (issues linked to JSON locations) | ⬜ | | | | ☐ |
 | 3 | Host the model on Modal (Codex prepares and explains) | ⬜ | | | | ☐ |
 | 4 | AI explanations, citation checks, red-team | ⬜ | | | | ☐ |
@@ -18,8 +18,8 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | 8 | Model swap exercise (CR-002), release v0.2 | ⬜ | | | | ☐ |
 
 ## Now
-- **Current step:** 1 — fixtures and wrapper written; real validator bootstrap/regression pending
-- **Waiting on Brian:** nothing required during Step 1 build; review at checkpoint. GitHub remote still needed for hosted CI evidence.
+- **Current step:** 1 — local implementation verified; real fixtures matched pass/fail/fail
+- **Waiting on Brian:** review docs/examples/step-1/README.md, ask questions and approve Step 2 when ready. Hosted CI evidence remains pending.
 - **Open anomalies:** 1 (see `docs/ANOMALIES.md`)
 - **Spend this month:** €0 (see `docs/COSTS.md`)
 

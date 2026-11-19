@@ -48,7 +48,17 @@
           "unit": "g",
           "system": "http://unitsofmeasure.org",
           "code": "g"
-        }
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

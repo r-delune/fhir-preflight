@@ -1,0 +1,262 @@
+{
+  "status": "pass",
+  "outcome": {
+    "resourceType": "OperationOutcome",
+    "text": {
+      "status": "generated",
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>OperationOutcome </b></p><table class=\"grid\"><tr><td><b>Severity</b></td><td><b>Location</b></td><td><b>Code</b></td><td><b>Details</b></td><td><b>Diagnostics</b></td><td><b>Source</b></td></tr><tr><td>Information</td><td>Bundle.entry[1].resource/*Observation/demo-weight*/</td><td>Informational Note</td><td>Validate Observation against the Body weight profile (http://hl7.org/fhir/StructureDefinition/bodyweight) which is required by the FHIR specification because the LOINC code 29463-7 was found</td><td/><td>InstanceValidator</td></tr><tr><td>Information</td><td>Bundle.entry[1].resource/*Observation/demo-weight*/.code</td><td>Invalid Code</td><td>Could not confirm that the codes provided are from the extensible value set http://hl7.org/fhir/ValueSet/observation-vitalsignresult|4.0.1 because there is no terminology service</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[1].resource/*Observation/demo-weight*/.value.ofType(Quantity)</td><td>Business Rule Violation</td><td>Unable to validate code 'g' in system 'http://unitsofmeasure.org' because the validator is running without terminology services</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[1].resource/*Observation/demo-weight*/.value.ofType(Quantity).code</td><td>Informational Note</td><td>Unable to validate code without using server because: Resolved system http://unitsofmeasure.org (v3.0.1), but the definition doesn't include any codes, so the code has not been validated</td><td/><td>TerminologyEngine</td></tr><tr><td>Warning</td><td>Bundle.entry[1].resource/*Observation/demo-weight*/</td><td>Invalid Content</td><td>Best Practice Recommendation: In general, all observations should have a performer</td><td/><td>InstanceValidator</td></tr><tr><td>Information</td><td>Bundle.entry[1].resource</td><td>Informational Note</td><td>Validate Observation against the Body weight profile (http://hl7.org/fhir/StructureDefinition/bodyweight) which is required by the FHIR specification because the LOINC code 29463-7 was found</td><td/><td>InstanceValidator</td></tr></table></div>"
+    },
+    "extension": [
+      {
+        "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-file",
+        "valueString": "/tmp/fhir-preflight-kpqxnknn/input.json"
+      }
+    ],
+    "issue": [
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+            "valueInteger": 1
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+            "valueInteger": 1217
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+            "valueString": "InstanceValidator"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+            "valueCode": "VALIDATION_VAL_PROFILE_SIGNPOST_OBS"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+            "valueString": "http://hl7.org/fhir/StructureDefinition/Patient|4.0.1"
+          }
+        ],
+        "severity": "information",
+        "code": "informational",
+        "details": {
+          "text": "Validate Observation against the Body weight profile (http://hl7.org/fhir/StructureDefinition/bodyweight) which is required by the FHIR specification because the LOINC code 29463-7 was found"
+        },
+        "expression": [
+          "Bundle.entry[1].resource/*Observation/demo-weight*/"
+        ]
+      },
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+            "valueInteger": 1
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+            "valueInteger": 872
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+            "valueString": "TerminologyEngine"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+            "valueCode": "TERMINOLOGY_TX_NOSVC_BOUND_EXT"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+            "valueString": "http://hl7.org/fhir/StructureDefinition/bodyweight|4.0.1"
+          }
+        ],
+        "severity": "information",
+        "code": "code-invalid",
+        "details": {
+          "text": "Could not confirm that the codes provided are from the extensible value set http://hl7.org/fhir/ValueSet/observation-vitalsignresult|4.0.1 because there is no terminology service"
+        },
+        "expression": [
+          "Bundle.entry[1].resource/*Observation/demo-weight*/.code"
+        ]
+      },
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+            "valueInteger": 1
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+            "valueInteger": 1091
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+            "valueString": "TerminologyEngine"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+            "valueCode": "Error_validating_code_running_without_terminology_services"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+            "valueString": "http://hl7.org/fhir/StructureDefinition/Patient|4.0.1"
+          }
+        ],
+        "severity": "warning",
+        "code": "business-rule",
+        "details": {
+          "text": "Unable to validate code 'g' in system 'http://unitsofmeasure.org' because the validator is running without terminology services"
+        },
+        "expression": [
+          "Bundle.entry[1].resource/*Observation/demo-weight*/.value.ofType(Quantity)"
+        ]
+      },
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+            "valueInteger": 1
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+            "valueInteger": 1090
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+            "valueString": "TerminologyEngine"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+            "valueCode": "TERMINOLOGY_TX_WARNING"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+            "valueString": "http://hl7.org/fhir/StructureDefinition/Patient|4.0.1"
+          }
+        ],
+        "severity": "warning",
+        "code": "informational",
+        "details": {
+          "text": "Unable to validate code without using server because: Resolved system http://unitsofmeasure.org (v3.0.1), but the definition doesn't include any codes, so the code has not been validated"
+        },
+        "expression": [
+          "Bundle.entry[1].resource/*Observation/demo-weight*/.value.ofType(Quantity).code"
+        ]
+      },
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+            "valueInteger": 1
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+            "valueInteger": 1217
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+            "valueString": "InstanceValidator"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+            "valueCode": "All_observations_should_have_a_performer"
+          }
+        ],
+        "severity": "warning",
+        "code": "invalid",
+        "details": {
+          "text": "Best Practice Recommendation: In general, all observations should have a performer"
+        },
+        "expression": [
+          "Bundle.entry[1].resource/*Observation/demo-weight*/"
+        ]
+      },
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+            "valueInteger": 1
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+            "valueInteger": 1217
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-source",
+            "valueString": "InstanceValidator"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+            "valueCode": "VALIDATION_VAL_PROFILE_SIGNPOST_OBS"
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-context",
+            "valueString": "https://example.org/fhir/StructureDefinition/demo-infant-weight|0.1.0"
+          }
+        ],
+        "severity": "information",
+        "code": "informational",
+        "details": {
+          "text": "Validate Observation against the Body weight profile (http://hl7.org/fhir/StructureDefinition/bodyweight) which is required by the FHIR specification because the LOINC code 29463-7 was found"
+        },
+        "expression": [
+          "Bundle.entry[1].resource"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "validator_version": "6.10.4",
+    "validator_sha256": "1106b9d58f9e363e47bea7c4fc065841e5fc91fe9d062775c3bfdd212bd653cc",
+    "fhir_version": "4.0.1",
+    "core_package": "hl7.fhir.r4.core#4.0.1",
+    "profile_url": "https://example.org/fhir/StructureDefinition/demo-infant-weight",
+    "profile_version": "0.1.0",
+    "remote_terminology": false,
+    "packages": [
+      {
+        "name": "hl7.fhir.r4.core",
+        "version": "4.0.1",
+        "content_sha256": "f83bee4ac13dea6da256eb28fc34ee0b67f21411866a9a2c31a7261508358795"
+      },
+      {
+        "name": "hl7.fhir.uv.extensions",
+        "version": "5.4.0",
+        "content_sha256": "0fc78158806baab3cc5268293b9a4120fb2089d0974b9b0200a060a9cc7eaeac"
+      },
+      {
+        "name": "hl7.fhir.uv.extensions.r4",
+        "version": "5.2.0",
+        "content_sha256": "8fea4a7f0d9f7ac33eba1a1f4fc6b0d9c68e22584146c8d0755908059d86161d"
+      },
+      {
+        "name": "hl7.fhir.xver-extensions",
+        "version": "0.1.0",
+        "content_sha256": "25f89086a6d71a4304edad552c5752f579707ebbeb0c42169e35d456ebd1bdea"
+      },
+      {
+        "name": "hl7.terminology",
+        "version": "7.5.0",
+        "content_sha256": "0f88b34ecc182e9b2b4629445006ac936fe8937a7ed32cd6d7fdbb0d217965b6"
+      },
+      {
+        "name": "hl7.terminology.r4",
+        "version": "6.2.0",
+        "content_sha256": "ee7ce5718d6de22145366891150bd5e1abe3778d5176e95427ed1e3c16c735c5"
+      },
+      {
+        "name": "hl7.terminology.r5",
+        "version": "7.5.0",
+        "content_sha256": "fd27739491e6145e716563e7149dcc29e71279df2eb856ba5fd147f9d2c87976"
+      }
+    ],
+    "input_sha256": "5f4f500fa84cc3616d1aae2af49936474a9c1bbf383e93d1455c210eb497ae21",
+    "profile_sha256": "320c8c9c73a89b01454c7a99c375c55e3195b986b2f8069ce74f97956ea5dd4f",
+    "validator_exit_code": 0
+  },
+  "checks": {
+    "structure": "completed",
+    "profile": "completed",
+    "invariants": "completed",
+    "references": "demo profile requires subject resolution within supplied data",
+    "remote_terminology": "disabled; local terminology checks may still run"
+  }
+}

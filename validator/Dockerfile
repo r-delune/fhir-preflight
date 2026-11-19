@@ -11,4 +11,5 @@ RUN python -c "import hashlib; from validator.runner import CONFIG,JAR; assert h
 USER preflight
 # Populate FHIR packages while building. Runtime requests prohibit all HTTP access.
 RUN python -m validator.runner --bootstrap
+RUN python -m validator.inventory > /home/preflight/package-inventory.json
 CMD ["python", "-m", "validator.server"]

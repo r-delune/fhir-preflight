@@ -113,3 +113,36 @@ Newest entries at the bottom.
 **Problems so far:** validator JAR transfer timed out; restarted with range downloads and will verify the complete upstream SHA-256 before execution. System Python's HTTPS certificate store failed; using system curl's verified TLS rather than disabling certificate verification. Existing TestClient deprecation warning remains ANOM-001.
 
 **Status:** in progress; actual validator results and final checkpoint to follow. No model deployment or paid services involved.
+
+#### Step 1 — verified checkpoint
+
+**Final implementation:** the official CLI 6.10.4 runs in a Python development wrapper, with Java 17 from a digest-pinned image. App /api/validate proxies to the validator; no model adapter participates. Added a 0.1.0 custom profile, three fictional Bundles, download/checksum helper, validation/regression commands, exact package content lock, process/proxy tests and explained runbook. See [ADR-002](docs/decisions/ADR-002-validator-service.md), [CR-000](docs/changes/CR-000-validator-baseline.md), [requirements](docs/REQUIREMENTS.md), [SOUP](docs/SOUP.md) and [risk starter](docs/RISK.md).
+
+**Expected versus actual:**
+
+| Fixture | Expected | Actual | Result |
+|---|---|---|---|
+| valid-infant-weight | Pass | Pass; 0 errors, 3 warnings, 3 information messages | Matched |
+| broken-structure | Missing status and numeric-value errors | Fail; 6 errors, including missing status and invalid decimal | Matched |
+| broken-profile-and-reference | Wrong code, wrong unit and unresolved subject | Fail; 5 errors, including fixed code 29463-7, fixed unit g and demo-subject-1 | Matched |
+
+Message counts are not distinct-defect counts: the same omission appears under several profiles; the deliberately wrong temperature code also activates core temperature-unit checks. Raw outcomes and provenance are committed under [docs/examples/step-1](docs/examples/step-1/README.md).
+
+**Verification:** final Python suite: **20 passed**, with the previously recorded TestClient deprecation warning (ANOM-001). Ruff passed; git diff whitespace check passed. Real three-fixture regression passed through the app proxy on port 8002 with `-no-http-access`, `-tx n/a` and the validator on an internal-only network. Package inventory was identical across a fresh image rebuild and is checked before startup. The specific grams-only fixed-code error was also checked directly in the saved outcome. `make dev` verifies the cached JAR checksum, uses cached builds and waits for both services' health checks. Landing-page HTTP smoke check returned the Step 1 notice.
+
+**What went wrong / corrections:**
+- First supposedly valid fixture failed with two category errors because HL7 automatically applies core bodyweight to LOINC 29463-7. Added vital-signs category to every fixture and reran; no rule suppressed (ANOM-002, resolved).
+- Port 8000 was occupied by an existing Python server. Left it running and chose app port 8002. Docker's internal validator network did not expose its host port, so requests now enter through the app proxy; validator has no published port (ANOM-003, resolved).
+- Added an app health check after observing a request arrive before app startup had finished.
+- GitHub remote appeared during work: https://github.com/r-delune/fhir-preflight. A read of workflow runs returned an empty list. Hosted CI is still not claimed green; earlier entries saying no remote describe historical state.
+- The shared checkout changed to main during implementation, so initial Step 1 commit b67d36b landed there. The Step 1 branch was fast-forwarded to the same commit without rewriting history. Remaining checkpoint work is on codex/step-1-validator.
+
+**Decisions and limits:** request-time validation is offline; image setup may download FHIR packages. Exact package contents are locked; if upstream defaults drift, a rebuild fails rather than accepting a new baseline silently. Three warnings on the passing fixture remain visible: two related to unit terminology without a server and one best-practice performer recommendation. The profile demonstrates technical constraints, not infant-age verification or clinical interpretation. Runtime results UI and AI/review features remain future work. No product compliance or formal safety classification is claimed.
+
+**Cost incurred:** €0 paid services; local software/image/package downloads only. No hosted model or app resources provisioned.
+
+**Your review:** read [the plain-English Step 1 guide](docs/examples/step-1/README.md). The app is running at http://127.0.0.1:8002; it currently confirms startup. Optional: run `make validate`, then `python3.12 scripts/validate.py fhir/fixtures/broken-profile-and-reference.json`. Ask about any result or development decision. Stop the local services with `make stop` if desired.
+
+**Brian's personal observations / questions:** optional; not supplied or invented by Codex.
+
+**Status:** ☐ awaiting Brian's checkpoint review. Step 2 has not started. AGENTS.md requires approval in chat or the journal before advancing. Hosted CI evidence remains a separate open item.

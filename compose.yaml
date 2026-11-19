@@ -2,20 +2,23 @@ services:
   app:
     build: .
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:${APP_PORT:-8002}:8000"
     environment:
       MODEL_ADAPTER: mock
       VALIDATOR_URL: http://validator:8081/validate
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 6
     depends_on:
       validator:
         condition: service_healthy
-    networks: [local]
+    networks: [access, local]
   validator:
     build:
       context: .
       dockerfile: validator/Dockerfile
-    ports:
-      - "127.0.0.1:8081:8081"
     mem_limit: 3g
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8081/health', timeout=3)"]
@@ -24,5 +27,6 @@ services:
       retries: 3
     networks: [local]
 networks:
+  access: {}
   local:
     internal: true

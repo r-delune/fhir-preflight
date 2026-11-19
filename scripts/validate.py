@@ -11,7 +11,7 @@ from pathlib import Path
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("file", type=Path)
-    parser.add_argument("--url", default="http://127.0.0.1:8081/validate")
+    parser.add_argument("--url", default="http://127.0.0.1:8002/api/validate")
     parser.add_argument(
         "--envelope", action="store_true", help="Include status, checks and provenance"
     )

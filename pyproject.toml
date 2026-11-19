@@ -12,7 +12,7 @@ dev = ["pytest", "httpx", "ruff"]
 testpaths = ["tests"]
 pythonpath = ["."]
 addopts = "--strict-markers"
-markers = ["req(id): approved requirement ID", "scaffold: Step 0 infrastructure check; requirements pending Brian"]
+markers = ["req(id): requirement ID", "scaffold: infrastructure check, not product requirement coverage"]
 
 [tool.ruff]
 target-version = "py312"

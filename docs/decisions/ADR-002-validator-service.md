@@ -20,3 +20,6 @@ Bootstrap may access package registries during image build; request-time validat
 Pass/fail policy (REQ-01): any error/fatal means fail; only warning/information means pass with documented limitations. Missing/malformed output, abnormal exit or timeout means incomplete, never pass. No AI is involved.
 
 The subject resolution invariant is a local teaching constraint in our profile, not a claim that every unresolved reference violates base FHIR. No age or clinical interpretation is performed.
+
+## Verified setup adjustment
+Docker Desktop's internal network did not publish the validator port to the laptop. The validator remains on that network with no published port; CLI requests pass through the app's /api/validate route. Only the app gets a host-access bridge and laptop-only port 8002 (8000 was already occupied). This is transport, not a results UI or alternative validation engine.

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "hl7.fhir.r4.core",
+    "version": "4.0.1",
+    "content_sha256": "f83bee4ac13dea6da256eb28fc34ee0b67f21411866a9a2c31a7261508358795"
+  },
+  {
+    "name": "hl7.fhir.uv.extensions",
+    "version": "5.4.0",
+    "content_sha256": "0fc78158806baab3cc5268293b9a4120fb2089d0974b9b0200a060a9cc7eaeac"
+  },
+  {
+    "name": "hl7.fhir.uv.extensions.r4",
+    "version": "5.2.0",
+    "content_sha256": "8fea4a7f0d9f7ac33eba1a1f4fc6b0d9c68e22584146c8d0755908059d86161d"
+  },
+  {
+    "name": "hl7.fhir.xver-extensions",
+    "version": "0.1.0",
+    "content_sha256": "25f89086a6d71a4304edad552c5752f579707ebbeb0c42169e35d456ebd1bdea"
+  },
+  {
+    "name": "hl7.terminology",
+    "version": "7.5.0",
+    "content_sha256": "0f88b34ecc182e9b2b4629445006ac936fe8937a7ed32cd6d7fdbb0d217965b6"
+  },
+  {
+    "name": "hl7.terminology.r4",
+    "version": "6.2.0",
+    "content_sha256": "ee7ce5718d6de22145366891150bd5e1abe3778d5176e95427ed1e3c16c735c5"
+  },
+  {
+    "name": "hl7.terminology.r5",
+    "version": "7.5.0",
+    "content_sha256": "fd27739491e6145e716563e7149dcc29e71279df2eb856ba5fd147f9d2c87976"
+  }
+]

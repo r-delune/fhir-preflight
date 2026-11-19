@@ -1,0 +1,37 @@
+[
+  {
+    "fixture": "valid-infant-weight",
+    "expected": "pass",
+    "actual": "pass",
+    "counts": {
+      "information": 3,
+      "warning": 3
+    },
+    "expected_error_terms_missing": [],
+    "matched": true
+  },
+  {
+    "fixture": "broken-structure",
+    "expected": "fail",
+    "actual": "fail",
+    "counts": {
+      "error": 6,
+      "information": 3,
+      "warning": 3
+    },
+    "expected_error_terms_missing": [],
+    "matched": true
+  },
+  {
+    "fixture": "broken-profile-and-reference",
+    "expected": "fail",
+    "actual": "fail",
+    "counts": {
+      "information": 3,
+      "warning": 3,
+      "error": 5
+    },
+    "expected_error_terms_missing": [],
+    "matched": true
+  }
+]

@@ -5,3 +5,6 @@
 - `broken-profile-and-reference.json`: wrong LOINC code, kilograms instead of the profile's fixed grams code, and an unresolved subject should fail. The custom subject invariant explicitly requires resolution to a Patient; this avoids assuming all dangling references are universally invalid FHIR.
 
 The custom profile teaches structural constraints, not whether a fictional measurement is clinically appropriate or whether the subject is an infant. Passing is limited to configured checks.
+
+## First real-run correction
+The initial valid example failed with two category-related errors: the HL7 validator automatically applies core bodyweight when it sees LOINC 29463-7. Added the required vital-signs category to all three fixtures. This corrects the baseline data; no validator rule was suppressed. Re-run expectations remain pass/fail/fail.

@@ -5,7 +5,7 @@ Step 1: local HL7 FHIR checker with three synthetic fixtures. Results UI and AI 
 ## Run locally
 
 From this directory run `make setup`, then `make dev` (Docker Desktop running).
-Open http://127.0.0.1:8000 for the hello page. First setup downloads the pinned
+Open http://127.0.0.1:8002 for the hello page. First setup downloads the pinned
 validator and FHIR packages; allow time for the image build.
 
 ```sh
@@ -36,4 +36,4 @@ run locally; actual AI requests go to the hosted endpoint after Step 3. Local Ol
 not part of the project. Only the mock model adapter exists so far; no model is deployed.
 Hosting costs and configuration will be verified before provisioning.
 
-GitHub Actions is configured but has not run: this repository has no remote.
+GitHub remote: https://github.com/r-delune/fhir-preflight. Actions is configured; no hosted workflow runs were returned when checked during Step 1. Local checks are recorded separately.
