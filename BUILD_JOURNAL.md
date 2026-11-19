@@ -531,3 +531,12 @@ generation attempted. Cached weights retained; no running cloud compute observed
 recognition. Required cold/warm/auth/stop/redeploy evidence is outstanding. The
 post-Step-3 product-plan draft stays queued under Brian's sequencing instruction;
 no profile/UI/upload implementation or adopted regulatory conclusion is inferred.
+
+**Final registration recheck:** retried once at 12:30:57 UTC after about ten
+minutes, to rule out a short payment-state propagation delay. The same L4
+payment-method error persisted, with no image rebuild or inference. Final app
+list: 3 listed apps, zero tasks. Final reported workspace billing:
+$0.01082632 metered / $0E-8 billed. Recorded in the same
+nonsecret evidence artifact. No more registration retries without a meaningful
+account-state change. This remains a platform/account blocker, not missing cost
+approval; the $15 limit is already authorized and confirmed.

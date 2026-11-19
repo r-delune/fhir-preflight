@@ -143,3 +143,9 @@ warm latency, tokens/sec, inference-session cost and redeployment test remain
 unmeasured.** ANOM-005's CPU-isolation mitigation is verified; ANOM-006 tracks
 the unresolved platform payment-method recognition. No GPU/model fallback or
 limit increase was attempted. Evidence: docs/examples/step-3/cpu-cache-success-gpu-blocked.json.
+
+A registration recheck at 12:30:57 UTC (about ten minutes later) returned the
+same payment-method error. Final account snapshot: $0.01082632 metered,
+$0E-8 billed, zero tasks across 3 listed apps. Cached weights remain;
+no GPU session was started. The $15 cap is confirmed, not awaiting renewed
+approval. The remaining dependency is the platform's payment-method recognition.
