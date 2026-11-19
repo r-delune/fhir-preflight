@@ -1,0 +1,22 @@
+[project]
+name = "fhir-preflight"
+version = "0.0.0"
+description = "Synthetic FHIR validation learning workbench"
+requires-python = ">=3.12,<3.13"
+dependencies = ["fastapi", "uvicorn", "jinja2"]
+
+[dependency-groups]
+dev = ["pytest", "httpx", "ruff"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--strict-markers"
+markers = ["req(id): approved requirement ID", "scaffold: Step 0 infrastructure check; requirements pending Brian"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
