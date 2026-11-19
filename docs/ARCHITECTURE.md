@@ -24,3 +24,11 @@ Validator packaging, region, GPU and exact model revision remain implementation 
 ## Step 2 governance extension
 
 Browser → /governance?doc=<fixed-id> → literal catalog path → source metadata/provenance → HTML-disabled Markdown renderer → read-only page. No URL value is passed to open() as a path. The image contains copied sources and a build hash manifest, not .git. Headers prohibit scripts and active images on governance pages. /docs, /redoc and /openapi.json have no route by default; an exact ENABLE_API_DOCS=1 opts in. Findings retain raw text/IDs; nested message excerpts and plain UI guidance are presentation only, not model output.
+
+## Step 3 prepared boundary (not deployed)
+The workbench remains on its mock adapter. `model/serve.py` defines a separate
+Modal app: CPU cache download → dedicated pinned model volume → one scale-to-zero
+L4 running vLLM. `model/config.py` holds the reviewed pins and resource limits;
+`model/smoke.py` is an explicit manual client, never a test/CI network dependency.
+Step 4 will add the application integration; no validator result passes through
+this model service. See ADR-005 and the model-hosting runbook.

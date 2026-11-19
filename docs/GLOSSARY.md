@@ -40,3 +40,9 @@ drafted_by: Codex
 **Document provenance:** The commit and content hash identifying the source text shown to a reviewer. A working copy can differ from its base commit, so the UI labels that difference instead of implying the edit was already committed. [Git](https://git-scm.com/docs/git-show)
 
 **Allowlist:** A fixed set of permitted targets. Governance URLs choose document IDs from this list; they cannot specify filesystem paths to read. [OWASP path traversal](https://owasp.org/www-community/attacks/Path_Traversal)
+
+## Inference server and cold start
+vLLM is the server that loads model weights and generates text. A cold start is the first request after its container has stopped; it includes starting hardware and loading weights, so it is slower than a warm request. https://modal.com/docs/guide/cold-start
+
+## Model weights and revision
+Weights are the downloaded numbers the model uses to produce text. An immutable revision identifies the exact upstream snapshot; it does not make output deterministic or prove its accuracy. https://huggingface.co/docs/huggingface_hub/guides/download

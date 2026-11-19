@@ -215,3 +215,63 @@ no runtime changes or tests needed. Cost incurred: €0 paid services.
 **Your review:** open http://127.0.0.1:8002 and http://127.0.0.1:8002/governance. Inspect the pipeline, a completed result, a nested-message excerpt and its raw disclosure. Follow REQ-02, ADR-002, CR-000 and the build-step link. Governance remains read-only and all current document statuses remain drafts. No secret value is needed for this review; the Modal contract is preparation only.
 
 **Checkpoint status:** ☐ awaiting Brian's Step 2 review under AGENTS.md. The pre-existing final visual click/mobile/saved-screenshot gap (ANOM-004) remains open; no new browser screenshot is claimed. Step 3 deployment has not started. No regulatory conclusion, document approval or release approval has been invented.
+
+<a id="step-3"></a>
+### #3 — Step 3 hosted-model preparation — 2026-11-19
+
+**Authorization:** Brian said “ok do it” after requesting the next step. This
+approves preparation/progression from Step 2, not paid provisioning. Step 2's
+ANOM-004 visual evidence gap remains open. Branch codex/step-3-model-hosting was
+fast-forwarded to the completed Step 2 commit e6376e6 before edits.
+
+**Built:** model/config.py, model/serve.py, model/smoke.py and offline tests;
+explained docs/runbooks/model-hosting.md; proposed REQ-17, ADR-005 and CR-003;
+SOUP, risk, architecture, costs, glossary, traceability and governance catalog
+updates. Optional Modal SDK is separate from app runtime dependencies. The app
+remains mock. No account credentials or endpoint secret values were read.
+
+**Why:** a separately testable hosted baseline makes model behaviour and cloud
+cost a controlled change. CPU-only pinned snapshot caching avoids paying for a
+GPU download. One L4, bounded context/concurrency, scale-to-zero and explicit
+stop/cache cleanup constrain the trial. Inference token travels through an
+environment variable; no redirects or model/provider fallback. Operational paths
+and unauthenticated container wake-ups remain documented exposure, so this is
+not a public-demo release. EU compute/routing does not establish EU-only handling.
+
+**Verified research:** official model card/API revision, SDK metadata, Modal
+pricing/region/budget/API/CLI docs, vLLM API-key environment source and registry
+CUDA digest. Exact upstream model snapshot is pinned; full remote dependency
+resolution and image identity are still to be recorded after an approved build.
+
+**Local checks:** 87 Python tests and 3 Node event-logic tests passed; Ruff passed.
+New tests exercise secret/command boundary, HTTPS target restrictions, identity
+mismatch rejection, fake-client timing and deployment resource settings using a
+fake SDK. They do not prove real GPU fit/auth/latency. Existing TestClient
+warning remains. Manual probe help runs without contacting cloud services.
+
+**Costs / remaining evidence:** estimated $0.5873004 per 30 allocated minutes
+under published broad-EU compute rates and configured CPU/RAM hard caps; extras
+and allowances require review. Screenshot shows $1 active credit. Paid spend
+incurred: $0. No image built remotely, model cached, endpoint deployed or remote
+probe run. Real cold/warm measurements, runtime manifest, auth, stop/redeploy and
+bill remain pending. Step 3 is not complete and Step 4 has not started.
+
+**What went wrong:** optional SDK resolution initially stalled; stopped only
+this task's uv processes and retried with bounded network retries and the
+previously used temporary cache. Installation/lock verification is recorded below
+when known. No cloud provisioning was used to bypass local verification.
+
+**Review:** the runbook explains every command and separates local preparation
+from chargeable commands. Brian reviews the proposed trial and budget settings;
+no personal learning answers, regulatory conclusions or approval are invented.
+AGENTS.md requires cost confirmation before paid provisioning. Await that
+specific review after preparation, rather than claiming a hosted-model checkpoint.
+
+**Upstream flag check:** vLLM 0.21.0 uses --no-enable-log-requests, replacing the older --disable-log-requests spelling. Corrected the proposed command against its versioned CLI documentation before any cloud build; also explicitly disabled output logging.
+
+**Lock verification:** optional hosting group resolved 50 total packages; uv lock
+--check --offline passed. Existing package versions were unchanged. Newly
+resolved SDK dependencies are registered in SOUP with licence review explicitly
+open. SDK wheel source inspection confirmed required_keys, routing_region,
+startup_timeout and max_inputs support. Installing the wheels is still underway
+at this preparation commit; no actual SDK import check is claimed yet.

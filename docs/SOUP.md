@@ -72,3 +72,50 @@ The runtime remains the existing Python/Jinja/FastAPI stack plus locally authore
 - **mdurl 0.1.2**, MIT, transitive URL parser dependency: https://pypi.org/project/mdurl/0.1.2/ . Required for renderer link parsing; application additionally restricts navigation schemes and local document targets. Distribution hashes and all resolved versions will be recorded in uv.lock before installation.
 
 No YAML or sanitization library is introduced. Document front matter is a deliberately limited flat metadata format, not general YAML, with fail-closed draft/unknown defaults. No additional raw HTML plugins are allowed.
+
+## Step 3 proposed hosted-model baseline (registered before use)
+
+Not deployed or adopted. See ADR-005 and CR-003. Runtime transitive packages and
+image ID must be captured after the approved build; top-level pins alone do not
+freeze the entire remote environment.
+
+| Component | Exact identity | Licence / terms | Requirement / known anomalies |
+|---|---|---|---|
+| Qwen3-8B | Qwen/Qwen3-8B revision b968826d9c46dd6066d109eabc6255188de91218; BF16, no quantisation | Apache-2.0, upstream model card | REQ-17; invented facts, bad citations, malformed JSON, misleading confidence; not clinically validated |
+| vLLM | 0.21.0 | Apache-2.0 | Serve pinned model only; GPU fit/startup not measured; API-key protection covers inference API, not all operational paths |
+| Transformers | 5.8.1 | Apache-2.0 | Qwen tokenizer/chat template; dependency compatibility awaits remote build |
+| Modal SDK | 1.6.4 | Apache-2.0 | Deployment-only optional dependency; no import-time remote execution; service usage governed separately by Modal terms |
+| CUDA image | nvidia/cuda:12.9.0-devel-ubuntu22.04@sha256:26cd7d00c09c1f3ff187929c7f4aa7e9273020cb18e86730f40e062e8ffa4d33 | NVIDIA CUDA image licences + Ubuntu component licences; review distribution before release | Remote serving base, Python 3.12 added by Modal; driver supplied by platform |
+| Modal compute/storage | Service (not an immutable software release); L4, region eu, routing eu-west | Modal service terms; pricing checked 2026-11-19 | REQ-17; availability, billing delays, cold starts, non-EU control plane/storage not excluded |
+
+Sources: https://huggingface.co/Qwen/Qwen3-8B,
+https://modal.com/docs/examples/vllm_inference,
+https://github.com/modal-labs/modal-client,
+https://modal.com/pricing. Hosting is not a free-model guarantee.
+
+### Optional SDK resolved dependencies
+
+Resolved locally for preparation; licence review remains open before release.
+
+| Component | Version | Licence status | Purpose / limits |
+|---|---|---|---|
+| aiohappyeyeballs | 2.7.1 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| aiohttp | 3.14.5 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| aiosignal | 1.4.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| attrs | 26.1.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| cbor2 | 6.3.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| frozenlist | 1.8.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| grpclib | 0.4.9 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| h2 | 4.4.1 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| hpack | 4.2.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| hyperframe | 6.1.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| multidict | 7.2.1 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| propcache | 0.5.4 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| protobuf | 7.36.2 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| rich | 15.0.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| synchronicity | 0.12.7 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| toml | 0.10.2 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| types-certifi | 2021.10.8.3 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| types-toml | 0.10.8.20260518 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| watchfiles | 1.3.0 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |
+| yarl | 1.25.1 | TODO(verify upstream licence) | Optional Modal SDK dependency; locked hashes in uv.lock; not app runtime; no anomaly-free claim |

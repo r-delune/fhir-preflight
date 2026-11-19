@@ -168,7 +168,7 @@ Larger excerpt set + retrieval (new SOUP component) · more profiles (e.g. IE/EU
 | Phase | What runs | Expected cost (Codex replaces with measured numbers in `docs/COSTS.md`) |
 |---|---|---|
 | Steps 0–2 | Laptop + Docker | €0 |
-| Steps 3–6 | Modal GPU only while generating; scales to zero | Should sit inside Modal's monthly free credits for dev use |
+| Steps 3–6 | Modal GPU only while generating; scales to zero | Proposed ~$0.59 per 30 allocated minutes including configured CPU/RAM and broad-EU multiplier, before extra charges; only $1 active credit shown. See COSTS.md; approval required. |
 | Step 7+ | Fly app + validator (auto-stop) + Modal on demand | Low single-digit to ~€15/month depending on machine sizes and traffic; the validator's RAM need is the main driver — measure it |
 
 Controls (all required): scale-to-zero everywhere · explanation cache · daily call caps · invite code for custom input · spend alerts/limits on Modal and Fly (where the platform offers them) · mock adapter for all tests/CI · no GPU calls in CI.

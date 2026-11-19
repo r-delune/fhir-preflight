@@ -22,6 +22,13 @@ DOCUMENTS = {
     "adr-004": (
         "ADR-004 · Governance UI", "docs/decisions/ADR-004-governance-workbench.md", "Decisions"
     ),
+    "adr-005": (
+        "ADR-005 · Model hosting", "docs/decisions/ADR-005-bounded-model-hosting.md", "Decisions"
+    ),
+    "cr-003": (
+        "CR-003 · Model baseline", "docs/changes/CR-003-model-hosting-baseline.md", "Change records"
+    ),
+    "model-runbook": ("Model Runbook", "docs/runbooks/model-hosting.md", "Lifecycle"),
     "cr-000": ("CR-000 · Baseline", "docs/changes/CR-000-validator-baseline.md", "Change records"),
     "ai-act": ("AI Act draft", "docs/regulatory/AI_ACT_MEMO.md", "Regulatory drafts"),
     "mdr": (

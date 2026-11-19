@@ -1,23 +1,10 @@
-# Hosted model setup — secret contract
+# Hosted model — Step 3 preparation
 
-Status: preparation only. No model deployment code or hosted endpoint exists yet.
+Qwen3-8B via vLLM on Modal; no local Ollama. Not deployed. The app remains mock.
+See [explained runbook](../docs/runbooks/model-hosting.md),
+[cost review](../docs/COSTS.md) and [ADR-005](../docs/decisions/ADR-005-bounded-model-hosting.md).
 
-Use Modal's Custom secret type in workspace `r-delune`, environment `main`:
-
-| Field | Value |
-|---|---|
-| Secret name | `fhir-test` |
-| Environment-variable key | `PREFLIGHT_API_KEY` |
-| Environment-variable value | A newly generated random token, kept private |
-
-The planned deployment must load `modal.Secret.from_name("fhir-test")` and use
-`PREFLIGHT_API_KEY` to authenticate requests to our inference endpoint. The local
-client will need the same value when that integration is implemented. Keep it in
-a password manager; do not paste it into chat, screenshots, source code or git.
-This is our endpoint token, separate from Modal account/CLI credentials.
-
-Creating this secret alone does not deploy or connect the model. The app still
-uses its mock adapter. Pricing, GPU/region choice and deployment authorization
-remain outstanding; the screenshot shows only $1 currently available credit.
-
-Reference: https://modal.com/docs/guide/secrets
+Secret contract: workspace r-delune, environment main, Custom secret fhir-test,
+key PREFLIGHT_API_KEY, private random value at least 32 characters. This protects
+the inference API and is separate from Modal CLI account credentials.
+Never paste the value in chat or source. No paid provisioning is authorized yet.
