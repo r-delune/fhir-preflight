@@ -463,3 +463,29 @@ existing TestClient warning remains. No new browser verification claim is made.
 Main and Step 1 pushes completed; Step 0 was already up to date. First GitHub run
 query returned none; workflow/run configuration is being checked before claiming
 CI passed. Remaining branch pushes and actual hosted result follow below.
+
+**GitHub publication and first CI evidence:** pushed main and all four step
+branches without force pushes. Backported only status-card commit 36e1862 to
+Step 2 as a4c3b5a. Earlier main/Step 0/Step 1 pushes showed no runs at first;
+Actions API confirmed enabled/active. Added workflow_dispatch to the unchanged
+mock-only workflow and backported that one-line trigger to each snapshot. The
+main backport hit a context conflict because its workflow is named Scaffold
+checks; retained the original main workflow and added only the trigger. No
+pending Step 3 model implementation was merged into main.
+
+First recorded completed run: Step 3 push run 44521196492, commit
+f6990023706dd3bf3d8ed5072e17c9d6e3482664, created 2026-11-19T12:09:00Z
+(19:09 Asia/Bangkok), conclusion success. Hosted log: Ruff passed, 88 Python
+tests passed with the existing warning, 3 Node tests passed/0 failed. Evidence:
+ docs/examples/step-3/first-ci-result.json. URL:
+https://github.com/r-delune/fhir-preflight/actions/runs/44521196492
+Main manual run 44521221793 also completed successfully. Explicit runs were
+dispatched for Step 0–3; their final statuses are recorded next when available.
+These are hosted CI observations, not model/GPU or mobile QA evidence.
+
+**All branch checks observed:** main dc2b41f, Step 0 892d339, Step 1 6f0bb46,
+Step 2 b122eee and Step 3 f699002 each completed hosted checks successfully.
+Saved exact run IDs, refs, SHAs, event types and result URLs in
+ docs/examples/step-3/ci-branch-results.json. No cloud/GPU calls ran in CI.
+Final evidence-only commit is pushed next; local image refresh then exposes the
+updated costs/anomalies/journal and Checking… status with committed provenance.

@@ -1,0 +1,62 @@
+[
+  {
+    "conclusion": "success",
+    "createdAt": "2026-11-19T12:10:18Z",
+    "databaseId": 44521399536,
+    "event": "workflow_dispatch",
+    "headBranch": "codex/step-3-model-hosting",
+    "headSha": "f6990023706dd3bf3d8ed5072e17c9d6e3482664",
+    "status": "completed",
+    "url": "https://github.com/r-delune/fhir-preflight/actions/runs/44521399536"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-11-19T12:10:14Z",
+    "databaseId": 44521388303,
+    "event": "workflow_dispatch",
+    "headBranch": "codex/step-2-results-ui",
+    "headSha": "b122eeea64842281ae582db0c65c5d0bdee6f572",
+    "status": "completed",
+    "url": "https://github.com/r-delune/fhir-preflight/actions/runs/44521388303"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-11-19T12:10:09Z",
+    "databaseId": 44521374524,
+    "event": "workflow_dispatch",
+    "headBranch": "codex/step-1-validator",
+    "headSha": "6f0bb464dfffbbf6fa3267c596049fc229fbb1b0",
+    "status": "completed",
+    "url": "https://github.com/r-delune/fhir-preflight/actions/runs/44521374524"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-11-19T12:10:04Z",
+    "databaseId": 44521358306,
+    "event": "workflow_dispatch",
+    "headBranch": "codex/step-0-skeleton",
+    "headSha": "892d339eb3956899c4b9e2c877c40630c914f2b3",
+    "status": "completed",
+    "url": "https://github.com/r-delune/fhir-preflight/actions/runs/44521358306"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-11-19T12:09:10Z",
+    "databaseId": 44521221793,
+    "event": "workflow_dispatch",
+    "headBranch": "main",
+    "headSha": "dc2b41f86208aa735daf9da2b7a597d3f10b46de",
+    "status": "completed",
+    "url": "https://github.com/r-delune/fhir-preflight/actions/runs/44521221793"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-11-19T12:09:00Z",
+    "databaseId": 44521196492,
+    "event": "push",
+    "headBranch": "codex/step-3-model-hosting",
+    "headSha": "f6990023706dd3bf3d8ed5072e17c9d6e3482664",
+    "status": "completed",
+    "url": "https://github.com/r-delune/fhir-preflight/actions/runs/44521196492"
+  }
+]
