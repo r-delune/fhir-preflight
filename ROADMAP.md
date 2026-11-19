@@ -15,7 +15,7 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | 0 | Skeleton, rules, CI, intended purpose, first requirements | ✅ progression approved in chat; hosted scaffold CI passed | 2026-11-19 | 2026-11-19 | [Entry #0](BUILD_JOURNAL.md#step-0) | ☐ |
 | 1 | FHIR fixtures, our profile, validator running locally | ✅ progression approved in chat | 2026-11-19 | 2026-11-19 | [Entry #1](BUILD_JOURNAL.md#step-1) | ☐ |
 | 2 | Results UI, pipeline guidance and read-only governance docs (REQ-15/REQ-16) | ✅ progression approved in chat; visual QA gap recorded | 2026-11-19 | 2026-11-19 | [Entry #2](BUILD_JOURNAL.md#step-2) | ☐ |
-| 3 | Host the model on Modal (Codex prepares and explains) | 🔨 prepared locally; initial cache failed; isolated CPU app tested; publishing CI | 2026-11-19 | | [Step 3](BUILD_JOURNAL.md#step-3) | ☐ |
+| 3 | Host the model on Modal (Codex prepares and explains) | 🔨 CPU cache/deployment verified; token correction pending | 2026-11-19 | | [Step 3](BUILD_JOURNAL.md#step-3) | ☐ |
 | 4 | AI explanations, citation checks, red-team | ⬜ | | | | ☐ |
 | 5 | Review, export, activity log | ⬜ | | | | ☐ |
 | 6 | Release v0.1 + reviewed AI Act / MDR drafts | ⬜ | | | | ☐ |
@@ -23,8 +23,8 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | 8 | Model swap exercise (CR-002), release v0.2 | ⬜ | | | | ☐ |
 
 ## Now
-- **Current step:** 3 — CPU cache verified in cloud; GPU deployment rejected by platform; hosted CI passed; Step 2 desktop QA reviewer-reported; mobile/screenshot pending
-- **Waiting on Brian:** check whether the card is active/pending in workspace r-delune: Modal still rejects L4 despite the confirmed $15 limit. No repeat cost approval required.
+- **Current step:** 3 — CPU cache and deployment verified; short endpoint token blocks probe; hosted CI passed; Step 2 desktop QA reviewer-reported; mobile/screenshot pending
+- **Waiting on Brian:** replace PREFLIGHT_API_KEY in Modal secret fhir-test with a private random token of at least 32 characters; do not share its value. Card and $15 limit are confirmed.
 - **Open anomalies:** 3 (see `docs/ANOMALIES.md`)
 - **Spend this month:** $0 billed in latest platform snapshot; metered costs recorded in `docs/COSTS.md`
 

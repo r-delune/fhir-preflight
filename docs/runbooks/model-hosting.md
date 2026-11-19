@@ -76,7 +76,7 @@ requires PREFLIGHT_API_KEY in its environment and is never called by CI.
 
 ```
 uv run --group hosting modal app list --env main
-uv run --group hosting modal app stop --env main APP_ID
+uv run --group hosting modal app stop --yes --env main APP_ID
 ```
 
 List apps, identify **fhir-preflight-model**, and replace APP_ID with that app's
@@ -103,3 +103,9 @@ Public demo explanations come from reviewed cached artifacts only. A public
 cache miss must never send a generation request or wake the GPU. This policy
 overrides earlier wording allowing public generation for new inputs; implementation
 remains in Step 4 and the public-release change record.
+
+Token preflight (ANOM-007): if the probe rejects PREFLIGHT_API_KEY length, replace
+only its value in Modal secret fhir-test with a password-manager-generated random
+token of at least 32 characters (64 recommended). Keep name/key unchanged and
+never paste the value into chat. Confirm the update, redeploy and rerun the probe.
+Do not relax the minimum length or use an account/CLI credential as this token.

@@ -1,0 +1,163 @@
+{
+  "deployment_app_id": "ap-60BP21OJMx9qBoqURu8KhN",
+  "deployed_successfully": true,
+  "cold_precondition": {
+    "at_utc": "2026-11-19T12:49:53.564115+00:00",
+    "function": "serve",
+    "stats": {
+      "backlog": 0,
+      "num_total_runners": 0,
+      "num_running_inputs": 0,
+      "input_headroom": 0
+    }
+  },
+  "probe_failure": "PREFLIGHT_API_KEY shorter than required 32 characters; rejected before inference HTTP request",
+  "secret_value_read_or_recorded": false,
+  "deployment_stats": {
+    "app_id": "ap-60BP21OJMx9qBoqURu8KhN",
+    "since": "2026-11-19T12:16:17.857794+00:00",
+    "until": "2026-11-19T13:16:17.857794+00:00",
+    "lifecycle": {
+      "state": "deployed",
+      "version": 1,
+      "created_at": "2026-11-19 19:46:30+07:00",
+      "created_by": "r-delune",
+      "deployed_at": "2026-11-19 19:46:51+07:00",
+      "deployed_by": "r-delune",
+      "stopped_at": null,
+      "stopped_by": null
+    },
+    "functions": {
+      "total": {
+        "calls": {
+          "total": 0,
+          "succeeded": 0,
+          "failed": 0
+        },
+        "containers": {
+          "errors": 0,
+          "total": 0
+        }
+      },
+      "by_name": {
+        "probe": {
+          "object_id": "fu-USPJsW8qTwRqyOM8bIV14f",
+          "counts": {
+            "calls": {
+              "total": 0,
+              "succeeded": 0,
+              "failed": 0
+            },
+            "containers": {
+              "errors": 0,
+              "total": 0
+            }
+          }
+        },
+        "serve": {
+          "object_id": "fu-9a91ZoGvARVws7fGoeRo5l",
+          "counts": {
+            "calls": {
+              "total": 0,
+              "succeeded": 0,
+              "failed": 0
+            },
+            "containers": {
+              "errors": 0,
+              "total": 0
+            }
+          }
+        }
+      }
+    },
+    "servers": {
+      "total": {
+        "requests": {
+          "total": 0,
+          "ok": 0,
+          "failed": 0
+        },
+        "containers": {
+          "errors": 0,
+          "total": 0
+        }
+      },
+      "by_name": {}
+    },
+    "sandboxes": {
+      "total": 0,
+      "finished": 0,
+      "live": 0
+    },
+    "deployment_count": 1
+  },
+  "final_apps": [
+    {
+      "app_id": "ap-qQDz7EQhRLmRez7ygFiwex",
+      "description": "fhir-preflight-model",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-11-19 19:50:46+07:00",
+      "stopped_at": "2026-11-19 19:53:13+07:00"
+    },
+    {
+      "app_id": "ap-UXsCPpv8XgQjpOfg0OpuwS",
+      "description": "fhir-preflight-model",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-11-19 19:50:02+07:00",
+      "stopped_at": "2026-11-19 19:53:02+07:00"
+    },
+    {
+      "app_id": "ap-60BP21OJMx9qBoqURu8KhN",
+      "description": "fhir-preflight-model",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-11-19 19:46:30+07:00",
+      "stopped_at": "2026-11-19 20:17:28+07:00"
+    },
+    {
+      "app_id": "ap-555J2W0KizO6O8YOjMERqb",
+      "description": "fhir-preflight-model",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-11-19 19:31:08+07:00",
+      "stopped_at": "2026-11-19 19:31:18+07:00"
+    },
+    {
+      "app_id": "ap-HyWWj3PeL8njqU58kvap84",
+      "description": "fhir-preflight-model",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-11-19 19:21:05+07:00",
+      "stopped_at": "2026-11-19 19:21:10+07:00"
+    },
+    {
+      "app_id": "ap-7BdmoCPCGt38E3yEGEjgO4",
+      "description": "fhir-preflight-model-cache",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-11-19 19:18:11+07:00",
+      "stopped_at": "2026-11-19 19:19:52+07:00"
+    }
+  ],
+  "billing_snapshot": {
+    "metered_cost": "0.01082632",
+    "billed_cost": "0E-8",
+    "adjustments": {
+      "free_storage": "-0E-8",
+      "credits": "-0.01000000",
+      "reservation_adjustment": "-0E-8",
+      "network_egress_allowance": "-0.00082632",
+      "plan_cost": "0E-8"
+    },
+    "metered_cost_breakdown": {
+      "llm_tokens": "0E-8",
+      "volumes": "0E-8",
+      "ephemeral_apps": "0.01033933",
+      "network_egress": "0.00082632"
+    }
+  },
+  "cold_start_seconds": null,
+  "warm_latency_seconds": null
+}

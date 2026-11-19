@@ -142,3 +142,16 @@ def test_cpu_cache_app_never_registers_gpu_or_loads_serving_module(monkeypatch):
     assert "secrets" not in registered[0]
     assert registered[0]["cpu"] == (2, 2)
     assert registered[0]["memory"] == (4096, 4096)
+
+
+@pytest.mark.req("REQ-17")
+@pytest.mark.parametrize("key", ["", "too-short", "x" * 31])
+def test_short_probe_token_fails_before_network_or_gpu_wakeup(monkeypatch, key):
+    from model import smoke
+
+    def unexpected(*args):
+        pytest.fail("Short credentials must fail before any network request")
+
+    monkeypatch.setattr(smoke, "build_opener", unexpected)
+    with pytest.raises(ValueError, match="PREFLIGHT_API_KEY"):
+        smoke.run_probe("https://example.modal.run", key, confirmed_cold=True)

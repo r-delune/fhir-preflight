@@ -8,8 +8,8 @@ drafted_by: Codex
 Latest authorization: Brian confirmed “$15 limit saved” after adding the card.
 This supersedes the earlier temporary $1 restriction. The saved control is
 user-confirmed; browser automation did not independently observe it. The
-separate CPU-only cache job completed successfully. The GPU deployment is
-still rejected by Modal for a payment-method requirement. Measured CPU outcomes
+separate CPU-only cache job completed successfully. GPU deployment was subsequently accepted; the CPU probe now stops before
+inference because its configured token is shorter than the required 32 characters. Measured CPU outcomes
 follow below; no GPU/cold-start success is claimed.
 Checked 2026-11-19 at https://modal.com/pricing and
 https://modal.com/docs/guide/region-selection.
@@ -149,3 +149,14 @@ same payment-method error. Final account snapshot: $0.01082632 metered,
 $0E-8 billed, zero tasks across 3 listed apps. Cached weights remain;
 no GPU session was started. The $15 cap is confirmed, not awaiting renewed
 approval. The remaining dependency is the platform's payment-method recognition.
+
+## Payment recognition cleared; token preflight failed
+Deployment ap-60BP21OJMx9qBoqURu8KhN succeeded after the active-card confirmation
+(23.018-second deployment orchestration, **not cold-start latency**). Live
+pre-request stats showed zero serve containers. The CPU probe then rejected the
+configured PREFLIGHT_API_KEY as shorter than 32 characters before inference HTTP.
+No token value was read/recorded. Deployed-app stats show zero calls/containers;
+all apps were stopped and zero tasks verified. Latest retrieved billing snapshot
+remains $0.01082632 metered/$0 billed; CPU-probe charges may roll up later.
+Cold/warm latency and GPU inference-session cost remain unmeasured. See
+docs/examples/step-3/deployed-short-token-blocked.json and ANOM-007.

@@ -540,3 +540,24 @@ $0.01082632 metered / $0E-8 billed. Recorded in the same
 nonsecret evidence artifact. No more registration retries without a meaningful
 account-state change. This remains a platform/account blocker, not missing cost
 approval; the $15 limit is already authorized and confirmed.
+
+### Active-card deployment accepted; probe credential preflight stopped safely
+Brian confirmed card active in r-delune and explicitly continued WORKDEMO; the
+personal-site instructions were accidental and were ignored without execution.
+Deployment ap-60BP21OJMx9qBoqURu8KhN succeeded in 23.018 seconds. ANOM-006
+resolved by observed acceptance; payment propagation/root cause is not inferred.
+Live serve stats recorded zero containers before the planned first request.
+After interruption, recovered logs showed CPU probe rejecting PREFLIGHT_API_KEY
+length (<32) before making an inference HTTP request. No secret value was read
+or printed. Secondary heartbeat conflict followed a stopped ephemeral app; it
+is not a successful inference. ANOM-007 records the actual credential blocker.
+
+Initial shutdown command required interactive confirmation and aborted; repeated
+with --yes and verified every listed app stopped with zero tasks. Latest billing
+snapshot $0.01082632 metered/$0 billed remains preliminary. Deployment time is
+not cold-start latency; no GPU measurement was invented. Evidence:
+ docs/examples/step-3/deployed-short-token-blocked.json. Added three REQ-17
+regressions proving short tokens fail before even opening a network client;
+13 hosting tests and Ruff passed. User must replace the private endpoint token
+in Modal (not share it) before retry; no repeat cost approval required. Step 3
+and subsequent product-plan drafting remain incomplete, with no Step 4 build.
