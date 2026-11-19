@@ -1,0 +1,13 @@
+**
+!Dockerfile
+!requirements.lock
+!app/
+!app/**
+!validator/
+!validator/**
+!fhir/
+!fhir/**
+!.cache/
+!.cache/validator/
+!.cache/validator/validator_cli.jar
+**/__pycache__

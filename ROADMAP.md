@@ -7,8 +7,8 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 
 | Step | What | Status | Started | Checkpoint | Journal | Approved |
 |---|---|---|---|---|---|---|
-| 0 | Skeleton, rules, CI, intended purpose, first requirements | ⏸ waiting for Brian; hosted CI pending | 2026-11-19 | 2026-11-19 | [Entry #0](BUILD_JOURNAL.md#step-0) | ☐ |
-| 1 | FHIR fixtures, our profile, validator running locally | ⬜ | | | | ☐ |
+| 0 | Skeleton, rules, CI, intended purpose, first requirements | ✅ progression approved in chat; hosted CI pending | 2026-11-19 | 2026-11-19 | [Entry #0](BUILD_JOURNAL.md#step-0) | ☐ |
+| 1 | FHIR fixtures, our profile, validator running locally | 🔨 in progress | 2026-11-19 | | [Entry #1](BUILD_JOURNAL.md#step-1) | ☐ |
 | 2 | Results UI (issues linked to JSON locations) | ⬜ | | | | ☐ |
 | 3 | Host the model on Modal (Codex prepares and explains) | ⬜ | | | | ☐ |
 | 4 | AI explanations, citation checks, red-team | ⬜ | | | | ☐ |
@@ -18,8 +18,8 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 | 8 | Model swap exercise (CR-002), release v0.2 | ⬜ | | | | ☐ |
 
 ## Now
-- **Current step:** 0 — scaffold implemented, local checks passed; hosted CI pending
-- **Waiting on Brian:** review of drafted purpose and five requirements, questions and checkpoint approval; GitHub remote for hosted CI
+- **Current step:** 1 — fixtures and wrapper written; real validator bootstrap/regression pending
+- **Waiting on Brian:** nothing required during Step 1 build; review at checkpoint. GitHub remote still needed for hosted CI evidence.
 - **Open anomalies:** 1 (see `docs/ANOMALIES.md`)
 - **Spend this month:** €0 (see `docs/COSTS.md`)
 

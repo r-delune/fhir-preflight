@@ -1,7 +1,11 @@
 # Architecture
 
-## Implemented at Step 0
-Browser → local FastAPI hello page. Mock adapter only; no validation, persistence or model inference.
+## Step 1 implementation
+Browser → local FastAPI hello page (no results UI yet).
+CLI → local Python HTTP wrapper → pinned HL7 Java validator → original OperationOutcome.
+Compose connects app and validator on an internal-only network and binds ports to 127.0.0.1.
+The app's validator URL is configured for Step 2; there is no AI inference or persistence yet.
+See decisions/ADR-002-validator-service.md for packaging, severity policy and limits.
 
 ## Planned target
 Browser → web app → validator (determines result).

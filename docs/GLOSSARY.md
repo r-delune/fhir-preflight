@@ -19,3 +19,11 @@
 **CI:** Continuous integration runs automated checks when changes reach the connected repository. A workflow file alone is not evidence of a successful hosted run. [GitHub](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
 
 **ADR:** A short architecture decision record explaining a decision, alternatives and consequences. It helps future readers understand why the system looks this way. [Microsoft](https://learn.microsoft.com/en-us/azure/well-architected/architect-role/architecture-decision-record)
+
+**StructureDefinition / differential:** A StructureDefinition is the FHIR resource describing a structure or profile. A differential lists our extra rules; a snapshot combines those rules with inherited base rules. [HL7](https://hl7.org/fhir/R4/structuredefinition.html)
+
+**Invariant / FHIRPath:** An invariant is a rule expressed as a condition that must hold. FHIRPath is the expression language the validator uses to evaluate rules such as whether a reference resolves. [HL7](https://hl7.org/fhir/R4/fhirpath.html)
+
+**LOINC / UCUM:** LOINC identifies what was measured, while UCUM identifies the unit in a machine-readable way. Our demo fixes one measurement code and the grams unit; it does not assess the medical significance of a value. [HL7 terminology guidance](https://hl7.org/fhir/R4/terminologies-systems.html)
+
+**Container / Docker Compose:** A container runs software in an isolated environment. Compose defines how our app and validator containers start and communicate on the laptop. [Docker](https://docs.docker.com/compose/)

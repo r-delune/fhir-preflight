@@ -96,3 +96,20 @@ Newest entries at the bottom.
 **Review focus:** are the intended purpose and first five requirements understandable and appropriate? Brian can ask questions or request edits. Optional personal notes may be added here.
 
 **Status:** awaiting Brian's review; no approval inferred. Step 1 not started. Hosted CI evidence remains pending.
+
+<a id="step-1"></a>
+### #1 — Step 1: Local FHIR validator — 2026-11-19
+
+**Authorization:** Brian said “ok do it, let me knwo what i need to do” in response to the Step 1 proposal. This authorizes progressing from the Step 0 local baseline; hosted CI evidence is still pending and is not claimed complete.
+
+**Goal:** three fictional FHIR Bundles, a teaching profile and a runnable pinned HL7 validator, with expected-versus-actual evidence.
+
+**What changed (in progress):** Docker Compose app/validator services; pinned CLI/checksum and base images; profile and synthetic fixtures; CLI and regression scripts; process-boundary tests and runbook. ADR-002 compares the upstream server wrapper with a locally wrapped official CLI. REQ-11 added to the draft requirements for remote-terminology/network controls.
+
+**Expectations before execution:** see [recorded expectations](docs/examples/step-1-expectations.md). Expected pass for valid fixture; missing status and decimal parse errors for broken structure; code/unit/subject-resolution errors for the profile/reference fixture.
+
+**Checks so far:** 18 Python tests passed, Ruff passed, Compose configuration parsed. App image built with locked dependencies. These checks do not prove the fixtures validate as expected; real validator regression is pending the download/build.
+
+**Problems so far:** validator JAR transfer timed out; restarted with range downloads and will verify the complete upstream SHA-256 before execution. System Python's HTTPS certificate store failed; using system curl's verified TLS rather than disabling certificate verification. Existing TestClient deprecation warning remains ANOM-001.
+
+**Status:** in progress; actual validator results and final checkpoint to follow. No model deployment or paid services involved.

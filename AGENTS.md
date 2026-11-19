@@ -49,7 +49,10 @@ At the end of each step (and whenever you make a decision with lasting consequen
 ## 8. Commands (Codex keeps this section current)
 ```
 make setup      # install locked dependencies into .venv (Python 3.12 + uv)
-make dev        # Step 0: local hello page; validator/docker compose arrive in Step 1
+make dev        # app + validator in Docker Compose, detached; first build downloads packages
+make stop       # stop local containers
+make validate   # validate built-in valid fixture; FILE=path selects another synthetic file
+make regression # run the three fixtures through the real local validator
 make test       # pytest with mock adapter; scaffold checks; product requirement coverage arrives with features
 make lint       # ruff
 make trace      # Step 0: explains that generation is deferred to Step 6

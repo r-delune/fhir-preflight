@@ -1,0 +1,87 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "demo-infant-weight",
+  "url": "https://example.org/fhir/StructureDefinition/demo-infant-weight",
+  "version": "0.1.0",
+  "name": "DemoInfantWeightObservation",
+  "title": "Synthetic demo weight in grams",
+  "status": "draft",
+  "experimental": true,
+  "date": "2026-11-19",
+  "publisher": "rdelune \u2014 fictional learning examples",
+  "description": "Teaching profile for synthetic Bundles only. Requires a resolvable Patient subject and weight in grams; does not assess patient age or clinical meaning.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation",
+        "path": "Observation"
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "29463-7"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.subject",
+        "path": "Observation.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
+        "constraint": [
+          {
+            "key": "demo-subject-1",
+            "severity": "error",
+            "human": "The subject must resolve to a Patient within the supplied synthetic data.",
+            "expression": "resolve().ofType(Patient).exists()"
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x].value",
+        "path": "Observation.value[x].value",
+        "min": 1
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "min": 1,
+        "fixedUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "min": 1,
+        "fixedCode": "g"
+      }
+    ]
+  }
+}

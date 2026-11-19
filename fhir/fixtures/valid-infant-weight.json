@@ -1,0 +1,55 @@
+{
+  "resourceType": "Bundle",
+  "id": "synthetic-demo",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "demo-patient",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Fictional synthetic patient for software testing only.</div>"
+        },
+        "active": true
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "demo-weight",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/demo-infant-weight|0.1.0"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Fictional test measurement: body weight 3200 grams. Not clinical data.</div>"
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "29463-7"
+            }
+          ],
+          "text": "Body weight"
+        },
+        "subject": {
+          "reference": "urn:uuid:00000000-0000-4000-8000-000000000001"
+        },
+        "effectiveDateTime": "2026-01-01T12:00:00Z",
+        "valueQuantity": {
+          "value": 3200,
+          "unit": "g",
+          "system": "http://unitsofmeasure.org",
+          "code": "g"
+        }
+      }
+    }
+  ]
+}

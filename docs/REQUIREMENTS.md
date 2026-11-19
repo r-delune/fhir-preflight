@@ -11,4 +11,6 @@ IDs preserve the meanings proposed in PLAN.md. Product features and their verifi
 | REQ-04 | Every AI-generated explanation is visibly labelled in the interface and export, including reviewer-edited text derived from it. | Check UI and Markdown/JSON exports for accepted, edited, rejected and cached explanations; preserve generation origin and review state. | Steps 4–5 |
 | REQ-05 | Each explanation records model ID and immutable revision, prompt version and excerpt-set version at generation; cached outputs preserve original provenance. | Generate with mock metadata, change configuration, retrieve original and cached outputs and verify original metadata is retained in storage and export. | Steps 4–5 |
 
-REQ-06 onward remain proposals in PLAN.md until added for implementation. Tests will carry REQ IDs when the corresponding behaviour exists.
+| REQ-11 | Remote terminology is disabled by default. Validation requests cannot fetch remote resources or dependencies; bootstrap downloads occur before runtime. | Check `-tx n/a` and `-no-http-access` in the command, run all fixtures on an internal-only Docker network, and inspect the resulting limitations. | Step 1 baseline |
+
+REQ-06 through REQ-10 remain proposals in PLAN.md until added for implementation. Tests will carry REQ IDs when the corresponding behaviour exists.
