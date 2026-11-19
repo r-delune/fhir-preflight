@@ -296,3 +296,79 @@ committed bytes. No Modal credentials, GPU or model endpoint was accessed.
 pending. Next: verify secret exists and saved workspace credit/limits, obtain
 explicit trial authorization, then cache/deploy/smoke/stop/redeploy and record
 actual billing. This is an intermediate cost gate, not a claim Step 3 is complete.
+
+### Pending direction — one fictional blood-pressure integration use case
+
+**Source:** Brian's chat instruction after the Step 3 preparation review,
+2026-11-19. **Plan only.** Finish and checkpoint Step 3 first; then draft a
+PLAN.md section with UN/REQ IDs and stop for Brian's review before building.
+This instruction does not approve the pending cloud spending proposal, document
+approval, a model adoption or implementation of the product changes below.
+
+**Current dependency:** Step 3 cloud cache/deployment, auth, latency,
+stop/redeployment and billing evidence remain outstanding. The prepared trial
+awaits cost authorization and verification of saved account limits/credit. No
+model or cloud endpoint has been run. No product implementation starts here.
+
+**Direction to carry into the post-checkpoint planning review:**
+
+1. Use “official HL7 FHIR validator” and “FHIR R4” in UI/docs, avoiding “HL7”
+   alone except where defining the organisation/terminology. Plan glossary entries
+   for HL7, FHIR, HL7 v2, profile, StructureDefinition and Implementation Guide
+   package. Explain the distinction between FHIR R4 and HL7 v2.
+2. Draft docs/USE_CASE.md: explicitly fictional PulseKeep home blood-pressure
+   monitoring startup integrates with explicitly fictional Northbridge General
+   before a scarce hospital integration test slot. Check name collisions against
+   well-known real products/hospitals before adopting the names; do not claim
+   clearance without research. Personas: startup integration developer, hospital
+   integration reviewer, startup quality lead. Walkthrough: target profile →
+   messages → validate → locate findings → AI explanation → reject a wrong
+   explanation → fix → rerun → export partner evidence. Remove neonatal,
+   paediatric and infant scenarios from the product direction; plan a source audit
+   and explicit treatment of historical evidence without silently falsifying it.
+3. Draft design inputs UN-01 onwards and UN → REQ traceability, including knowing
+   exactly which rules were checked, understanding problems without FHIR expertise
+   and showing a partner evidence of the checks. Allocate unused REQ IDs when
+   drafting; none is adopted or implemented by this entry.
+4. Plan UI steps ① Target profile, ② Messages, ③ Check and review. Built-in
+   profile selector shows name, version, publisher, canonical URL and content
+   hash. Derive a plain-English summary from the actual StructureDefinition
+   differential, never separately authored prose; raw JSON one click away. Record
+   profile/hash per run and report. Header: “Message X checked against Profile Y
+   vZ (hash)”. Built-in fictional messages belong to the chosen profile.
+5. Before Step 4, propose formal replacement baseline CR-004 (next unused number
+   at receipt; recheck before creation): fictional Northbridge General Blood
+   Pressure v1.0.0, derived from the official FHIR R4 vital-signs blood-pressure
+   profile. Panel, systolic/diastolic components, LOINC and UCUM mm[Hg]: mark every
+   proposed code/constraint TODO(verify) until checked against the specification.
+   Four expected-outcome fixtures recorded before running: valid; structural
+   failure; missing diastolic plus mmHg instead of mm[Hg]; unresolved patient
+   reference. Change impact includes requirements, fixtures, tests, risks, SOUP,
+   docs, UI and actual regression evidence. Freeze this baseline before AI
+   excerpts/saved explanations depend on it.
+6. Plan uploads only, as a separate change record alongside Step 7 (provisionally
+   CR-005; recheck numbering). Local/invite-only, never public demo; accept
+   StructureDefinition JSON or Implementation Guide .tgz with size/type limits,
+   parse data only, never request-time dependency downloads. Missing dependencies
+   visibly fail with a list. Hash every uploaded file in provenance; synthetic-only
+   upload notice. Draft risks for malicious/oversized files, real patient data,
+   and silently missing package dependencies. Do not implement uploads now.
+7. Plan a guided demo under five minutes with a step indicator and intro:
+   “You’re the PulseKeep developer. Northbridge has given you its profile. Check
+   your messages before the test slot.” Retain the fictional/synthetic/no clinical
+   interpretation notice. Step 4 public demo uses explanations generated in
+   advance, reviewed and cached with complete provenance. GPU only for genuinely
+   new permitted inputs; honest model-waking state. Include one intentionally
+   wrong cached explanation, explicitly labelled demonstration data, rejected
+   through a Codex-authored demo review decision, never attributed to Brian.
+8. Step 5 export is evidence for the integration partner: profile/hash, findings,
+   fixes, AI review decisions, checks not run and all versions. Preserve REQ-02:
+   AI/review cannot change the official validator result.
+
+**Work now:** recorded the queue in this journal and ROADMAP.md only. PLAN.md,
+requirements, fixtures, profiles, UI, glossary and runtime are unchanged by this
+entry. No new use-case/ADR/change record has been created prematurely. No tests
+run: this is an instruction/history update with no executable change.
+
+**Next stop:** Step 3 cost authorization, then actual trial/checkpoint evidence;
+after that, the draft product plan is a separate mandatory review before build.

@@ -30,3 +30,14 @@ Status key: ⬜ not started · 🔨 in progress · ⏸ waiting for Brian · ✅ 
 
 ## Parked ideas
 Things that came up but are out of scope for now. Add here instead of building them.
+
+## Queued after the Step 3 checkpoint — planning review first
+Brian requested a single fictional home blood-pressure integration use case,
+visible/selectable target profiles, design-input UN → REQ traceability, a guided
+cache-first demo and partner evidence reports. See the pending-direction entry
+in BUILD_JOURNAL.md for the full constraints. After Step 3 is finished and
+checkpointed, draft a PLAN.md section plus draft UN/REQ IDs, then stop for review
+before implementation. The profile replacement must precede Step 4 (proposed
+CR-004); local/invite-only uploads are planned alongside Step 7 as their own
+change (proposed CR-005). Recheck numbering before creating either record.
+No product changes or new profile are authorized for implementation yet.
