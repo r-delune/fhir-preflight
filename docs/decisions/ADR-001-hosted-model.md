@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # ADR-001 — Hosted runtime model
 
 Date: 2026-11-19. Decision source: Brian's explicit chat instruction. Implementation: scheduled for Step 3.

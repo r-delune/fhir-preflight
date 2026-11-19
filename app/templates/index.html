@@ -10,12 +10,23 @@
 <body>
   <header class="topbar">
     <a class="brand" href="/" aria-label="FHIR Preflight home"><span class="brand-mark">r</span><span>rdelune<span class="brand-divider">/</span><strong>FHIR Preflight</strong></span></a>
-    <div class="top-meta"><span class="local-badge"><span class="dot"></span>Local workbench</span><span class="step-label">STEP 02</span></div>
+    <div class="top-meta"><span class="local-badge"><span class="dot"></span>Local workbench</span><a class="nav-link" href="/governance">Governance</a><a class="step-label" href="/governance?doc=roadmap">Build step 2 of 8</a></div>
   </header>
   <main>
     <section class="intro">
       <div><p class="eyebrow">HEALTH DATA · DEVELOPER TOOLS</p><h1>Understand the finding.<br><span>See the source.</span></h1><p class="intro-copy">Check a fictional FHIR example. Follow each finding back to the data.</p></div>
       <div class="scope-note"><span class="scope-symbol" aria-hidden="true">◈</span><div><strong>A safe place to investigate</strong><p>Built-in synthetic examples only.<br>Technical validation, with no clinical interpretation.</p></div></div>
+    </section>
+    <section class="how-it-works" aria-labelledby="pipeline-heading">
+      <div class="pipeline-intro"><h2 id="pipeline-heading">How this works</h2><a href="/governance?doc=requirements#req-15">REQ-15</a></div>
+      <ol class="pipeline" id="pipeline" data-current-stage="{{ stage }}">
+        <li data-pipeline-stage="example" class="{{ 'current' if stage == 'example' else '' }}" {% if stage == 'example' %}aria-current="step"{% endif %}><strong>Example</strong><small>Fictional data</small></li>
+        <li data-pipeline-stage="validator" class="{{ 'current' if stage == 'validator' else '' }}" {% if stage == 'validator' %}aria-current="step"{% endif %}><strong>HL7 validator</strong><small>Offline · {{ validator_version }} · <a href="/governance?doc=adr-002">ADR-002</a></small></li>
+        <li data-pipeline-stage="findings" class="{{ 'current' if stage == 'findings' else '' }}" {% if stage == 'findings' %}aria-current="step"{% endif %}><strong>Findings</strong><small>Original wording</small></li>
+        <li class="future" aria-disabled="true"><strong>AI explanation</strong><small>Later · Step 4</small></li>
+        <li class="future" aria-disabled="true"><strong>Human review</strong><small>Later · Step 5</small></li>
+        <li class="future" aria-disabled="true"><strong>Report</strong><small>Later · Step 5</small></li>
+      </ol>
     </section>
     <div class="toolbar">
       <form action="/" method="get" class="fixture-form">
@@ -34,6 +45,18 @@
       {% else %}<div class="result-label pending"><span class="status-icon">—</span><div><strong>Ready to check</strong><small>Load an example, then run validation.</small></div></div>{% endif %}
       <div class="checks"><span class="checks-title">{% if result %}CHECKS ENABLED{% else %}CHECKS PLANNED{% endif %}</span><span>{{ '✓' if result else '○' }} Structure</span><span>{{ '✓' if result else '○' }} Profile</span><span>{{ '✓' if result else '○' }} Invariants</span><span class="disabled-check">⊘ Remote terminology off</span></div>
     </section>
+    {% if result %}<section class="run-explanation" aria-label="What this run means">
+      <h2>What this run means</h2>
+      <p>The checker compared this example with FHIR R4 structure rules, the demo profile and enabled invariants, including our patient-reference constraint.</p>
+      <p><strong>Not checked with a terminology server:</strong> no remote terminology service was used. Some local code checks still run; full external code and value-set validation is not established.</p>
+      <p>{% if result.status == 'pass' %}<strong>Pass:</strong> this run returned no error or fatal findings. Warnings still need attention; a pass covers only the enabled checks.{% else %}<strong>Fail:</strong> the validator reported at least one error or fatal finding. Investigate those findings; several messages can describe the same underlying defect.{% endif %} This is technical checking, not a judgement of clinical suitability.</p>
+    </section>{% endif %}
+    <details class="severity-guide"><summary>What do the severity levels mean?</summary><dl>
+      <div><dt>Fatal</dt><dd>A serious problem prevented reliable processing of part or all of the example.</dd></div>
+      <div><dt>Error</dt><dd>The data does not meet a required validation rule.</dd></div>
+      <div><dt>Warning</dt><dd>A potential issue, recommendation or validation limit to investigate.</dd></div>
+      <div><dt>Information</dt><dd>Context about the checks; this does not make the run fail.</dd></div>
+    </dl></details>
     <section class="workbench" aria-label="Validation workbench">
       <section class="panel source-panel" aria-labelledby="source-heading">
         <div class="panel-heading"><div><span class="panel-number">01</span><h2 id="source-heading">Sample data</h2></div><span class="tag">FHIR R4</span></div>
@@ -44,22 +67,23 @@
       <section class="panel findings-panel" aria-labelledby="findings-heading">
         <div class="panel-heading"><div><span class="panel-number">02</span><h2 id="findings-heading">Problems found</h2></div><span class="count-tag">{{ issues | length }}</span></div>
         {% if issues %}<p class="panel-hint">Select a finding to locate it in the JSON.</p><div class="issue-list" aria-label="Validator findings">{% for issue in issues %}
-          <button class="issue-card {{ issue.severity }}" type="button" aria-pressed="false" data-issue-id="{{ issue.id }}" data-start="{{ issue.start }}" data-end="{{ issue.end }}" data-note="{{ issue.note }}" data-message="{{ issue.message }}">
+          <article class="finding"><button class="issue-card {{ issue.severity }}" type="button" aria-pressed="false" data-issue-id="{{ issue.id }}" data-start="{{ issue.start }}" data-end="{{ issue.end }}" data-note="{{ issue.note }}" data-message="{{ issue.summary or issue.message }}">
             <span class="issue-meta"><span class="severity"><span class="severity-dot"></span>{{ issue.severity }}</span><span class="issue-id">{{ issue.id }}</span></span>
-            <span class="issue-message">{{ issue.message }}</span>
+            {% if issue.summary %}<span class="extracted-label">Extracted nested validator message</span>{% endif %}<span class="issue-message">{{ issue.summary or issue.message }}</span>
             {% for path in issue.paths %}<span class="issue-path">{{ path }}</span>{% endfor %}
             <span class="issue-action">Locate in data <span aria-hidden="true">↗</span></span>
-          </button>{% endfor %}</div>
+          </button><p class="wording-note">Original HL7 validator wording. A plain-English AI explanation arrives in Step 4.</p>
+          {% if issue.summary %}<details class="raw-message"><summary>Full original validator text</summary><pre>{{ issue.message }}</pre></details>{% endif %}</article>{% endfor %}</div>
         {% else %}<div class="empty-state"><span class="empty-icon" aria-hidden="true">⌕</span><h3>{{ 'No result available' if error else 'Start with a check' }}</h3><p>{{ 'Resolve the validator connection and run again. No passing result has been assumed.' if error else 'Run validation to see the original errors, warnings and information from HL7.' }}</p></div>{% endif %}
         <div class="panel-foot">Original validator messages · stable finding IDs</div>
       </section>
       <section class="panel review-panel" aria-labelledby="review-heading">
         <div class="panel-heading"><div><span class="panel-number">03</span><h2 id="review-heading">Explanation &amp; review</h2></div></div>
         <div class="review-content"><span class="tag later-tag">COMING IN A LATER STEP</span><h3>First, understand<br>the evidence.</h3><p>AI explanations and review controls will live here. For now, explore the validator’s original findings.</p><div class="selection-detail" id="selection-detail" hidden><p class="eyebrow">SELECTED FINDING</p><strong id="selected-id"></strong><p id="selected-message"></p><p class="location-note" id="location-note" role="status"></p></div><div class="review-placeholder" id="review-placeholder"><span aria-hidden="true">↖</span><p>Select a finding to see where it points.</p></div></div>
-        <div class="boundary-note"><strong>The validator decides. AI will explain.</strong><p>No AI model is connected. An explanation will never change a validation result.</p></div>
+        <div class="boundary-note"><strong>The validator decides. AI will explain.</strong> <a href="/governance?doc=requirements#req-02">REQ-02</a><p>No AI model is connected. An explanation will never change a validation result.</p></div>
       </section>
     </section>
-    <footer class="page-footer"><span>Research the structure. Keep the context.</span><span>Demo profile 0.1.0 · HL7 validator 6.10.4 · Synthetic inputs only</span></footer>
+    <footer class="page-footer"><span>Research the structure. Keep the context.</span><span>Demo profile 0.1.0 · HL7 validator {{ validator_version }} (<a href="/governance?doc=adr-002">ADR-002</a>) · Baseline <a href="/governance?doc=cr-000">CR-000</a> · Synthetic inputs only</span></footer>
     <p class="coverage-note">Checks describe enabled validation categories, not proof that every rule could be evaluated. Remote terminology is disabled; local terminology checks may still run. A pass is limited to these checks.</p>
     {% if result %}<details class="provenance"><summary>Run provenance</summary><pre>{{ result.provenance | tojson(indent=2) }}</pre></details>{% endif %}
     <noscript><p>JavaScript is needed for click-to-highlight. Original locations remain visible beside each finding; loading examples and validation still work.</p></noscript>

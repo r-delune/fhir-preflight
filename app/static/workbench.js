@@ -1,4 +1,12 @@
 "use strict";
+function setPipelineStage(name) {
+  document.querySelectorAll("[data-pipeline-stage]").forEach((stage) => {
+    const active = stage.dataset.pipelineStage === name;
+    stage.classList.toggle("current", active);
+    if (active) stage.setAttribute("aria-current", "step");
+    else stage.removeAttribute("aria-current");
+  });
+}
 const cards = document.querySelectorAll(".issue-card");
 cards.forEach((card) => {
   card.addEventListener("click", () => {
@@ -20,6 +28,7 @@ cards.forEach((card) => {
   });
 });
 document.getElementById("validation-form")?.addEventListener("submit", () => {
+  setPipelineStage("validator");
   document.getElementById("validate-button").disabled = true;
   document.getElementById("validate-label").textContent = "Validating…";
   document.getElementById("busy-message").hidden = false;
@@ -32,6 +41,8 @@ document.getElementById("fixture")?.addEventListener("change", (event) => {
 });
 // A page restored from the browser's back/forward cache must be runnable again.
 window.addEventListener("pageshow", () => {
+  const originalStage = document.getElementById("pipeline")?.dataset.currentStage;
+  if (originalStage) setPipelineStage(originalStage);
   document.getElementById("validate-button").disabled = false;
   document.getElementById("validate-label").textContent = "Run validation";
   document.getElementById("busy-message").hidden = true;

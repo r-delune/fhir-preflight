@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # Development plan — Step 0
 
 Use a 62304-inspired lifecycle; no compliance claim. PLAN.md defines the ordered steps.
@@ -20,3 +25,7 @@ Tools: Python 3.12, uv, Git, pytest, Ruff and GitHub Actions; Codex assists deve
 Codex is a development tool, not the runtime model. Review its changes and check outputs.
 Log problems in ANOMALIES.md; link the change, control and verification when resolved.
 Do not store secrets or real patient data. Local checks and CI use only the mock adapter.
+
+## Governance source records
+
+The UI reads fixed cataloged Markdown sources. Files carry flat front matter with `status` and `drafted_by`; `approved` is displayed only with explicit `approved_by` and `approved_on` metadata. No approval is invented during implementation. Local working-copy reads and Docker build snapshots expose content hashes and distinguish exact commit bytes from later edits. API schema/docs routes are opt-in through ENABLE_API_DOCS=1; the product governance browser uses /governance. See ADR-004 and REQ-15/REQ-16.

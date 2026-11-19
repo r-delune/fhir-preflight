@@ -5,6 +5,7 @@ services:
       - "127.0.0.1:${APP_PORT:-8002}:8000"
     environment:
       MODEL_ADAPTER: mock
+      ENABLE_API_DOCS: ${ENABLE_API_DOCS:-0}
       VALIDATOR_URL: http://validator:8081/validate
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/', timeout=3)"]

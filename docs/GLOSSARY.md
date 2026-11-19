@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # Glossary
 
 **FHIR:** A standard for exchanging health information using defined data structures called resources. We pin R4 (4.0.1) so examples use the same rules. [HL7](https://hl7.org/fhir/R4/)
@@ -31,3 +36,7 @@
 **Stable finding ID:** A content-derived reference for a validator message. Reordering messages or changing temporary file metadata does not change this reference; it is not a persisted review record yet. [Python hashing documentation](https://docs.python.org/3/library/hashlib.html)
 
 **Location mapping:** FHIRPath refers to the logical FHIR model, which is not always identical to JSON property names. Our display maps a limited set of emitted paths to JSON lines and labels parent or unsupported-path fallbacks explicitly. [HL7](https://hl7.org/fhir/R4/fhirpath.html)
+
+**Document provenance:** The commit and content hash identifying the source text shown to a reviewer. A working copy can differ from its base commit, so the UI labels that difference instead of implying the edit was already committed. [Git](https://git-scm.com/docs/git-show)
+
+**Allowlist:** A fixed set of permitted targets. Governance URLs choose document IDs from this list; they cannot specify filesystem paths to read. [OWASP path traversal](https://owasp.org/www-community/attacks/Path_Traversal)

@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # Costs
 
 Step 0: no paid service provisioned; no model calls. Hosting estimates in PLAN.md are unverified and are not guarantees of free operation.

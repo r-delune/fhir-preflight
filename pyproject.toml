@@ -3,7 +3,7 @@ name = "fhir-preflight"
 version = "0.0.0"
 description = "Synthetic FHIR validation learning workbench"
 requires-python = ">=3.12,<3.13"
-dependencies = ["fastapi", "uvicorn", "jinja2"]
+dependencies = ["fastapi", "uvicorn", "jinja2", "markdown-it-py==4.0.0"]
 
 [dependency-groups]
 dev = ["pytest", "httpx", "ruff"]

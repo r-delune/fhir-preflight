@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Source template (author unverified); Codex updates
+---
+
 # AGENTS.md — how Codex works in this repo
 
 Read `PLAN.md` first. This file sets the working rules. They exist because **the owner (Brian) is using this project to learn**, so how the work is done matters as much as the result.
@@ -31,6 +36,7 @@ At the end of each step (and whenever you make a decision with lasting consequen
 - Every requirement in `docs/REQUIREMENTS.md` has an ID (`REQ-xx`).
 - Tests reference REQ IDs (`@pytest.mark.req("REQ-02")`).
 - New third-party component, model, image or service → entry in `docs/SOUP.md` before it is used (name, exact version/hash, licence, why, what we require of it, known anomalies).
+- New governance ADR/change/regulatory document → add its literal path to `app/governance_catalog.py` and flat source metadata (`status`, `drafted_by`). Never mark a document approved without explicit reviewer authorization and approval metadata. `make dev` regenerates per-file git/hash provenance; rebuild after edits.
 - Changes to the model, prompt, excerpt set, validator version or hosting → a change record in `docs/changes/` with impact analysis and regression results.
 
 ## 6. Safety and cost rules

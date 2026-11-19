@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # ADR-002 — Pinned CLI inside a local validator service
 
 Date: 2026-11-19. Scope: Step 1 implementation authorized by Brian in chat.

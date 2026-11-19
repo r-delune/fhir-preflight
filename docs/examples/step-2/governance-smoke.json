@@ -1,0 +1,19 @@
+{
+  "documents_rendered": 22,
+  "/docs": 404,
+  "/redoc": 404,
+  "/openapi.json": 404,
+  "/governance?doc=../../.env": 404,
+  "/governance?doc=%2e%2e%2f.env": 404,
+  "valid-infant-weight": {
+    "matched": true,
+    "wording_notes": 6
+  },
+  "broken-profile-and-reference": {
+    "matched": true,
+    "wording_notes": 11
+  },
+  "container_sources_readable_and_read_only": true,
+  "git_and_env_absent_from_image": true,
+  "initial_dirty_provenance_label_verified": true
+}

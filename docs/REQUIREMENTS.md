@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # Requirements
 
 Status: Codex working drafts used for authorized Steps 1–2 development; final wording remains open to Brian's review.
@@ -14,5 +19,7 @@ IDs preserve the meanings proposed in PLAN.md. Current versus future verificatio
 | REQ-12 | Each validator issue has a deterministic ID derived from severity, code, message, normalized location and message type. Reordering issues or changing temporary filenames/line metadata does not change identity. | Compare repeated, reordered and metadata-varied outcomes; meaningful issue changes must change IDs. Duplicate identical findings may share an ID and remain individually displayed. | Step 2 |
 | REQ-13 | Selecting an issue highlights its matching JSON location, or the closest resolvable parent with an explicit fallback notice. Unmapped locations are labelled without inventing a match. | Exercise Bundle indices, resource comments, typed choices, missing fields and unsupported FHIRPath. Verify interaction in a browser. | Step 2 |
 | REQ-14 | The workbench presents only the selected built-in synthetic fixture and its current validator result. Loading another fixture clears prior results; failed validation shows incomplete with no old pass/fail result. | Route tests plus real-browser switching and failure checks. | Step 2 |
+| REQ-15 | The UI explains the pipeline Example → offline HL7 validator (version shown) → Findings → AI explanation (later) → Human review (later) → Report (later), highlights the current stage, and visibly marks unbuilt stages. Completed runs explain checked categories, lack of a terminology server, pass/fail meaning and each severity in plain language. The AI boundary links to REQ-02, validator version to ADR-002, and baseline to CR-000. “Build step 2 of 8” links to the roadmap. Every finding identifies original HL7 wording and Step 4 AI explanation; any shortened nested message is extracted verbatim from validator text with the full raw text available. | Route tests for pre-run, completed pass/fail and incomplete states, stage markers, severity definitions and governance links; visual review. | Step 2 extension — draft |
+| REQ-16 | A read-only /governance browser renders allowlisted repository Markdown directly, including Roadmap, Build Journal, Intended Purpose, Requirements, Traceability, Risk, SOUP, Anomalies, every ADR/change record and regulatory draft. URL identifiers cannot read arbitrary paths; unsafe HTML/links/images cannot become active content. Each document shows source-authored status/drafter and verified git provenance, honestly marking dirty/untracked/unknown content. Docker includes docs/ and top-level Markdown plus content-hash provenance without .git or secrets. API docs/schema endpoints are off by default and enabled only by ENABLE_API_DOCS=1. | Path-traversal, symlink, allowlist-completeness, Markdown safety, status/provenance, read-only route and default-404 API-doc tests; verify the built container serves the committed documents. | Step 2 extension — draft |
 
 REQ-06 through REQ-10 remain proposals in PLAN.md until added for implementation. Tests will carry REQ IDs when the corresponding behaviour exists.

@@ -10,7 +10,8 @@ function setup() {
     return {
       hidden: false, disabled: false, textContent: '', offsetTop: 100,
       attributes: {}, listeners: {}, dataset: {},
-      classList: {add: c => classes.add(c), remove: c => classes.delete(c)},
+      classList: {add: c => classes.add(c), remove: c => classes.delete(c),
+        toggle(c, active) {if (active) classes.add(c); else classes.delete(c);}},
       hasClass: c => classes.has(c),
       addEventListener(name, fn) {this.listeners[name] = fn;},
       setAttribute(name, value) {this.attributes[name] = value;},
@@ -21,12 +22,16 @@ function setup() {
   const ids = Object.fromEntries([
     'json-view', 'selected-id', 'selected-message', 'location-note', 'selection-detail',
     'review-placeholder', 'validation-form', 'validate-button', 'validate-label',
-    'busy-message', 'fixture'
+    'busy-message', 'fixture', 'pipeline'
   ].map(id => [id, element()]));
   for (let i = 1; i <= 10; i++) {
     ids[`line-${i}`] = element();
     ids[`line-${i}`].offsetTop = 100 + i * 20;
   }
+  ids.pipeline.dataset.currentStage = 'example';
+  const stages = ['example', 'validator', 'findings'].map(name => {
+    const item = element(); item.dataset.pipelineStage = name; return item;
+  });
   const cards = [element(), element()];
   cards[0].dataset = {start: '4', end: '5', issueId: 'VAL-TEST1',
     note: 'Matching JSON location highlighted.', message: '<b>untrusted text</b>'};
@@ -36,11 +41,12 @@ function setup() {
   const document = {
     getElementById: id => ids[id],
     querySelectorAll: selector => selector === '.issue-card' ? cards :
+      selector === '[data-pipeline-stage]' ? stages :
       Object.values(ids).filter(e => e.hasClass('highlighted')),
   };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../app/static/workbench.js'), 'utf8'),
     {document, window});
-  return {ids, cards, window};
+  return {ids, cards, window, stages};
 }
 
 test('REQ-13: selecting a finding highlights its range, clears old selection and uses textContent', () => {
@@ -70,8 +76,10 @@ test('REQ-14: fixture changes load the selected example and prevent validation o
 });
 
 test('REQ-14: validation shows progress and back/forward restore permits another run', () => {
-  const {ids, window} = setup();
+  const {ids, window, stages} = setup();
   ids['validation-form'].listeners.submit();
+  assert.equal(stages[1].hasClass('current'), true);
+  assert.equal(stages[1].attributes['aria-current'], 'step');
   assert.equal(ids['validate-button'].disabled, true);
   assert.equal(ids['busy-message'].hidden, false);
   assert.equal(ids['validation-form'].attributes['aria-busy'], 'true');
@@ -79,4 +87,6 @@ test('REQ-14: validation shows progress and back/forward restore permits another
   assert.equal(ids['validate-button'].disabled, false);
   assert.equal(ids['busy-message'].hidden, true);
   assert.equal(ids['validation-form'].attributes['aria-busy'], undefined);
+  assert.equal(stages[0].hasClass('current'), true);
+  assert.equal(stages[1].hasClass('current'), false);
 });

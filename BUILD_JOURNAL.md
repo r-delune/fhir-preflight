@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Source template (author unverified); Codex updates
+---
+
 # Build Journal
 
 The development record for FHIR Preflight: what we did, why, how we checked it, what went wrong, what Brian learned. Codex appends an entry at every checkpoint; Brian fills in his sections and approves.
@@ -186,3 +191,27 @@ deployment is performed. This is authorization for setup guidance, not paid
 provisioning or proof that Step 2's outstanding visual evidence is complete.
 The future deployment and client must use this contract. Documentation only;
 no runtime changes or tests needed. Cost incurred: €0 paid services.
+
+#### Step 2 reopened — REQ-15 / REQ-16 extension — 2026-11-19
+
+**Authorization:** Brian explicitly requested an explanatory pipeline and read-only governance documents before the Step 2 checkpoint, then specified /governance, default-off API docs, original-wording notes, verbatim nested-message excerpts and “Build step 2 of 8”. ROADMAP.md was immediately returned to in-progress. The Modal secret contract is preserved, but no key is needed or read for this work and no cloud deployment occurs.
+
+**What changed:** drafted REQ-15/REQ-16 and ADR-004; added pipeline/current-stage guidance, result/severity explanations and direct requirement/ADR/baseline links. Finding IDs and raw messages are unchanged; a nested message can be excerpted verbatim with full original text in a disclosure. Added /governance with a fixed ID-to-path catalog, repository Markdown rendering, source status/drafter metadata and per-document git/hash provenance. Docker copies docs/ and top-level Markdown plus a generated source manifest, excluding .git and .env. Swagger, ReDoc and OpenAPI routes are absent unless ENABLE_API_DOCS=1.
+
+**Why / decisions:** see [ADR-004](docs/decisions/ADR-004-governance-workbench.md). Source metadata is the authority for document status and authorship; no approval is inferred from permission to build. Original template authors are labelled unverified, with Codex updates identified. Existing documents remain drafts. Unknown IDs/symlink substitutions fail closed. Markdown uses registered/pinned markdown-it-py 4.0.0 + mdurl 0.1.2, html=False, inactive images, restricted links and namespaced anchors. CSP prevents active content on the governance page. No source prose is copied into templates. A build manifest distinguishes committed document bytes from working copies; missing or changed hashes never become a clean-commit claim.
+
+**Checks so far:** 75 Python tests and 3 Node event-logic tests passed; Ruff passed. Tests cover traversal/encoded paths/symlinks, every current ADR/change/regulatory draft being cataloged, active Markdown content, status/author metadata, source edits on subsequent reads, exact/dirty/unknown provenance, read-only routes, default API-doc 404s and explicit opt-in, pipeline stages/links/severities and nested-message quote/bracket handling. Real container checks follow below.
+
+**What went wrong:** the first new anchor test caught blank lines splitting REQ-15/REQ-16 out of the Markdown table. Removed those blank lines in the source rather than special-case the renderer; the requirement anchors now render and tests pass. The pre-existing TestClient deprecation warning remains recorded. No new browser verification claim is made while ANOM-004 is open.
+
+**Cost:** €0 paid services. No model, GPU, new hosting or external secret operation.
+
+**Container findings and correction:** the first live /governance request returned 500 because Docker preserved private host modes on the original PLAN.md/AGENTS.md/BUILD_JOURNAL.md copies, making them unreadable to the non-root app user. Corrected image permissions only: top-level Markdown and manifest are 0444; docs files are 0444 and directories 0555. Host permissions remain unchanged. Added a fail-closed unreadable-source regression. Rebuilt from the cached dependency layer and verified all 22 sources are readable but not writable by the runtime user. .git and .env are absent. The initial source manifest correctly labelled changed documents as working copies based on the prior commit.
+
+**Final verification:** 78 Python tests and 3 Node event-logic tests passed; make lint passed (same pre-existing TestClient warning). The actual container served all 22 allowlisted documents with status/drafter, git/hash provenance and restrictive CSP. /docs, /redoc and /openapi.json returned 404 by default. Literal and encoded traversal URLs returned 404. Real valid and profile/reference runs showed the correct pass/fail meanings, current Findings stage, wording notes (6 and 11), and the original-text disclosure for the verbatim nested excerpt. See [live smoke evidence](docs/examples/step-2/governance-smoke.json). Initial dependency downloads were slow (about nine minutes in Docker); no GPU or paid service ran.
+
+**Source refresh at checkpoint:** make dev regenerates the git/content manifest. The local image is rebuilt again after the checkpoint commit so its displayed source commit identifies the committed document bytes; no clean-source claim is made for the earlier working-copy image. The UI itself exposes the current snapshot commit and file hash for inspection.
+
+**Your review:** open http://127.0.0.1:8002 and http://127.0.0.1:8002/governance. Inspect the pipeline, a completed result, a nested-message excerpt and its raw disclosure. Follow REQ-02, ADR-002, CR-000 and the build-step link. Governance remains read-only and all current document statuses remain drafts. No secret value is needed for this review; the Modal contract is preparation only.
+
+**Checkpoint status:** ☐ awaiting Brian's Step 2 review under AGENTS.md. The pre-existing final visual click/mobile/saved-screenshot gap (ANOM-004) remains open; no new browser screenshot is claimed. Step 3 deployment has not started. No regulatory conclusion, document approval or release approval has been invented.

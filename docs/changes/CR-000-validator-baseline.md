@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # CR-000 — Initial local validator baseline
 
 Date: 2026-11-19. Authorization: Brian approved Step 1 in chat. Status: local implementation verified; awaiting checkpoint review, not a release approval.

@@ -7,7 +7,11 @@
 !validator/**
 !fhir/
 !fhir/**
+!docs/
+!docs/**
+!*.md
 !.cache/
 !.cache/validator/
 !.cache/validator/validator_cli.jar
+!.cache/workbench-source.json
 **/__pycache__

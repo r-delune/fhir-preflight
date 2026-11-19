@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # Anomaly log
 
 | ID | Date | Observed / expected | Versions | Impact | Resolution / verification | Status |

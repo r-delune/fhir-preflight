@@ -35,3 +35,17 @@ The initial desktop screen was visually observed in Chrome via CUA, and a real b
 Open http://127.0.0.1:8002. Select **Profile & reference errors**, run validation, then select the finding about `kg` being fixed to `g`. The JSON unit-code line should highlight and the right panel should show the selected message. Then try another example and confirm the old result clears. This review is optional hands-on learning; questions and requested edits are welcome.
 
 `make dev` starts the services; `make stop` stops them. No account setup or paid service is involved. The next planned step is preparing the hosted model, which needs a separate cost/deployment checkpoint.
+
+## Step 2 extension — workflow guidance and governance
+
+The workbench now explains the pipeline, highlights the current stage and greys out the future AI/review/report stages. After a completed run it describes enabled checks, missing terminology-server coverage, and pass/fail meaning. The severity guide gives a one-line definition for every level.
+
+Every finding identifies its text as original HL7 wording and states that the AI explanation arrives in Step 4. A verbose nested `message=...` can be displayed as a shorter verbatim excerpt; expand **Full original validator text** to see the untouched message. Stable IDs still use the original text, never the excerpt.
+
+Open http://127.0.0.1:8002/governance to inspect the repo's governance sources. Status and drafter are source metadata; all current records are drafts. The source commit and hash are shown with an explicit working-copy label if needed. REQ-02, ADR-002, CR-000 and the “Build step 2 of 8” label link to the relevant documents. This page cannot edit files or accept file paths in its URL.
+
+The default API documentation URLs /docs, /redoc and /openapi.json return 404. An exact ENABLE_API_DOCS=1 explicitly enables them for development. See ADR-004 and draft REQ-15/REQ-16. Governance stays at /governance regardless of that flag.
+
+The extended suite verifies fixed allowlist coverage, encoded traversal, symlink rejection, raw-HTML/protocol/image safety, metadata approval rules, exact-versus-dirty git/build provenance, pipeline stages, links and verbatim excerpts. Docker smoke checks and the current count are recorded in the build journal. The earlier browser screenshot/mobile verification gap remains explicit unless later closed with observed evidence.
+
+Extended verification completed: 78 Python tests, 3 Node event-logic tests and lint passed. The live image served all 22 governance records, rejected traversal and left /docs, /redoc and /openapi.json at 404. The app user can read but cannot write source documents. Pass/fail guidance and verbatim excerpt/raw-text rendering passed actual validator-run checks. Visual/mobile/saved-screenshot evidence remains the explicitly open browser-tooling item.

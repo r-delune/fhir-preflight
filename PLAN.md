@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Source template (author unverified); Codex updates
+---
+
 # FHIR Preflight — Build Plan (v0.1 → public demo)
 
 Owner: Brian Dillon (rdelune.dev) · Builder: Codex · Plan date: 2026-11-19
@@ -103,7 +108,8 @@ A CLI script `scripts/validate.py <file>` that prints the OperationOutcome.
 ### Step 2 — Show the results
 **Codex builds:** one-screen UI, three panels: *Sample data* (pick fixture, view JSON) · *Problems found* (severity, message, FHIRPath location, stable issue ID like `VAL-3`) · *Explanation & review* (empty for now). Clicking an issue highlights the location in the JSON. Show "Checks run: structure ✓ profile ✓ invariants ✓ terminology ✗ (disabled)".
 **Review focus:** Codex explains one validator issue using the specification before adding AI. Brian reviews the reasoning.
-**Evidence:** screenshot in journal; tests for issue-ID stability.
+**Step 2 extension (Brian, 2026-11-19):** add the How this works pipeline, completed-run/severity guidance, original-HL7 wording notes and verbatim nested-message excerpts with raw text preserved (REQ-15). Add a read-only `/governance` source-document browser with a fixed path catalog, safe Markdown, source status/drafter and verified git/build provenance (REQ-16). API docs/schema routes are disabled unless `ENABLE_API_DOCS=1`. Copy docs/ and top-level Markdown into Docker, without .git or .env. Link REQ-02, ADR-002, CR-000 and “Build step 2 of 8” to their governance records. See ADR-004.
+**Evidence:** screenshot in journal; tests for issue-ID stability, workflow guidance, read-only document access, traversal/symlink rejection, Markdown safety, metadata/provenance and default-off API docs; actual container checks. The previously recorded visual-tooling gap must stay explicit until observed evidence closes it.
 
 ### Step 3 — Host the model (the big learning step)
 **Codex builds:** `model/serve.py` deploying vLLM + Qwen3-8B on Modal: EU region, smallest GPU that fits (Codex justifies in an ADR), scale-to-zero, short scaledown window, model weights cached in a volume, bearer-token auth via Modal secret, pinned model revision (commit hash). A `docs/runbooks/model-hosting.md` with every command explained line by line. A smoke-test script measuring cold-start time, warm latency, tokens/sec.

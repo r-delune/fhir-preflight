@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # ADR-003 — Browser results and conservative location mapping
 
 Date: 2026-11-19. Brian authorized Step 2 with “start” in chat.

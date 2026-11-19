@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ document.title }} · Governance · FHIR Preflight</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='workbench.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='governance.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="FHIR Preflight home"><span class="brand-mark">r</span><span>rdelune<span class="brand-divider">/</span><strong>FHIR Preflight</strong></span></a>
+    <nav class="top-meta" aria-label="Main navigation"><a class="nav-link" href="/">Workbench</a><a class="nav-link" href="/governance" aria-current="page">Governance</a><a class="step-label" href="/governance?doc=roadmap">Build step 2 of 8</a></nav>
+  </header>
+  <main class="governance-main">
+    <div class="governance-intro"><p class="eyebrow">THE RECORD BEHIND THE WORK</p><h1>Governance</h1><p>Read-only repository documents. Each file is the source of truth.</p><a href="/governance?doc=requirements#req-16">REQ-16</a> · <a href="/governance?doc=adr-004">ADR-004</a></div>
+    <div class="governance-layout">
+      <nav class="document-nav" aria-label="Governance documents">
+        {% for group in groups %}<section><h2>{{ group }}</h2><ul>
+          {% for item in documents if item.group == group %}<li><a href="/governance?doc={{ item.id }}" {% if item.id == document.id %}aria-current="page"{% endif %}><span>{{ item.title }}</span><small>{{ item.status | capitalize }} · {{ item.drafted_by }}</small></a></li>{% endfor %}
+        </ul></section>{% endfor %}
+      </nav>
+      <section class="document-panel" aria-label="{{ document.title }} source document">
+        <div class="document-meta">
+          <div class="document-labels"><span class="doc-status {{ document.status }}">{{ document.status | capitalize }}</span><span>Drafted by {{ document.drafted_by }}</span></div>
+          {% if document.approved_by %}<p>Approved by {{ document.approved_by }} · {{ document.approved_on }}</p>{% else %}<p>No document approval recorded. Build-step progression is not document approval.</p>{% endif %}
+          <p class="source-path">{{ document.path }}</p>
+          <div class="commit-provenance"><strong>{{ document.provenance.state }}</strong><p>{% if document.provenance.commit %}Git commit: <code>{{ document.provenance.commit }}</code>{% else %}Git commit: unavailable — no source commit is claimed.{% endif %}</p><details><summary>Document content hash</summary><code>{{ document.provenance.sha256 }}</code></details></div>
+        </div>
+        <article class="markdown-body">{{ document.html }}</article>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

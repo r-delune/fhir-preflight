@@ -44,6 +44,39 @@ def issue_id(issue: dict) -> str:
     return "VAL-" + digest[:16].upper()
 
 
+def nested_message(text: str) -> str | None:
+    """Extract a verbatim nested message, never synthesize an explanation."""
+    match = re.search(r"\bmessage=", text)
+    if not match:
+        return None
+    start, depth, quote, escaped = match.end(), 0, None, False
+    end = len(text)
+    for index in range(start, len(text)):
+        char = text[index]
+        if escaped:
+            escaped = False
+        elif char == "\\" and quote:
+            escaped = True
+        elif quote:
+            if char == quote:
+                quote = None
+        elif char in {"'", '"'} and (index == start or not text[index - 1].isalnum()):
+            quote = char
+        elif char == "[":
+            depth += 1
+        elif char == "]":
+            if depth == 0:
+                end = index
+                break
+            depth -= 1
+    summary = text[start:end].strip()
+    # This removes only trailing source detail, leaving an exact substring of the original.
+    summary = summary.split(" in the profile ", 1)[0]
+    if len(summary) > 240:
+        summary = summary[:240].rsplit(" ", 1)[0]
+    return summary or None
+
+
 def json_lines(payload: dict) -> tuple[list[dict], dict]:
     lines, ranges = [], {}
 
@@ -120,9 +153,10 @@ def present(payload: dict, result: dict | None = None) -> dict:
             location = next((m for m in mapped if m["start"]), {
                 "start": 0, "end": 0, "note": "No mapped location supplied by the validator."
             })
+            message = issue.get("details", {}).get("text") or issue.get("diagnostics", "")
             issues.append({
                 "id": issue_id(issue), "severity": issue["severity"],
-                "message": issue.get("details", {}).get("text") or issue.get("diagnostics", ""),
+                "message": message, "summary": nested_message(message),
                 "paths": locations, **location,
             })
         order = {"fatal": 0, "error": 1, "warning": 2, "information": 3}

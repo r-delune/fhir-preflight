@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # Third-party component register — Step 0
 
 Exact distribution hashes and sources are recorded in uv.lock. Licence labels below are provisional; verify upstream licence files before release. No validator, FHIR package, runtime AI model, cloud service or HTMX is used yet.
@@ -60,3 +65,10 @@ Bootstrap resolved the packages below. `validator/packages.lock.json` records ex
 ## Step 2 development components
 
 The runtime remains the existing Python/Jinja/FastAPI stack plus locally authored CSS and browser JavaScript; no CDN, HTMX or new browser library is used. Node.js **v22.22.1** (observed locally; MIT and bundled component notices, https://nodejs.org/en/about/previous-releases) is a development-only tool for built-in `node:test`/`node:vm` interaction tests. These tests simulate DOM interfaces and do not establish actual layout or browser compatibility. CI uses `actions/setup-node@v4` with exact Node version 22.22.1; immutable action pinning remains release preparation work alongside existing actions. No npm packages are installed.
+
+## Step 2 governance Markdown renderer — registered before use
+
+- **markdown-it-py 4.0.0**, MIT, official package metadata: https://pypi.org/project/markdown-it-py/4.0.0/ ; upstream security guidance: https://markdown-it-py.readthedocs.io/en/latest/security.html . Required to render repository Markdown with raw HTML disabled (`html=False`), explicit safe link handling, no active images and no extra plugins. Known hazard: the default CommonMark configuration enables raw HTML; our constructor must explicitly disable it. Parser/configuration regressions could enable XSS, so malicious HTML/protocol fixtures are tested. Not a general HTML sanitizer.
+- **mdurl 0.1.2**, MIT, transitive URL parser dependency: https://pypi.org/project/mdurl/0.1.2/ . Required for renderer link parsing; application additionally restricts navigation schemes and local document targets. Distribution hashes and all resolved versions will be recorded in uv.lock before installation.
+
+No YAML or sanitization library is introduced. Document front matter is a deliberately limited flat metadata format, not general YAML, with fail-closed draft/unknown defaults. No additional raw HTML plugins are allowed.

@@ -1,3 +1,8 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # Intended purpose
 
 Status: Codex draft for Brian's review — 2026-11-19. Not yet approved.

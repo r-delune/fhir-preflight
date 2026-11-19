@@ -1,12 +1,14 @@
 UV_CACHE_DIR ?= /private/tmp/fhir-preflight-uv-cache
 export UV_CACHE_DIR
 
-.PHONY: setup dev dev-python stop validator-download validate regression test lint trace
+.PHONY: setup dev dev-python stop build-metadata validator-download validate regression test lint trace
 setup:
 	uv sync --locked
 validator-download:
 	python3.12 scripts/download_validator.py
-dev: validator-download
+build-metadata:
+	python3.12 scripts/prepare_build_metadata.py
+dev: validator-download build-metadata
 	docker compose up --build -d --wait
 dev-python:
 	uv run --locked uvicorn app.main:app --reload --host 127.0.0.1

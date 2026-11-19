@@ -1,6 +1,11 @@
+---
+status: draft
+drafted_by: Codex
+---
+
 # FHIR Preflight
 
-Step 2: browser workbench for three synthetic FHIR examples, with real HL7 validation and clickable finding locations. AI explanations and review are future steps.
+Step 2: browser workbench for three synthetic FHIR examples, with real HL7 validation, a pipeline guide, clickable finding locations and a read-only governance browser. AI explanations and review are future steps.
 
 ## Run locally
 
@@ -21,6 +26,26 @@ Exit codes: 0 pass under configured checks, 1 validation errors, 2 incomplete.
 `make regression` checks the three fixtures with the real local validator.
 `make test` also runs three frontend interaction-logic checks with Node.js 22.22.1 (no npm dependencies). `make lint` checks Python style. No AI model, API key or cloud account is needed.
 See [the explained runbook](docs/runbooks/local-validator.md) for details and limitations.
+
+## Governance and API documentation
+
+Open http://127.0.0.1:8002/governance to read the repository documents. Status and
+original drafter come from each file's flat front matter. All current records are
+drafts; permission to proceed with a build step does not approve every document.
+Only fixed document IDs are accepted. Raw HTML and unsafe links cannot become active
+content; documents and the page are read-only. New ADRs, change records and regulatory
+drafts must be deliberately added to app/governance_catalog.py; tests check coverage.
+
+The browser shows the source git commit and file hash. A working-copy file is labelled
+as such. `make dev` generates a content-hash manifest before copying docs/ and top-level
+Markdown into the image, without copying .git or .env. Rebuild after source edits to
+refresh the Docker snapshot. Committed provenance requires committing those edits and
+then rebuilding; an uncommitted image is never labelled as a clean commit snapshot.
+
+Swagger `/docs`, ReDoc `/redoc` and `/openapi.json` return 404 by default. For explicit
+local development only, run `ENABLE_API_DOCS=1 make dev`; restart with
+`ENABLE_API_DOCS=0 make dev` to turn them off. This option does not enable editing of
+governance files.
 
 ## How we work
 

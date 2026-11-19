@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 
@@ -7,6 +8,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.adapters.mock import MockModelAdapter
+from app.services.document_source import ROOT
+from app.services.governance import document_index, get_document
 from app.services.presentation import FIXTURES, load_fixture, present
 from app.services.validation import ValidationServiceError, request_validation
 
@@ -15,7 +18,13 @@ def create_app() -> FastAPI:
     # Fail visibly rather than quietly using a different provider.
     if os.getenv("MODEL_ADAPTER", "mock") != "mock":
         raise RuntimeError("This build supports MODEL_ADAPTER=mock only.")
-    application = FastAPI(title="FHIR Preflight", version="0.0.0")
+    enable_api_docs = os.getenv("ENABLE_API_DOCS") == "1"
+    application = FastAPI(
+        title="FHIR Preflight", version="0.0.0",
+        docs_url="/docs" if enable_api_docs else None,
+        redoc_url="/redoc" if enable_api_docs else None,
+        openapi_url="/openapi.json" if enable_api_docs else None,
+    )
     adapter = MockModelAdapter()
     templates = Jinja2Templates(directory=Path(__file__).parent / "templates")
     application.mount(
@@ -50,6 +59,10 @@ def create_app() -> FastAPI:
             request=request, name="index.html",
             context={"model_status": adapter.describe(), "fixtures": FIXTURES,
                      "fixture": fixture, "result": result, "error": error,
+                     "stage": "findings" if result else "validator" if error else "example",
+                     "validator_version": (result or {}).get("provenance", {}).get(
+                         "validator_version", json.loads(
+                             (ROOT / "validator/config.json").read_text())["validator_version"]),
                      **present(payload, result)},
             status_code=503 if error else 200,
         )
@@ -61,6 +74,28 @@ def create_app() -> FastAPI:
     @application.post("/workbench/validate", response_class=HTMLResponse)
     def workbench_validate(request: Request, fixture: str):
         return render_workbench(request, fixture, run=True)
+
+    @application.get("/governance", response_class=HTMLResponse)
+    def governance(request: Request, doc: str = "roadmap"):
+        try:
+            selected = get_document(doc)
+            documents = document_index()
+        except FileNotFoundError:
+            raise HTTPException(
+                status_code=404, detail="Governance document not available"
+            ) from None
+        response = templates.TemplateResponse(
+            request=request, name="governance.html",
+            context={"document": selected, "documents": documents,
+                     "groups": list(dict.fromkeys(item["group"] for item in documents))},
+        )
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'none'; style-src 'self'; img-src 'none'; script-src 'none'; "
+            "base-uri 'none'; frame-ancestors 'none'; form-action 'none'"
+        )
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Referrer-Policy"] = "no-referrer"
+        return response
 
     @application.post("/api/validate")
     def validate_payload(payload: dict):
