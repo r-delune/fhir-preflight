@@ -32,12 +32,31 @@ Brian's screenshot showed only **$1 active credit**; the additional $29 required
 a payment method. Do not assume access to all advertised monthly credits. We use
 custom GPU compute, not Modal's separate managed per-token Model APIs.
 
-Before chargeable operations, review workspace Usage & Billing Settings:
-set a $1 usage budget and $0 out-of-pocket spend limit if supported, verify saved
-settings and their scope, then approve the trial in chat. Usage budget counts
-before credits; spend limit counts after credits. Environment budgets require
-higher plans; no plan upgrade is proposed. If a desired control is unavailable,
-stop and review an alternative. https://modal.com/docs/guide/budgets
+## Authorized trial — 2026-11-19
+
+Brian instructed: “Proceed. Set a $15 Modal spending limit, download the weights
+with a CPU-only job, use FP8 or a capped context length, measure the cold start
+and the cost of the first session, and record them in COSTS.md. Public demo
+explanations come from the cache only.” This supersedes the earlier proposed
+$1 credit-only authorization gate; no further cost permission is needed within
+this scope. The $15 workspace **spend limit** caps net monthly charges after
+credits; usage before credits is a different control. Do not raise an existing
+stricter usage limit automatically. https://modal.com/docs/guide/budgets
+
+Chosen configuration: retain BF16 and cap total context at 4096 tokens, one
+sequence/container, rather than introduce FP8 quantisation into the first
+behavioural baseline. CPU-only snapshot job is already separate from GPU serving.
+Public demo is strictly cache-only: cache misses never wake the GPU. New input
+in future local/invite-only modes is a separate path, not a public-demo exception.
+
+**Current access evidence:** CLI initially returned “Token missing”. Browser
+control twice timed out. Brian completed the subsequently opened normal Modal
+sign-in flow: CLI verified workspace r-delune and confirmed secret fhir-test
+exists (names only; no secret value read). A 12-hour CLI credential was stored by
+the SDK outside the repo. Baseline billing summary reports metered and billed
+cost both $0 before any jobs. Saved $15 limit and remaining credit are still
+awaiting dashboard verification; billing summary does not expose those settings.
+No cloud job starts until the saved limit is verified.
 
 Measured allocation time, image build charges, first-call/warm latency,
 authentication, cache size, teardown/redeployment and dashboard balance delta:

@@ -13,7 +13,7 @@ def test_pinned_command_and_secret_boundary():
     key = "private-token-" * 4
     assert REVISION in command[2]
     assert "--trust-remote-code" not in command
-    assert "--max-model-len" in command
+    assert command[command.index("--max-model-len") + 1] == "4096"
     assert "--no-enable-log-requests" in command
     assert "--no-enable-log-outputs" in command
     assert key not in " ".join(command)
@@ -96,7 +96,9 @@ def test_deployment_caps_are_registered_without_remote_calls(monkeypatch):
     monkeypatch.delitem(sys.modules, "model.serve", raising=False)
     importlib.import_module("model.serve")
     monkeypatch.delitem(sys.modules, "model.serve")
-    cache, gpu = functions
+    cache, gpu, probe = functions
+    assert "gpu" not in probe
+    assert probe["cpu"] == (1, 1)
     assert "gpu" not in cache
     assert gpu["gpu"] == "L4"
     assert gpu["region"] == "eu"

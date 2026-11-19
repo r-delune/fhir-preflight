@@ -372,3 +372,37 @@ run: this is an instruction/history update with no executable change.
 
 **Next stop:** Step 3 cost authorization, then actual trial/checkpoint evidence;
 after that, the draft product plan is a separate mandatory review before build.
+
+### Step 3 trial authorized — 2026-11-19
+
+Brian explicitly authorized setting a $15 Modal spend limit, CPU-only weight
+download, FP8 or capped context, cold-start/session-cost measurements in COSTS.md,
+and cache-only public-demo explanations. This replaces the proposed $1 credit-only
+gate. No repeat cost permission is needed within the authorized scope.
+
+Selected the existing BF16/4096-token cap rather than introduce FP8 quantisation.
+Added an explicit CPU-only CLI probe reading the existing Modal secret, avoiding
+local copying/disclosure of its value. Refactored the same smoke routine for CLI
+and remote CPU use; generation is not connected to the workbench. Public demo
+cache misses must not wake the GPU, overriding earlier “new input” wording for
+public mode. Broader product-plan drafting remains queued after Step 3 checkpoint.
+
+Access: CLI initially lacked credentials. Browser automation inventory worked but
+opening/acquiring billing tab timed out twice. No budget setting was changed or
+claimed verified by automation. Started normal modal token new with 12-hour
+lifetime; Brian completed browser authentication. SDK confirmed r-delune, saved
+its CLI credential outside the repo, and listed fhir-test without reading values.
+The SDK emitted a token ID (not its secret) in an expiry warning; no credential
+value is copied to project files. Initial billing summary: metered $0, billed $0.
+Raw billing/app snapshots are gitignored under .cache. Saved spend-limit/credit
+state still requires dashboard evidence before any cloud job. Asked Brian for
+that access-dependent information while completing local work.
+
+Local verification after the refinement: 87 Python tests, 3 Node tests and Ruff
+passed; real SDK loads the deployment graph without hydration. Capped context
+and absence of GPU allocation on cache/probe functions are checked. The existing
+TestClient warning remains. No jobs, deployment or model calls started; no cold
+start or session charge is invented. COSTS.md records zero baseline separately
+from pending measurements. Next action is the already authorized CPU cache job
+once the saved $15 spend limit is verified, followed by capped GPU measurement
+and teardown. No further spending approval is requested.

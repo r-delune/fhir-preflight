@@ -5,7 +5,7 @@ drafted_by: Codex
 
 # Step 3 — hosted model runbook
 
-Preparation is ready for review, not deployed. The model is Qwen3-8B (Apache-2.0)
+Trial authorized with a $15 workspace spend limit; not deployed yet. The model is Qwen3-8B (Apache-2.0)
 running through vLLM on Modal's rented GPU. Your laptop runs the workbench and
 sends a request; the GPU generates the text. No local Ollama. The current
 workbench still uses mock output; connecting it is Step 4.
@@ -29,9 +29,10 @@ a private random token at least 32 characters. Save it in your password manager.
 Do not paste its value in chat or commit it. No Hugging Face token is required
 for this public model. Confirm the secret exists without displaying its value.
 
-## 2. Cost gate — stop here until approved
-Review COSTS.md and ADR-005. Verify saved workspace usage/spend limits and active
-credit. Brian approves the concrete trial before any commands below. They may
+## 2. Authorized spending control — verify before jobs
+Review COSTS.md and ADR-005. Brian authorized a $15 workspace spend limit. Save
+and verify it in Usage & Billing, and record active credit/baseline billing.
+Keep any existing stricter usage limit. Authorization does not prove a limit was saved. They may
 build images, create persistent storage and consume credits/cash. A bearer key
 does not stop unauthenticated requests waking compute. Do not share the URL.
 
@@ -50,24 +51,25 @@ app; record its HTTPS URL. It can allocate a GPU when requested. No GPU/model
 fallback is configured. Failure or memory exhaustion means stop and review.
 
 ## 4. Manual smoke measurement
-Confirm zero GPU containers in the dashboard before the first request. Set the
-client token securely without putting it into shell history (zsh):
+Confirm zero GPU containers in the dashboard before the first request, then run:
 
 ```
-read -rs 'PREFLIGHT_API_KEY?Endpoint token: '; echo
-export PREFLIGHT_API_KEY
-uv run python -m model.smoke https://YOUR-ENDPOINT.modal.run --confirmed-cold
-unset PREFLIGHT_API_KEY
+uv run --group hosting modal run --env main -m model.serve::probe --url https://YOUR-ENDPOINT.modal.run --confirmed-cold
 ```
 
-Replace only the URL. The hidden prompt reads the password-manager value.
-The probe sends a tiny synthetic prompt twice, verifies pinned served identity
+Replace only the URL. This explicit CPU-only test function reads the endpoint
+token from the existing fhir-test secret in Modal; no copying its value locally
+is needed. It sends a tiny synthetic prompt twice, verifies pinned served identity
 and exact response, then verifies unauthenticated /v1/models returns 401.
-It prints timings and token counts, never credentials or generated content.
-First-call time includes network, queue and load, not just model loading.
-Only use --confirmed-cold after independently confirming zero containers.
-End-to-end tokens/sec is not server-only decode throughput. Any failure stops
-with no fallback. Save the nonsecret JSON output with the trial evidence.
+It prints timings, UTC session boundaries and token counts, never credentials or
+generated content. First-call time includes network, queue and load, not just
+model loading. Only use --confirmed-cold after independently confirming zero
+containers. End-to-end tokens/sec is not server-only decode throughput. Any
+failure stops with no fallback. Save the nonsecret JSON output with trial evidence.
+The waiting CPU probe adds its own small compute cost to the measured session.
+
+The optional local probe remains available as `python -m model.smoke URL`; it
+requires PREFLIGHT_API_KEY in its environment and is never called by CI.
 
 ## 5. Stop, verify, redeploy
 
@@ -94,3 +96,9 @@ identity: recreating its name requires rerunning cache and deploy commands so th
 app references the new volume. For ordinary redeployment with retained cache,
 rerun deploy, smoke and stop. Record both cycles and actual billing before
 claiming Step 3 complete. Do not start Step 4 without checkpoint approval.
+
+## Public-demo boundary
+Public demo explanations come from reviewed cached artifacts only. A public
+cache miss must never send a generation request or wake the GPU. This policy
+overrides earlier wording allowing public generation for new inputs; implementation
+remains in Step 4 and the public-release change record.

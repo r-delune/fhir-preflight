@@ -5,7 +5,7 @@ drafted_by: Codex
 
 # ADR-005 — A bounded, separately approved hosted-model trial
 
-Date: 2026-11-19. Proposed configuration; no cloud deployment/adoption approved.
+Date: 2026-11-19. Cloud trial authorized in chat on 2026-11-19; model adoption remains pending.
 
 ## Context and options
 Step 3 needs a real open-weight model without local Ollama. Qwen3-8B's BF16
@@ -29,8 +29,9 @@ VLLM_API_KEY environment variable, never command-line text. Inference /v1 paths
 require bearer authentication. Operational health/metrics paths may be public;
 authentication does not prevent unauthenticated requests from waking compute.
 This private trial is not the Step 7 public demo. Do not advertise its URL.
-Set a workspace usage budget and spend limit, verify saved settings, then obtain
-Brian's cost approval before any image build/cache/deploy or endpoint call.
+Brian authorized a $15 workspace spend limit and trial on 2026-11-19. Set and
+verify that limit before any image build/cache/deploy or endpoint call. Keep any
+existing stricter usage limit; do not raise it automatically.
 
 ## Consequences and open evidence
 EU compute/routing is not a claim that all processing, storage or control-plane
@@ -52,3 +53,10 @@ Sources checked 2026-11-19:
 - https://modal.com/docs/guide/budgets
 - https://modal.com/docs/examples/vllm_inference
 - https://huggingface.co/Qwen/Qwen3-8B
+
+## Trial instruction update — 2026-11-19
+Use the existing capped 4096-token context BF16 baseline rather than add FP8
+quantisation as another variable. Cache weights with the CPU function only.
+Measure independently confirmed cold first-request latency and warm latency,
+and distinguish measured platform billing from resource-rate estimates. Public
+demo explanations are cache-only, including cache misses (no GPU wake-up).

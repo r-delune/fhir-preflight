@@ -51,14 +51,8 @@ def completion(client, url, key, clock=time.perf_counter):
             "end_to_end_tokens_per_second": tokens / elapsed if elapsed > 0 else None}
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("url")
-    parser.add_argument("--confirmed-cold", action="store_true",
-                        help="Only after dashboard confirms zero containers before this probe")
-    args = parser.parse_args()
-    url = check_url(args.url)
-    key = os.environ.get("PREFLIGHT_API_KEY", "")
+def run_probe(url, key, confirmed_cold=False):
+    url = check_url(url)
     if len(key) < 32:
         raise ValueError("Set PREFLIGHT_API_KEY securely; do not pass it as a CLI argument")
     client = build_opener(NoRedirects())
@@ -72,9 +66,21 @@ def main():
             raise RuntimeError("Unexpected unauthenticated API status") from None
     else:
         raise RuntimeError("API authentication check failed")
-    print(json.dumps({"model": SERVED_NAME, "revision": REVISION,
-                      "first_call": first, "cold_precondition_confirmed": args.confirmed_cold,
-                      "warm_call": warm, "unauthenticated_status": 401}, indent=2))
+    return {
+        "model": SERVED_NAME, "revision": REVISION,
+        "first_call": first, "cold_precondition_confirmed": confirmed_cold,
+        "warm_call": warm, "unauthenticated_status": 401,
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("url")
+    parser.add_argument("--confirmed-cold", action="store_true",
+                        help="Only after dashboard confirms zero containers before this probe")
+    args = parser.parse_args()
+    result = run_probe(args.url, os.environ.get("PREFLIGHT_API_KEY", ""), args.confirmed_cold)
+    print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":

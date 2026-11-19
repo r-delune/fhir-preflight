@@ -5,8 +5,8 @@ drafted_by: Codex
 
 # CR-003 — Proposed Step 3 hosted model baseline
 
-Trigger: Brian authorized Step 3 preparation in chat on 2026-11-19. Paid cloud
-provisioning is a separate pending decision under AGENTS.md.
+Trigger: Brian authorized Step 3 preparation in chat on 2026-11-19. Brian subsequently authorized the trial with a $15 workspace spend limit in chat.
+Set and verify the limit before provisioning; model adoption remains a checkpoint.
 
 Change: add optional Modal SDK, deployment definition, pinned model identity,
 manual smoke probe, runbook, cost estimate and REQ-17. See ADR-005.
@@ -26,3 +26,8 @@ Release: none. Rollback: keep app on mock; stop the named Modal app, verify zero
 containers, then optionally remove only its dedicated cache after review. Preserve
 pins and evidence for redeployment. Stop immediately on failed identity/auth or
 out-of-memory; do not upgrade GPU or change model automatically.
+
+Trial refinement: a CLI-only CPU probe reads the endpoint token from the existing
+Modal secret and calls the deployed HTTPS inference API. No secret copying to
+chat/local files is required. Record this CPU waiting time in session cost. Local
+tests verify the probe itself requests no GPU and remains outside app/CI paths.
