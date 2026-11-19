@@ -22,13 +22,15 @@ function setup() {
   const ids = Object.fromEntries([
     'json-view', 'selected-id', 'selected-message', 'location-note', 'selection-detail',
     'review-placeholder', 'validation-form', 'validate-button', 'validate-label',
-    'busy-message', 'fixture', 'pipeline'
+    'busy-message', 'fixture', 'pipeline', 'run-status-title', 'run-status-detail'
   ].map(id => [id, element()]));
   for (let i = 1; i <= 10; i++) {
     ids[`line-${i}`] = element();
     ids[`line-${i}`].offsetTop = 100 + i * 20;
   }
   ids.pipeline.dataset.currentStage = 'example';
+  ids['run-status-title'].textContent = 'Ready to check';
+  ids['run-status-detail'].textContent = 'Load an example, then run validation.';
   const stages = ['example', 'validator', 'findings'].map(name => {
     const item = element(); item.dataset.pipelineStage = name; return item;
   });
@@ -78,6 +80,8 @@ test('REQ-14: fixture changes load the selected example and prevent validation o
 test('REQ-14: validation shows progress and back/forward restore permits another run', () => {
   const {ids, window, stages} = setup();
   ids['validation-form'].listeners.submit();
+  assert.equal(ids['run-status-title'].textContent, 'Checking…');
+  assert.match(ids['run-status-detail'].textContent, /official HL7 FHIR validator/);
   assert.equal(stages[1].hasClass('current'), true);
   assert.equal(stages[1].attributes['aria-current'], 'step');
   assert.equal(ids['validate-button'].disabled, true);
@@ -87,6 +91,8 @@ test('REQ-14: validation shows progress and back/forward restore permits another
   assert.equal(ids['validate-button'].disabled, false);
   assert.equal(ids['busy-message'].hidden, true);
   assert.equal(ids['validation-form'].attributes['aria-busy'], undefined);
+  assert.equal(ids['run-status-title'].textContent, 'Ready to check');
+  assert.equal(ids['run-status-detail'].textContent, 'Load an example, then run validation.');
   assert.equal(stages[0].hasClass('current'), true);
   assert.equal(stages[1].hasClass('current'), false);
 });
