@@ -10,8 +10,8 @@ def test_home_is_honest_about_missing_services(monkeypatch):
     with TestClient(create_app()) as client:
         response = client.get("/")
     assert response.status_code == 200
-    assert "Validation results are not connected to this page yet" in response.text
-    assert "no AI model is connected" in response.text
+    assert "Ready to check" in response.text
+    assert "No AI model is connected" in response.text
 
 
 @pytest.mark.scaffold

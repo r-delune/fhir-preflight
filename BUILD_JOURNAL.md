@@ -146,3 +146,32 @@ Message counts are not distinct-defect counts: the same omission appears under s
 **Brian's personal observations / questions:** optional; not supplied or invented by Codex.
 
 **Status:** ☐ awaiting Brian's checkpoint review. Step 2 has not started. AGENTS.md requires approval in chat or the journal before advancing. Hosted CI evidence remains a separate open item.
+
+<a id="step-2"></a>
+### #2 — Step 2: Show the results — 2026-11-19
+
+**Authorization:** Brian said “start” after the Step 2 proposal. This approves progression from Step 1; it does not approve a paid model deployment or a public release.
+
+**Goal:** select a synthetic fixture, see real validator findings and locate the affected data in a three-panel workbench.
+
+**What changed:** branch `codex/step-2-results-ui`; app/main.py routes/static mounting, app/services/presentation.py, app/templates/index.html, local CSS/JavaScript and tests/test_presentation.py + tests/frontend.test.cjs. Docker app image now includes built-in fixtures. Makefile/CI include the frontend logic tests; Node is registered in SOUP before use. Updated requirements (REQ-12–REQ-14), architecture, traceability, glossary, risk/anomaly records and the review guide.
+
+**Why:** [ADR-003](docs/decisions/ADR-003-results-presentation.md) documents a small server-rendered UI with no frontend library or external assets. REQ-01/REQ-14 keep status tied to the current validator result and clear it on fixture changes or failure. REQ-12 gives semantic finding identities; REQ-13 maps only known emitted path forms and labels fallback locations. REQ-02 has a presentation-level regression showing an injected model claim cannot alter the displayed validator status; model/review integration remains future verification.
+
+**How checked:** 35 Python tests passed; three Node interaction-logic tests passed; Ruff and whitespace checks passed. All three actual HTTP result pages matched the Step 1 findings and stable IDs: complete fixture pass/6 findings, broken structure fail/12 findings, profile/reference fail/11 findings. See [saved comparison](docs/examples/step-2/http-smoke.json). These were real validator calls on the pinned offline service, without AI. Desktop initial rendering was observed in Chrome; a browser-submitted validation returned HTTP 200.
+
+**What went wrong / limits:**
+- Browser/IAB control repeatedly timed out; a native Chrome acquisition unexpectedly took over seven minutes despite a requested 30-second tool timeout. Native access briefly worked and emitted an initial desktop screenshot in chat, but no screenshot artifact was saved to the repo. Final visual highlight confirmation and mobile/narrow-screen QA remain pending (ANOM-004); they are not claimed complete.
+- A smoke request was mistakenly started while the app was being recreated, and its connection closed. Waited for service health and validator idle, then reran the complete HTTP smoke check successfully. This was test orchestration, not a passing validator result.
+- `uv` crashed inside the sandbox during `make test`/`make lint`, as seen in Step 0. Direct environment checks passed; final make commands were retried with the approved sandbox override.
+- Example selection originally required clicking Load before Run. Added immediate form navigation on dropdown change to prevent validating the old fixture; the fallback Load button still works without JavaScript.
+
+**Decisions:** use ordinary Jinja forms plus small local JS/CSS rather than add HTMX for this limited interaction. Finding IDs are hash-derived semantic references, not sequential numbers or persisted review records. Identical duplicate findings can share an ID while remaining separate displayed rows. FHIRPath mapping is deliberately limited; exact/parent/unmapped notes remain visible. The validator, profile, packages and hosted-model architecture are unchanged.
+
+**Cost incurred:** €0 paid services. No hosted model or public app deployment.
+
+**Your review:** open http://127.0.0.1:8002, select the profile/reference example, run validation and select the grams-unit finding. Ask about any message, design choice or step. See [plain-English guide](docs/examples/step-2/README.md). Suggested discussion: why a grams-only profile can reject otherwise valid units; why we label fallback locations; why passing a limited check retains warnings. No personal learning answers are invented.
+
+**Evidence status:** UI implementation and local automated/HTTP checks ready for review. Final interactive/mobile browser verification and a saved screenshot artifact are still outstanding due to tooling; hosted GitHub CI has not been claimed green.
+
+**Status:** ☐ awaiting Brian's review. Step 3 not started; AGENTS.md requires checkpoint approval before progression. Browser evidence gap remains open, rather than marking this step fully verified.

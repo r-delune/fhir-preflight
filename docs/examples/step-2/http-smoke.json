@@ -1,0 +1,58 @@
+[
+  {
+    "fixture": "valid-infant-weight",
+    "status": "pass",
+    "findings": 6,
+    "issue_ids": [
+      "VAL-02CBAF50F5626CD8",
+      "VAL-3E1DA8016048B1B8",
+      "VAL-6C74E6E06F444EFC",
+      "VAL-6AE43B14B4E9631C",
+      "VAL-827CF9F2CAE2006B",
+      "VAL-AC1E1527DB3D766A"
+    ],
+    "html_sha256": "c21b3d025e6a56ef750671c3df3f8c598135f9ec20a62a53356e9a3ddc4934a0",
+    "matched_step_1_findings": true
+  },
+  {
+    "fixture": "broken-structure",
+    "status": "fail",
+    "findings": 12,
+    "issue_ids": [
+      "VAL-2E4C70329C598175",
+      "VAL-32D9AB0A1B412031",
+      "VAL-419E825C8BC87CFB",
+      "VAL-8ABFB0282073987A",
+      "VAL-A0781E36A8F3C063",
+      "VAL-D78C26D21F527594",
+      "VAL-02CBAF50F5626CD8",
+      "VAL-3E1DA8016048B1B8",
+      "VAL-6C74E6E06F444EFC",
+      "VAL-6AE43B14B4E9631C",
+      "VAL-827CF9F2CAE2006B",
+      "VAL-AC1E1527DB3D766A"
+    ],
+    "html_sha256": "b8fc4b74d313675b47ceea630e4729ac55cceec9cd889bb88e3a9433bd3e9bb0",
+    "matched_step_1_findings": true
+  },
+  {
+    "fixture": "broken-profile-and-reference",
+    "status": "fail",
+    "findings": 11,
+    "issue_ids": [
+      "VAL-68F6BD11006E8566",
+      "VAL-A5BDE51E84D189E0",
+      "VAL-B465CE5E0C9F58E7",
+      "VAL-BE5C0DB98BE283FA",
+      "VAL-C74C9EE8E3A63440",
+      "VAL-0AA7DBA41EFEE460",
+      "VAL-6C74E6E06F444EFC",
+      "VAL-AF59417332E7B689",
+      "VAL-AC1E1527DB3D766A",
+      "VAL-D118115604B4331D",
+      "VAL-E06ADDCFBF8EE8A1"
+    ],
+    "html_sha256": "44cddd6c5e6922a120cd1b04c5e0a2af4c1c952f69685f8a63bfe12b14ac8ec0",
+    "matched_step_1_findings": true
+  }
+]

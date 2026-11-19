@@ -1,10 +1,10 @@
 # Architecture
 
-## Step 1 implementation
-Browser → local FastAPI hello page (no results UI yet).
+## Step 2 implementation
+Browser → server-rendered Jinja workbench → selected synthetic fixture → real validator request.
 CLI → app /api/validate (127.0.0.1:8002) → isolated Python HTTP wrapper → pinned HL7 Java validator → original OperationOutcome.
 Compose connects app and validator on an internal-only network. The app also has a bridge network for its laptop-only published port; the validator has no host port and no external network.
-The app proxies validator responses unchanged; there is no results UI, AI inference or persistence yet.
+The CLI API proxies validator responses unchanged. The workbench decorates findings with stable IDs and conservative JSON line mappings, preserving the validator result. Local CSS/JavaScript supports selection and progress; no AI inference or persistence yet. See ADR-003 for presentation limits.
 See decisions/ADR-002-validator-service.md for packaging, severity policy and limits.
 
 ## Planned target

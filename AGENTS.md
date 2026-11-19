@@ -53,7 +53,7 @@ make dev        # app + validator in Docker Compose, detached; first build downl
 make stop       # stop local containers
 make validate   # validate built-in valid fixture; FILE=path selects another synthetic file
 make regression # run the three fixtures through the real local validator
-make test       # pytest with mock adapter; scaffold checks; product requirement coverage arrives with features
+make test       # pytest with mock adapter + Node interaction-logic tests (Node 22.22.1)
 make lint       # ruff
 make trace      # Step 0: explains that generation is deferred to Step 6
 ```

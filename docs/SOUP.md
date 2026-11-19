@@ -56,3 +56,7 @@ Bootstrap resolved the packages below. `validator/packages.lock.json` records ex
 | hl7.terminology | 7.5.0 | `0f88b34ecc182e9b2b4629445006ac936fe8937a7ed32cd6d7fdbb0d217965b6` |
 | hl7.terminology.r4 | 6.2.0 | `ee7ce5718d6de22145366891150bd5e1abe3778d5176e95427ed1e3c16c735c5` |
 | hl7.terminology.r5 | 7.5.0 | `fd27739491e6145e716563e7149dcc29e71279df2eb856ba5fd147f9d2c87976` |
+
+## Step 2 development components
+
+The runtime remains the existing Python/Jinja/FastAPI stack plus locally authored CSS and browser JavaScript; no CDN, HTMX or new browser library is used. Node.js **v22.22.1** (observed locally; MIT and bundled component notices, https://nodejs.org/en/about/previous-releases) is a development-only tool for built-in `node:test`/`node:vm` interaction tests. These tests simulate DOM interfaces and do not establish actual layout or browser compatibility. CI uses `actions/setup-node@v4` with exact Node version 22.22.1; immutable action pinning remains release preparation work alongside existing actions. No npm packages are installed.

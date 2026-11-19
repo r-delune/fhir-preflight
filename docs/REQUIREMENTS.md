@@ -1,7 +1,7 @@
 # Requirements
 
-Status: first five drafted by Codex for Brian's review — 2026-11-19. Not yet approved.
-IDs preserve the meanings proposed in PLAN.md. Product features and their verification are future work; Step 0 scaffold tests do not prove these requirements.
+Status: Codex working drafts used for authorized Steps 1–2 development; final wording remains open to Brian's review.
+IDs preserve the meanings proposed in PLAN.md. Current versus future verification is recorded in TRACEABILITY.md; scaffold tests alone do not prove product requirements.
 
 | ID | Required behaviour | Verification criterion | Planned implementation |
 |---|---|---|---|
@@ -11,5 +11,8 @@ IDs preserve the meanings proposed in PLAN.md. Product features and their verifi
 | REQ-04 | Every AI-generated explanation is visibly labelled in the interface and export, including reviewer-edited text derived from it. | Check UI and Markdown/JSON exports for accepted, edited, rejected and cached explanations; preserve generation origin and review state. | Steps 4–5 |
 | REQ-05 | Each explanation records model ID and immutable revision, prompt version and excerpt-set version at generation; cached outputs preserve original provenance. | Generate with mock metadata, change configuration, retrieve original and cached outputs and verify original metadata is retained in storage and export. | Steps 4–5 |
 | REQ-11 | Remote terminology is disabled by default. Validation requests cannot fetch remote resources or dependencies; bootstrap downloads occur before runtime. | Check `-tx n/a` and `-no-http-access` in the command, run all fixtures on an internal-only Docker network, and inspect the resulting limitations. | Step 1 baseline |
+| REQ-12 | Each validator issue has a deterministic ID derived from severity, code, message, normalized location and message type. Reordering issues or changing temporary filenames/line metadata does not change identity. | Compare repeated, reordered and metadata-varied outcomes; meaningful issue changes must change IDs. Duplicate identical findings may share an ID and remain individually displayed. | Step 2 |
+| REQ-13 | Selecting an issue highlights its matching JSON location, or the closest resolvable parent with an explicit fallback notice. Unmapped locations are labelled without inventing a match. | Exercise Bundle indices, resource comments, typed choices, missing fields and unsupported FHIRPath. Verify interaction in a browser. | Step 2 |
+| REQ-14 | The workbench presents only the selected built-in synthetic fixture and its current validator result. Loading another fixture clears prior results; failed validation shows incomplete with no old pass/fail result. | Route tests plus real-browser switching and failure checks. | Step 2 |
 
 REQ-06 through REQ-10 remain proposals in PLAN.md until added for implementation. Tests will carry REQ IDs when the corresponding behaviour exists.

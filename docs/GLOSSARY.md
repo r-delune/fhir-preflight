@@ -27,3 +27,7 @@
 **LOINC / UCUM:** LOINC identifies what was measured, while UCUM identifies the unit in a machine-readable way. Our demo fixes one measurement code and the grams unit; it does not assess the medical significance of a value. [HL7 terminology guidance](https://hl7.org/fhir/R4/terminologies-systems.html)
 
 **Container / Docker Compose:** A container runs software in an isolated environment. Compose defines how our app and validator containers start and communicate on the laptop. [Docker](https://docs.docker.com/compose/)
+
+**Stable finding ID:** A content-derived reference for a validator message. Reordering messages or changing temporary file metadata does not change this reference; it is not a persisted review record yet. [Python hashing documentation](https://docs.python.org/3/library/hashlib.html)
+
+**Location mapping:** FHIRPath refers to the logical FHIR model, which is not always identical to JSON property names. Our display maps a limited set of emitted paths to JSON lines and labels parent or unsupported-path fallbacks explicitly. [HL7](https://hl7.org/fhir/R4/fhirpath.html)

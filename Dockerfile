@@ -4,5 +4,6 @@ COPY requirements.lock .
 RUN pip install --no-cache-dir --no-deps -r requirements.lock
 RUN useradd --create-home --uid 10001 preflight
 COPY app app
+COPY fhir/fixtures fhir/fixtures
 USER preflight
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

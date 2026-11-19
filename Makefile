@@ -18,6 +18,7 @@ regression:
 	python3.12 scripts/regression_validator.py
 test:
 	MODEL_ADAPTER=mock uv run --locked pytest
+	node --test tests/frontend.test.cjs
 lint:
 	uv run --locked ruff check .
 trace:
