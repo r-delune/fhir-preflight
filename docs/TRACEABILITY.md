@@ -21,7 +21,7 @@ REQ-01 through REQ-05 are working drafts; Brian authorized Steps 1–2 implement
 | REQ-15 | tests/test_workflow_guidance.py; tests/frontend.test.cjs | Pipeline, severity/result explanations, governance links and verbatim nested message excerpts verified locally |
 | REQ-16 | tests/test_governance.py; scripts/prepare_build_metadata.py | Allowlist, traversal/symlink rejection, Markdown safety, status/authorship, git/build hashes, read-only routes and default-off API docs verified; container smoke evidence recorded in journal |
 
-Scaffold tests verify infrastructure only. The traceability generator is scheduled for Step 6. Hosted CI has no recorded runs when last checked; local results are recorded in the journal.
+Scaffold tests verify infrastructure only. The traceability generator is scheduled for Step 6. Hosted CI run 44521196492 passed Ruff, 88 Python tests and 3 Node tests at commit f699002 on 2026-11-19; see docs/examples/step-3/first-ci-result.json. This does not close remote model or mobile verification gaps.
 
 REQ-17: tests/test_model_hosting.py verifies local configuration, secret/target boundaries, identity rejection and measurement with a fake client. Cloud fit/auth/latency/billing and teardown remain pending; local tests do not prove them.
 
