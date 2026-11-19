@@ -12,7 +12,7 @@ A small web app that checks a **synthetic** FHIR health-data file, shows what is
 
 **The one rule that matters most:** the validator decides pass/fail. The AI only explains. The AI can never change the result.
 
-### Intended purpose (draft — Brian rewrites this in his own words in Step 0)
+### Intended purpose (Codex draft — Brian reviews in Step 0)
 > FHIR Preflight helps software developers understand why a sample FHIR R4 payload fails validation against a pinned profile and what to investigate next. It is used with synthetic data only. It does not process real patient data, does not interpret clinical information about any individual, and does not support diagnosis, treatment or care decisions.
 
 ### Out of scope (do not build, even if it seems helpful)
@@ -60,16 +60,20 @@ A small web app that checks a **synthetic** FHIR health-data file, shows what is
 
 ## 3. Build steps
 
-Each step ends at a **CHECKPOINT** (see AGENTS.md). Codex stops, writes the journal entry, and waits for Brian.
+Each step ends at a **CHECKPOINT** (see AGENTS.md). Codex stops, writes the journal entry, and waits for Brian's review. Approval may be given in chat or the journal.
+
+**Working agreement updated 2026-11-19:** Codex drafts, implements, demonstrates and explains; Brian reviews the work and asks questions. Mandatory homework is replaced by review. Codex never invents Brian's personal learning, approvals or adopted regulatory conclusions.
+
+**Model decision confirmed by Brian:** Qwen3-8B hosted through vLLM on Modal. The app and validator run locally during development; model inference runs on the hosted endpoint once Step 3 is completed. Tests and CI use the mock adapter. No local Ollama integration is planned. Region, GPU, pricing, licence and version details must be verified before deployment.
 
 Every step has three parts:
 - **Codex builds** — the code/docs
-- **Brian does** — a hands-on learning task (Codex must not do this part for him)
+- **Review focus** — Codex prepares the explanation and evidence; Brian reviews and asks questions
 - **Evidence** — what proves the step is done
 
 ### Step 0 — Skeleton and rules
 **Codex builds:** repo layout (below), `pyproject.toml`, FastAPI hello page, pytest, ruff, GitHub Actions CI running tests with the **mock** model adapter, `BUILD_JOURNAL.md`, empty doc templates in `docs/`, `.env.example` (no secrets committed), `docs/GLOSSARY.md` seeded with FHIR/AI Act/62304 terms used in this plan.
-**Brian does:** rewrite the intended-purpose statement in his own words in `docs/INTENDED_PURPOSE.md`. Write 5 requirements himself in `docs/REQUIREMENTS.md` before Codex adds more.
+**Review focus:** Codex drafts `docs/INTENDED_PURPOSE.md` and the first five requirements in `docs/REQUIREMENTS.md`, with verification criteria. Brian reviews the scope and wording.
 **Evidence:** CI green; journal entry #0.
 
 ```
@@ -93,17 +97,17 @@ BUILD_JOURNAL.md
 3. `broken-profile-and-reference.json` — wrong unit/code for our profile + dangling `subject` reference in a Bundle
 
 A CLI script `scripts/validate.py <file>` that prints the OperationOutcome.
-**Brian does:** *before running*, write in the journal which errors he expects for fixtures 2 and 3 and why. Then run it and compare. Read the profile StructureDefinition and explain one constraint in his own words.
-**Evidence:** validator version + FHIR package versions recorded in `docs/SOUP.md`; prediction vs actual in journal.
+**Review focus:** Codex records expected fixture errors before running, compares actual results, and explains one profile constraint. Brian reviews the comparison.
+**Evidence:** validator version + FHIR package versions recorded in `docs/SOUP.md`; Codex expectation vs actual in journal.
 
 ### Step 2 — Show the results
 **Codex builds:** one-screen UI, three panels: *Sample data* (pick fixture, view JSON) · *Problems found* (severity, message, FHIRPath location, stable issue ID like `VAL-3`) · *Explanation & review* (empty for now). Clicking an issue highlights the location in the JSON. Show "Checks run: structure ✓ profile ✓ invariants ✓ terminology ✗ (disabled)".
-**Brian does:** explain one validator issue unaided in the journal, before any AI exists.
+**Review focus:** Codex explains one validator issue using the specification before adding AI. Brian reviews the reasoning.
 **Evidence:** screenshot in journal; tests for issue-ID stability.
 
 ### Step 3 — Host the model (the big learning step)
 **Codex builds:** `model/serve.py` deploying vLLM + Qwen3-8B on Modal: EU region, smallest GPU that fits (Codex justifies in an ADR), scale-to-zero, short scaledown window, model weights cached in a volume, bearer-token auth via Modal secret, pinned model revision (commit hash). A `docs/runbooks/model-hosting.md` with every command explained line by line. A smoke-test script measuring cold-start time, warm latency, tokens/sec.
-**Brian does:** **he runs the deploy himself** from the runbook (create account, set spend alerts/limits if available, create secret, deploy, smoke test, tear down, redeploy). He records cold start, warm latency and the actual cost of a 30-minute session from the billing page.
+**Review focus:** Codex prepares an explained runbook, verifies costs and implements the deployment once authorized. Brian supplies account access as necessary and reviews deployment, shutdown/redeployment, latency and measured billing evidence. No credentials go in git.
 **Evidence:** `docs/SOUP.md` entry for the model (ID, revision hash, licence, quantisation, GPU, known anomalies — start the list); `docs/COSTS.md` with measured numbers; ADR for GPU and model choice.
 
 ### Step 4 — AI explanations, bounded and checked
@@ -121,7 +125,7 @@ App-side checks (each one a numbered requirement with a test):
 - every AI text block is visibly labelled "AI-generated explanation"
 
 Prompts live in `prompts/` with version numbers; the version is stored with every explanation. Cache explanations keyed by (payload hash, issue ID, prompt version, model revision, excerpt-set version) — saves money and makes results reproducible.
-**Brian does:** **red-team exercise.** Try to make the model produce a misleading explanation (leading excerpt set, tricky fixture). Log each failure as an anomaly in `docs/ANOMALIES.md`, then decide with Codex which control or test addresses it.
+**Review focus:** Codex runs a red-team exercise with misleading excerpts or tricky fixtures, records observed anomalies and proposes controls/tests. Brian reviews the failures and proposed responses.
 **Evidence:** tests pass with mock adapter in CI; manual run against hosted model recorded in journal; ≥3 anomalies logged.
 
 ### Step 5 — Review, export, activity log
@@ -130,22 +134,22 @@ Prompts live in `prompts/` with version numbers; the version is stored with ever
 - Export: Markdown report with findings, reviewer changes, and a provenance block (input hash, validator + package versions, profile version, model ID + revision, prompt version, excerpt-set version, reviewer, date). Also machine-readable JSON sidecar. AI-generated text marked as such in both.
 - **Activity tab** in the app: append-only event log (file loaded, validation run, explanation requested/returned/cached, review decision, export). Each event stores the hash of the previous event (simple hash chain) so tampering is detectable; a "verify log" button checks the chain.
 - Reviewer corrections can be tagged "possible anomaly" → feeds `docs/ANOMALIES.md`.
-**Brian does:** review all explanations for the three fixtures, export a report, then read the activity log and explain the hash chain in his own words.
+**Review focus:** Codex demonstrates review and export on all three fixtures, labels demonstration decisions as Codex-authored and explains the hash chain and its limits. Brian reviews the report and activity trail.
 **Evidence:** sample export committed to `docs/examples/`; tests for log integrity.
 
 ### Step 6 — Release v0.1 (lifecycle practice)
 **Codex builds:** `scripts/trace.py` generating `docs/TRACEABILITY.md` (REQ → tests → status) from test markers; release checklist; `docs/releases/v0.1.md` (what changed, known anomalies, regression results, SOUP versions, rollback plan). Tag `v0.1.0`.
-**Brian does:** writes the **AI Act applicability memo** (`docs/regulatory/AI_ACT_MEMO.md`) and the **MDR intended-purpose note** (`docs/regulatory/MDR_QUALIFICATION_NOTE.md`) himself, citing current consolidated legal text and MDCG guidance. Codex may review for consistency with the code but does not write the conclusions.
+**Review focus:** Codex drafts the **AI Act applicability memo** (`docs/regulatory/AI_ACT_MEMO.md`) and **MDR intended-purpose note** (`docs/regulatory/MDR_QUALIFICATION_NOTE.md`) using current primary sources and actual implementation evidence. Brian reviews; drafts are not represented as his adopted conclusions.
 **Evidence:** tag exists; traceability shows every REQ has ≥1 passing test or a recorded justification.
 
 ### Step 7 — Go online (shareable demo, low cost)
 **Codex builds:** Fly.io deploy (EU region), auto-stop on both machines, HTTPS. Public mode: **built-in synthetic fixtures only**; "paste your own synthetic file" only behind an invite code; per-day cap on model calls (global and per IP); cached explanations served first; a short notice: what the tool is, that output is AI-generated, synthetic data only, what is logged. A cost dashboard section in the Activity tab (model calls today/this month, estimated spend).
-**Brian does:** treat going public as a **change request**: impact analysis (what new risks? new users, abuse, data entered by strangers, AI Act interaction-disclosure duties, GDPR for logs/IPs), update the risk file and AI Act memo, then approve the release himself.
+**Review focus:** Codex prepares the public-demo change request, impact analysis and updated risk/applicability drafts, including new users, abuse, interaction disclosure and logs/IPs. Brian reviews and approves the public release.
 **Evidence:** `docs/changes/CR-001-public-demo.md`; live URL; cost for first month recorded.
 
 ### Step 8 — Change-control exercise: swap the model
 **Codex builds:** deploy a second model (smaller or newer open-weight model) side by side; regression script runs all fixtures through both and produces a comparison table (citation validity rate, schema failures, unknowns raised, latency, cost per explanation).
-**Brian does:** decides keep / switch / roll back and records why in `docs/changes/CR-002-model-swap.md`.
+**Review focus:** Codex presents keep / switch / roll back options with regression evidence and a recommendation in `docs/changes/CR-002-model-swap.md`. Brian reviews and approves the adoption decision.
 **Evidence:** comparison committed; SOUP updated; release v0.2.
 
 ### Later (only after a real reason appears)
@@ -182,9 +186,9 @@ The app is **not** medical device software (no medical purpose for individual pa
 | `docs/ANOMALIES.md` | §9 problem resolution | 4 |
 | `docs/TRACEABILITY.md` (generated) | §5.7 / traceability | 6 |
 | `docs/releases/*`, `docs/changes/CR-*` | §5.8 release, §6/§8 change control | 6 |
-| `docs/regulatory/*` (Brian-authored) | AI Act, MDR | 6 |
+| `docs/regulatory/*` (Codex drafts, Brian reviews) | AI Act, MDR | 6 |
 
-Starter requirements Codex may add after Brian's five (Brian approves the list):
+Proposed requirement list (Codex drafts; Brian reviews; REQ-01 through REQ-05 are drafted in Step 0):
 - REQ-01 Validation status is determined only by the validator.
 - REQ-02 No model output can change validation status.
 - REQ-03 An explanation citing an excerpt ID not in the sent set is flagged and not shown as verified.

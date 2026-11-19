@@ -1,3 +1,3 @@
-# MDR intended-purpose note — Brian authored
+# MDR intended-purpose note
 
-Status: awaiting Brian in Step 6.
+Status: Codex draft scheduled for Step 6, for Brian’s review. No assessment or adopted conclusion exists yet.

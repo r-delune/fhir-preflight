@@ -74,3 +74,25 @@ Newest entries at the bottom.
 **Evidence:** [tests](tests/test_scaffold.py), [dependency register](docs/SOUP.md), [workflow](.github/workflows/ci.yml), [anomaly](docs/ANOMALIES.md), [run instructions](README.md).
 
 **Status:** ☐ approved by Brian — next step may start only after approval; hosted CI evidence pending.
+
+### #0a — Step 0 review update — 2026-11-19
+
+**Goal:** apply Brian's revised learning workflow and make model hosting unambiguous.
+
+**User directions:** Brian asked Codex to do the work while he reviews the steps and asks questions. He then explicitly ruled out local Ollama and asked for clear docs. These supersede the earlier mandatory homework rules. They are not recorded as approval of the drafted requirements or the next build step.
+
+**What changed:** drafted docs/INTENDED_PURPOSE.md and REQ-01–REQ-05 in docs/REQUIREMENTS.md with verification criteria; updated AGENTS.md, PLAN.md, README.md, ROADMAP.md and lifecycle templates for review-based learning. Added ADR-001 documenting Qwen3-8B/vLLM on Modal. Active architecture, development and cost docs now agree on remote model inference with a local development app/validator and mock-only automated tests.
+
+**Why:** preserve the boundary in REQ-01/REQ-02 while making the plan useful for Brian's chosen learning style. Cite validity remains separate from source support (REQ-03). No feature or regulatory applicability conclusion is claimed implemented by these drafts.
+
+**Explanation for review:** the mock is a predictable stand-in that costs nothing per call; it lets us check app plumbing before connecting AI. The validator controls pass/fail because an AI explanation can be wrong. Passing the two scaffold tests proves the home page responds with honest notices and unsupported adapter configuration fails; it does not prove FHIR validation, AI quality or product requirement coverage.
+
+**Historical note:** Entry #0 describes the earlier working agreement and unresolved hosting question at that time. This entry supersedes those open actions: purpose/requirements are now drafted by Codex; homework is optional; Brian has selected hosted inference. His personal predictions and learning are not fabricated.
+
+**How checked:** reviewed doc consistency and git diff whitespace. No runtime code or dependencies changed; the earlier two passing scaffold tests and lint results remain the runtime baseline. Hosted CI still has not run because there is no GitHub remote. Product requirements await implementation and verification in later steps.
+
+**Cost incurred:** €0 in paid services. No cloud model provisioned.
+
+**Review focus:** are the intended purpose and first five requirements understandable and appropriate? Brian can ask questions or request edits. Optional personal notes may be added here.
+
+**Status:** awaiting Brian's review; no approval inferred. Step 1 not started. Hosted CI evidence remains pending.

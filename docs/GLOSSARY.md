@@ -8,7 +8,7 @@
 
 **Mock adapter:** A small replacement for a service that gives predictable results during development and tests. Our mock makes no network or AI calls. [Python testing documentation](https://docs.python.org/3/library/unittest.mock.html)
 
-**AI Act applicability assessment:** A written analysis of which EU AI Act provisions apply to a particular system and use. Brian will write the project's conclusions. [EUR-Lex](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)
+**AI Act applicability assessment:** A written analysis of which EU AI Act provisions apply to a particular system and use. Codex drafts the assessment for Brian to review; review status is recorded explicitly. [EUR-Lex](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)
 
 **IEC 62304-inspired lifecycle:** We practise planning, requirements, verification and change control using this medical-device software standard as a reference. This phrase does not claim conformity or certification. [ISO](https://www.iso.org/standard/38421.html)
 

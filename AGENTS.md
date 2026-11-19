@@ -5,7 +5,7 @@ Read `PLAN.md` first. This file sets the working rules. They exist because **the
 ## 1. Work in small, visible steps
 - Work on one step from `PLAN.md` at a time. Split a step into sub-tasks small enough to review in ~15 minutes each.
 - One branch per step (`step-3-model-hosting`), small commits with messages that say *why*, not just *what*.
-- Never start the next step until Brian has written "approved" (or similar) in the journal entry for the current one.
+- Never start the next step until Brian approves it in chat or the journal. Record chat approval in the journal with its source; never invent approval.
 
 ## 2. Stop at every CHECKPOINT
 At the end of each step (and whenever you make a decision with lasting consequences), stop and append an entry to `BUILD_JOURNAL.md` using the template there. Then summarise in chat:
@@ -13,11 +13,14 @@ At the end of each step (and whenever you make a decision with lasting consequen
 2. Why (link the REQ / ADR)
 3. How to see it working (exact commands, what you should see)
 4. What I'm unsure about or chose without asking
-5. **Your turn:** the "Brian does" task from `PLAN.md`, plus 2–3 explain-back questions about this step
+5. **Review:** explain the step in plain English, show evidence and invite questions. Exercises and explain-back questions are optional.
 
-## 3. Leave the learning tasks to Brian
-- Do not complete any "Brian does" task, write his predictions, or write conclusions in `docs/regulatory/`. You may review them for consistency with the code and point out errors.
-- When Brian runs commands himself (e.g. the model deploy), provide a runbook that explains each line. Do not run cloud deploys on his behalf unless he asks.
+## 3. Codex drafts and demonstrates; Brian reviews
+- Brian requested this workflow in chat on 2026-11-19: Codex does the work, Brian reviews the steps and asks questions. This supersedes the original mandatory hands-on learning tasks.
+- Draft purpose statements, requirements, worked examples and evidence-based regulatory assessments for review. Clearly distinguish a Codex draft from Brian's approval or adopted conclusion.
+- Do not invent Brian's predictions, observations, personal learning or decisions. Provide Codex explanations and observed evidence instead; Brian's personal notes are optional.
+- Prepare explained runbooks and carry out authorized technical work. Brian supplies credentials/account access when needed; confirm verified cost before paid provisioning. Public releases and model adoption remain review checkpoints.
+- Model target: Qwen3-8B through vLLM on Modal, as specified in PLAN.md. No local Ollama integration or automatic provider fallback. Verify hosting details before implementation.
 
 ## 4. Explain as you go
 - New concept → add or update an entry in `docs/GLOSSARY.md` (plain English, 2–4 sentences, one link to an authoritative source).
@@ -47,7 +50,7 @@ At the end of each step (and whenever you make a decision with lasting consequen
 ```
 make setup      # install locked dependencies into .venv (Python 3.12 + uv)
 make dev        # Step 0: local hello page; validator/docker compose arrive in Step 1
-make test       # pytest with mock adapter; scaffold checks until Brian writes requirements
+make test       # pytest with mock adapter; scaffold checks; product requirement coverage arrives with features
 make lint       # ruff
 make trace      # Step 0: explains that generation is deferred to Step 6
 ```

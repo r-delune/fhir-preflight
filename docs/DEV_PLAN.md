@@ -1,10 +1,16 @@
 # Development plan — Step 0
 
 Use a 62304-inspired lifecycle; no compliance claim. PLAN.md defines the ordered steps.
-Brian owns intended purpose, initial requirements, learning answers and regulatory conclusions.
-Codex implements one step and records checks and decisions. Brian approves in the journal
-before the next step. Model hosting remains unresolved: PLAN.md proposes Modal whereas
-the preceding discussion proposed local Ollama. No hosting or paid service is provisioned.
+Codex drafts and implements each step, records evidence, and explains the work.
+Brian learns by reviewing and asking questions; personal homework is optional.
+Brian approves progression in chat or the journal. Codex drafts regulatory assessments
+for review without representing them as Brian's adopted conclusions.
+
+The runtime model is Qwen3-8B served through vLLM on Modal (Brian confirmed).
+The app and validator run locally in development; the model is hosted remotely.
+Tests/CI use a mock. No local Ollama integration is planned. Region, pricing,
+GPU and exact revisions must be verified before Step 3 provisioning.
+No hosting or paid service is provisioned yet.
 
 Configuration items: application code, fixtures, profiles, validator, dependency lockfile,
 model revision, prompts, excerpt set, reports and lifecycle records. Later steps will
